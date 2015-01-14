@@ -1,3 +1,3 @@
-# programacio_2
+# 2D Engine "P2"
 
-This is a step by step 2D Engine used to teaxg Coding subjuect at UPC Videogame degree
+This is a step by step 2D Engine used to teach Coding at UPC Videogame Degree
