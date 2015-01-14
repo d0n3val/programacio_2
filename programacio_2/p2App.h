@@ -2,7 +2,10 @@
     #define __P2APP_H__
 
 #include "p2List.h"
+#include "p2RefBool.h"
 #include "p2Module.h"
+#include "p2Window.h"
+#include "p2Input.h"
 
 class p2App
 {
@@ -26,9 +29,19 @@ class p2App
         // Called before quitting
         bool CleanUp();
 
+		// Add a new module to handle
 		void AddModule(p2Module* module);
 
+	public:
+
+		p2RefBool	pause;
+
+		p2Window*	win;
+		p2Input*	input;
+
     private:
+
+		
         bool				quitting;
 		p2list<p2Module*>	modules;
 };

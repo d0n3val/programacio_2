@@ -68,15 +68,18 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="p2App.cpp" />
+    <ClCompile Include="p2Input.cpp" />
     <ClCompile Include="p2Log.cpp" />
     <ClCompile Include="p2Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="p2Input.h" />
     <ClInclude Include="p2Log.h" />
     <ClInclude Include="p2App.h" />
     <ClInclude Include="p2Defs.h" />
     <ClInclude Include="p2List.h" />
     <ClInclude Include="p2Module.h" />
+    <ClInclude Include="p2RefBool.h" />
     <ClInclude Include="p2Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

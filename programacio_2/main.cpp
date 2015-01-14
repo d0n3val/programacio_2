@@ -38,7 +38,7 @@ int main( int argc, char* args[] )
 
 		// Allocate the engine --------------------------------------------
 		case CREATE:
-			LOG("INFO: Creating engine");
+			LOG("CREATION PHASE ---------------");
 			p2 = new p2App();
 
 			if(p2 != NULL)
@@ -49,6 +49,7 @@ int main( int argc, char* args[] )
 
 		// Awake all modules -----------------------------------------------
 		case AWAKE:
+			LOG("AWAKE PHASE ------------------");
 			if(p2->Awake() == true)
 				state = START;
 			else
@@ -60,8 +61,12 @@ int main( int argc, char* args[] )
 
 		// Call all modules before first frame  ----------------------------
 		case START:
+			LOG("START PHASE ------------------");
 			if(p2->Start() == true)
+			{
 				state = LOOP;
+				LOG("UPDATE PHASE-----------------");
+			}
 			else
 			{
 				state = FAIL;
@@ -77,7 +82,7 @@ int main( int argc, char* args[] )
 
 		// Cleanup allocated memory -----------------------------------------
 		case CLEAN:
-			LOG("INFO: Cleaning Up");
+			LOG("CLEANUP PHASE-----------------");
 			if(p2->CleanUp() == true)
 			{
 				RELEASE(p2);

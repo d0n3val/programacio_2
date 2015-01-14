@@ -7,7 +7,7 @@ class p2Module
 {
 public:
 
-	void Init(p2App* App) { this->App = App; }
+	void Init(p2App* App) { this->App = App; Active = true; }
 
     // Called before render is available
     virtual bool Awake() = 0;
@@ -21,9 +21,11 @@ public:
     // Called before quitting
     virtual bool CleanUp() = 0;
 
-private:
+public:
 
-	p2App* App;
+	bool	Active;
+	p2App*	App;
+	
 };
 
 #endif // __P2MODULE_H__

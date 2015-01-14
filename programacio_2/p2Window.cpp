@@ -1,5 +1,6 @@
 #include "p2Defs.h"
 #include "p2Log.h"
+#include "p2App.h"
 #include "p2Window.h"
 
 const int SCREEN_WIDTH = 640;
@@ -19,13 +20,13 @@ p2Window::~p2Window()
 // Called before render is available
 bool p2Window::Awake()
 {
-	LOG("window awake: creating window with SDL");
+	LOG("Init SDL window & surface");
 	bool ret = true;
 	
 
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
 	{
-		LOG( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
+		LOG( "SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError() );
 		ret = false;
 	}
 	else
@@ -57,8 +58,12 @@ bool p2Window::Start()
 // Called each loop iteration
 bool p2Window::Update(float dt)
 {
-	LOG("window update");
-	return false;
+	bool ret = true;
+
+	if(App->input->GetWindowEvent(WE_QUIT) == true)
+		ret = false;
+
+	return ret;
 }
 
 // Called before quitting

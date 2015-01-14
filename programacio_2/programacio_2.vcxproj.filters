@@ -27,6 +27,9 @@
     <ClCompile Include="p2Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="p2Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2App.h">
@@ -45,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="p2Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="p2RefBool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
