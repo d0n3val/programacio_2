@@ -1,9 +1,14 @@
-#include <stdio.h>
+#define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
+#include <crtdbg.h>
 
-#include "log.h"
+#include "p2Defs.h"
+#include "p2Log.h"
 #include "p2App.h"
-#include "SDL.h"
+
+#include "SDL\include\SDL.h"
+#pragma comment( lib, "SDL/lib/x86/SDL2.lib" )
+#pragma comment( lib, "SDL/lib/x86/SDL2main.lib" )
 
 enum MainState
 {
@@ -19,6 +24,8 @@ enum MainState
 int main( int argc, char* args[] )
 {
 	LOG("P2 engine starting ...");
+
+	_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 
 	MainState state = CREATE;
 	int result = EXIT_FAILURE;
@@ -73,7 +80,7 @@ int main( int argc, char* args[] )
 			LOG("INFO: Cleaning Up");
 			if(p2->CleanUp() == true)
 			{
-				delete(p2);
+				RELEASE(p2);
 				result = EXIT_SUCCESS;
 				state = EXIT;
 			}
@@ -90,6 +97,12 @@ int main( int argc, char* args[] )
 		}
 	}
 
-	LOG("... Bye! :)");
+	LOG("... Bye! :)\n");
+
+	//_CrtSetReportMode( _CRT_ERROR, _CRTDBG_MODE_DEBUG );
+	//void* s = malloc(200);
+	_CrtDumpMemoryLeaks();
+
+	// Dump memory leaks
 	return result;
 }

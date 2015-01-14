@@ -21,12 +21,30 @@
     <ClCompile Include="p2App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="p2Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p2Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="log.h">
+    <ClInclude Include="p2Module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="p2List.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
