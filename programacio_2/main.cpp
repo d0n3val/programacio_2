@@ -105,8 +105,9 @@ int main( int argc, char* args[] )
 
 	LOG("... Bye! :)\n");
 
-	//_CrtSetReportMode( _CRT_ERROR, _CRTDBG_MODE_DEBUG );
-	//void* s = malloc(200);
+	_CrtSetReportMode( _CRT_ERROR, _CRTDBG_MODE_DEBUG );
+	void* s = malloc(200);
+	int *p = new int[100];
 	_CrtDumpMemoryLeaks();
 
 	// Dump memory leaks
