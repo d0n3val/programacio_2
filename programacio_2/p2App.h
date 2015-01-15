@@ -3,6 +3,7 @@
 
 #include "p2List.h"
 #include "p2RefBool.h"
+#include "p2Timer.h"
 #include "p2IniReader.h"
 #include "p2Module.h"
 
@@ -39,6 +40,11 @@ class p2App
 
 		p2RefBool	pause;
 		p2IniReader	config;
+		Uint32		frames;
+		int			fps_counter;
+		int			last_frame_ms;
+		int			last_fps;
+		int			capped_ms;
 
 		// Modules
 		p2Window*	win;
@@ -47,6 +53,8 @@ class p2App
     private:
 
         bool				quitting;
+		p2Timer				ms_timer;
+		p2Timer				fps_timer;
 		p2list<p2Module*>	modules;
 };
 

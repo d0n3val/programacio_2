@@ -30,3 +30,17 @@ int p2IniReader::GetInt(const char* section, const char* key, int default)
 {
 	return GetPrivateProfileInt(section, key, default, file_name);
 }
+
+// ---------------------------------------------
+bool p2IniReader::GetBool(const char* section, const char* key, bool default)
+{
+	char* result = GetString(section, key, "false");
+
+	if(stricmp(result, "true") == 0)
+		return true;
+
+	if(stricmp(result, "false") == 0)
+		return false;
+
+	return default;
+}

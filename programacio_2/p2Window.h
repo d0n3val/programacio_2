@@ -25,12 +25,17 @@ public:
     // Called before quitting
     bool CleanUp();
 
+	// Changae title
+    void SetTitle(const char* new_title);
+
 private:
 	//The window we'll be rendering to
 	SDL_Window* window;
 	
 	//The surface contained by the window
-	SDL_Surface* screenSurface;
+	SDL_Surface* screen_surface;
+
+	char	title[255]; 
 };
 
 #endif // __P2WINDOW_H__

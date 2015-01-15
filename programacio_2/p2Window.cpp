@@ -9,7 +9,7 @@ const int SCREEN_HEIGHT = 480;
 p2Window::p2Window() : p2Module()
 {
 	window = NULL;
-	screenSurface = NULL;
+	screen_surface = NULL;
 	UpdateOnPause = true;
 }
 
@@ -35,8 +35,23 @@ bool p2Window::Awake()
 		//Create window
 		int width = App->config.GetInt("window", "width", SCREEN_WIDTH);
 		int height = App->config.GetInt("window", "height", SCREEN_HEIGHT);
+		char* title = App->config.GetString("window", "title", "P2 Engine");
 
-		window = SDL_CreateWindow( "P2 Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN );
+		Uint32 flags = SDL_WINDOW_SHOWN;
+
+		if(App->config.GetBool("window", "fullscreen", false) == true)
+			flags |= SDL_WINDOW_FULLSCREEN;
+
+		if(App->config.GetBool("window", "borderless", false) == true)
+			flags |= SDL_WINDOW_BORDERLESS;
+
+		if(App->config.GetBool("window", "resizable", false) == true)
+			flags |= SDL_WINDOW_RESIZABLE;
+
+		if(App->config.GetBool("window", "fullscreen_windowed", false) == true)
+			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+
+		window = SDL_CreateWindow( "", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags );
 		if( window == NULL )
 		{
 			LOG( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
@@ -45,7 +60,9 @@ bool p2Window::Awake()
 		else
 		{
 			//Get window surface
-			screenSurface = SDL_GetWindowSurface( window );
+			screen_surface = SDL_GetWindowSurface( window );
+
+			SetTitle(title);
 		}
 	}
 
@@ -83,6 +100,12 @@ bool p2Window::Update(float dt)
 			LOG("Leaving background mode");
 	}
 
+	SDL_UpdateWindowSurface( window );
+
+	char framerate[255];
+	sprintf_s(framerate, "%s - %d fps (%d/%d ms | %.3f dt)", title, App->last_fps, App->last_frame_ms, App->capped_ms, dt);// SDL_GetWindowTitle(window));//, App->last_frametime);
+	SDL_SetWindowTitle(window, framerate);
+
 	return ret;
 }
 
@@ -99,4 +122,10 @@ bool p2Window::CleanUp()
 	SDL_Quit();
 
 	return true;
+}
+
+// Set new window title
+void p2Window::SetTitle(const char* new_title)
+{
+	strcpy_s(title, 255, new_title);
 }

@@ -13,6 +13,7 @@ public:
 	void	SetFile(const char* file_name);
 	char*	GetString(const char* section, const char* key, const char* default = NULL);
 	int		GetInt(const char* section, const char* key, int default = 0);
+	bool	GetBool(const char* section, const char* key, bool default = false);
 
 public:
 

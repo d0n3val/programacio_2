@@ -2,12 +2,17 @@
 #include "p2App.h"
 #include "p2Window.h"
 #include "p2Input.h"
-
+#include "p2Timer.h"
 
 // Constructor
 p2App::p2App(const char* config_file)
 {
 	quitting = false;
+	frames = 0;
+	last_frame_ms = -1;
+	last_fps = -1;
+	capped_ms = -1;
+
 	config.SetFile(config_file);
 
 	input = new p2Input();
@@ -36,6 +41,12 @@ void p2App::AddModule(p2Module* module)
 bool p2App::Awake()
 {
 	bool ret = true;
+
+	int cap = config.GetInt("App", "framerate_cap", -1);
+	if(cap > 0)
+	{
+		capped_ms = 1000 / cap;
+	}
 
 	p2list_item<p2Module*>* item;
 
@@ -70,7 +81,10 @@ bool p2App::Start()
 bool p2App::Update()
 {
 	bool ret = true;
-	float dt = 0.0f;
+
+	float dt = (float)ms_timer.Read() / 1000.0f;
+
+	ms_timer.Start();
 
 	p2list_item<p2Module*>* item;
 
@@ -90,6 +104,24 @@ bool p2App::Update()
 		ret = item->data->Update(dt);
 	}
 
+	// In background mode leave some time for OS to do stuff
+	if(pause.Get() == true)
+		SDL_Delay(33);
+
+	++frames;
+	++fps_counter;
+
+	if(fps_timer.Read() >= 1000)
+	{
+		last_fps = fps_counter;
+		fps_counter = 0;
+		fps_timer.Start();
+	}
+
+	last_frame_ms = ms_timer.Read();
+	if(last_frame_ms < capped_ms)
+		SDL_Delay(capped_ms - last_frame_ms);
+		
 	return ret;
 }
 

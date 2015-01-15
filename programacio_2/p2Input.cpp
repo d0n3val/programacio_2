@@ -53,7 +53,6 @@ bool p2Input::Update(float dt)
 			break;
 
 			case SDL_WINDOWEVENT:
-
 				switch(event.window.event)
 				{
 					//case SDL_WINDOWEVENT_LEAVE:
@@ -71,7 +70,11 @@ bool p2Input::Update(float dt)
 						windowEvents[WE_SHOW] = true;
 					break;
 				}
-				
+			break;
+
+			case SDL_KEYDOWN:
+				if(event.key.keysym.sym == SDLK_ESCAPE)
+					windowEvents[WE_QUIT] = true;
 			break;
 		 }
     }
