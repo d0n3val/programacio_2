@@ -1,0 +1,32 @@
+#include <Windows.h>
+#include <string.h>
+#include "p2IniReader.h"
+
+p2IniReader::p2IniReader()
+{
+	memset(file_name, 0, 255);
+}
+
+// ---------------------------------------------
+void p2IniReader::SetFile(const char* file)
+{
+	strncpy_s(file_name, file, 256);
+}
+
+// ---------------------------------------------
+char* p2IniReader::GetString(const char* section, const char* key, const char* default)
+{
+	char* result = new char[255];
+
+	memset(result, 0, 255);
+
+	GetPrivateProfileString(section, key, default, result, 255, file_name); 
+
+	return result;
+}
+
+// ---------------------------------------------
+int p2IniReader::GetInt(const char* section, const char* key, int default)
+{
+	return GetPrivateProfileInt(section, key, default, file_name);
+}

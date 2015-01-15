@@ -5,9 +5,10 @@
 
 
 // Constructor
-p2App::p2App()
+p2App::p2App(const char* config_file)
 {
 	quitting = false;
+	config.SetFile(config_file);
 
 	input = new p2Input();
 	win = new p2Window();
@@ -71,24 +72,22 @@ bool p2App::Update()
 	bool ret = true;
 	float dt = 0.0f;
 
-	// Handle paused App
-	if(input->GetWindowEvent(WE_HIDDEN) == true)
-	{
-		LOG("App Paused");
-		SDL_Delay( 33 );
-		return input->Update(dt);
-	}
-
 	p2list_item<p2Module*>* item;
 
 	item = modules.start;
-	while( item != NULL && ret == true )
+	p2Module* pModule = NULL;
+
+	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
-		if(item->data->Active == true)
-			ret = item->data->Update(dt);
-		else
-			LOG("module inactive");
-		item = item->next;
+		pModule = item->data;
+
+		if(pModule->Active == false)
+			continue;
+
+		if(pause.Get() == true && pModule->UpdateOnPause == false)
+			continue;
+
+		ret = item->data->Update(dt);
 	}
 
 	return ret;

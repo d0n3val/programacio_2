@@ -6,10 +6,11 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-p2Window::p2Window()
+p2Window::p2Window() : p2Module()
 {
 	window = NULL;
 	screenSurface = NULL;
+	UpdateOnPause = true;
 }
 
 // Destructor
@@ -32,7 +33,10 @@ bool p2Window::Awake()
 	else
 	{
 		//Create window
-		window = SDL_CreateWindow( "P2 Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		int width = App->config.GetInt("window", "width", SCREEN_WIDTH);
+		int height = App->config.GetInt("window", "height", SCREEN_HEIGHT);
+
+		window = SDL_CreateWindow( "P2 Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN );
 		if( window == NULL )
 		{
 			LOG( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
@@ -62,6 +66,22 @@ bool p2Window::Update(float dt)
 
 	if(App->input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
+
+	if(App->input->GetWindowEvent(WE_HIDE) == true)
+	{
+		if(App->pause.Get() == false)
+			LOG("Entering background mode");
+
+		App->pause.Set();
+	}
+
+	if(App->input->GetWindowEvent(WE_SHOW) == true)
+	{
+		App->pause.Unset();
+
+		if(App->pause.Get() == false)
+			LOG("Leaving background mode");
+	}
 
 	return ret;
 }

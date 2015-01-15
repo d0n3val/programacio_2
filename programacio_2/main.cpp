@@ -39,7 +39,8 @@ int main( int argc, char* args[] )
 		// Allocate the engine --------------------------------------------
 		case CREATE:
 			LOG("CREATION PHASE ---------------");
-			p2 = new p2App();
+			
+			p2 = new p2App((argc>1) ? args[1] : "");
 
 			if(p2 != NULL)
 				state = AWAKE;

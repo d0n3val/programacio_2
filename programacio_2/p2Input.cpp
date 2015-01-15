@@ -2,8 +2,9 @@
 #include "p2Log.h"
 #include "p2Input.h"
 
-p2Input::p2Input()
+p2Input::p2Input() : p2Module()
 {
+	UpdateOnPause = true;
 }
 
 // Destructor
@@ -52,14 +53,24 @@ bool p2Input::Update(float dt)
 			break;
 
 			case SDL_WINDOWEVENT:
+
 				switch(event.window.event)
 				{
+					//case SDL_WINDOWEVENT_LEAVE:
 					case SDL_WINDOWEVENT_HIDDEN:
 					case SDL_WINDOWEVENT_MINIMIZED:
-						windowEvents[WE_HIDDEN] = true;
-						LOG("minimized");
+					case SDL_WINDOWEVENT_FOCUS_LOST:
+						windowEvents[WE_HIDE] = true;
+					break;
+
+					//case SDL_WINDOWEVENT_ENTER:
+					case SDL_WINDOWEVENT_SHOWN:
+					case SDL_WINDOWEVENT_FOCUS_GAINED:
+					case SDL_WINDOWEVENT_MAXIMIZED:
+					case SDL_WINDOWEVENT_RESTORED:
+						windowEvents[WE_SHOW] = true;
+					break;
 				}
-			
 				
 			break;
 		 }

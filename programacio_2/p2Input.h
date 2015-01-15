@@ -7,7 +7,8 @@
 enum p2EventWindow
 {
 	WE_QUIT = 0,
-	WE_HIDDEN = 1,
+	WE_HIDE = 1,
+	WE_SHOW = 2,
 	WE_COUNT
 };
 

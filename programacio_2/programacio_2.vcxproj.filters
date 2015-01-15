@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Tools">
+      <UniqueIdentifier>{887a72f0-ed97-4ea2-8b36-904b09c8d464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Modules">
+      <UniqueIdentifier>{e294ab32-768c-49ec-94e4-4241c48eaca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tools">
+      <UniqueIdentifier>{46e360ea-a6cb-4b51-9325-8dceb72fe19c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Modules">
+      <UniqueIdentifier>{0c79e20e-92b1-4c61-bb68-0cd4e0111bfc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,14 +33,17 @@
     <ClCompile Include="p2App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="p2Input.cpp">
+      <Filter>Source Files\Modules</Filter>
+    </ClCompile>
     <ClCompile Include="p2Window.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Modules</Filter>
     </ClCompile>
     <ClCompile Include="p2Log.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="p2Input.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="p2IniReader.cpp">
+      <Filter>Source Files\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,23 +53,26 @@
     <ClInclude Include="p2Module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="p2Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="p2List.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="p2Defs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="p2Log.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="p2Input.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="p2List.h">
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
     <ClInclude Include="p2RefBool.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Window.h">
+      <Filter>Header Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Input.h">
+      <Filter>Header Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="p2IniReader.h">
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

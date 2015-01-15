@@ -7,6 +7,8 @@ class p2Module
 {
 public:
 
+	p2Module() { Active = false; UpdateOnPause = false; App = NULL; }
+
 	void Init(p2App* App) { this->App = App; Active = true; }
 
     // Called before render is available
@@ -24,6 +26,7 @@ public:
 public:
 
 	bool	Active;
+	bool	UpdateOnPause;
 	p2App*	App;
 	
 };

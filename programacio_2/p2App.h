@@ -3,7 +3,10 @@
 
 #include "p2List.h"
 #include "p2RefBool.h"
+#include "p2IniReader.h"
 #include "p2Module.h"
+
+// Modules
 #include "p2Window.h"
 #include "p2Input.h"
 
@@ -12,7 +15,7 @@ class p2App
     public:
 
         // Constructor
-        p2App();
+        p2App(const char* );
 
         // Destructor
         virtual ~p2App();
@@ -35,13 +38,14 @@ class p2App
 	public:
 
 		p2RefBool	pause;
+		p2IniReader	config;
 
+		// Modules
 		p2Window*	win;
 		p2Input*	input;
 
     private:
 
-		
         bool				quitting;
 		p2list<p2Module*>	modules;
 };

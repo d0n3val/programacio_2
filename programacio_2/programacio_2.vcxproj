@@ -41,13 +41,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <UseFullPaths>false</UseFullPaths>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,11 +68,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="p2App.cpp" />
+    <ClCompile Include="p2IniReader.cpp" />
     <ClCompile Include="p2Input.cpp" />
     <ClCompile Include="p2Log.cpp" />
     <ClCompile Include="p2Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="p2IniReader.h" />
     <ClInclude Include="p2Input.h" />
     <ClInclude Include="p2Log.h" />
     <ClInclude Include="p2App.h" />
