@@ -72,6 +72,7 @@
     <ClCompile Include="p2Input.cpp" />
     <ClCompile Include="p2Log.cpp" />
     <ClCompile Include="p2Render.cpp" />
+    <ClCompile Include="p2Textures.cpp" />
     <ClCompile Include="p2Timer.cpp" />
     <ClCompile Include="p2Window.cpp" />
   </ItemGroup>
@@ -85,8 +86,13 @@
     <ClInclude Include="p2Module.h" />
     <ClInclude Include="p2RefBool.h" />
     <ClInclude Include="p2Render.h" />
+    <ClInclude Include="p2Textures.h" />
     <ClInclude Include="p2Timer.h" />
     <ClInclude Include="p2Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.ini" />
+    <None Include="templates.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

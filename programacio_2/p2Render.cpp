@@ -66,7 +66,7 @@ bool p2Render::PostUpdate()
 // Called before quitting
 bool p2Render::CleanUp()
 {
-	LOG("render cleanup");
+	LOG("Destroying SDL render");
 	
 	SDL_DestroyRenderer(renderer);
 	

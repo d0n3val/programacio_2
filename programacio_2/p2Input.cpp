@@ -90,7 +90,7 @@ bool p2Input::Update(float dt)
 // Called before quitting
 bool p2Input::CleanUp()
 {
-	LOG("input cleanup");
+	LOG("Quitting SDL event subsystem");
 
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 

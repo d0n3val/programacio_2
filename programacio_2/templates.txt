@@ -1,0 +1,101 @@
+----------------------------------------------------
+mymodule.h   ---------------------------------------
+----------------------------------------------------
+
+#ifndef __P2MYMODULE_H__
+    #define __P2MYMODULE_H__
+
+#include "p2Module.h"
+
+class p2MyModule : public p2Module
+{
+public:
+
+	p2MyModule();
+
+    // Destructor
+    virtual ~p2MyModule();
+
+    // Called before render is available
+    bool Awake();
+
+    // Called before the first frame
+    bool Start();
+
+    // Called each loop iteration
+    bool PreUpdate();
+	bool Update(float dt);
+	bool PostUpdate();
+
+    // Called before quitting
+    bool CleanUp();
+
+public:
+
+
+
+};
+
+#endif // __P2MODULE_H__
+
+----------------------------------------------------
+mymodule.cpp ---------------------------------------
+----------------------------------------------------
+
+#include "p2Defs.h"
+#include "p2Log.h"
+#include "p2App.h"
+#include "p2MyModule.h"
+
+p2MyModule::p2MyModule() : p2Module()
+{
+}
+
+// Destructor
+p2MyModule::~p2MyModule()
+{
+}
+
+// Called before render is available
+bool p2MyModule::Awake()
+{
+	LOG("awake mymodule");
+	bool ret = true;
+
+	return ret;
+}
+
+// Called before the first frame
+bool p2MyModule::Start()
+{
+	LOG("start mymodule");
+	bool ret = true;
+
+	return ret;
+}
+
+// Called each loop iteration
+bool p2MyModule::PreUpdate()
+{
+	return true;
+}
+
+bool p2MyModule::Update(float dt)
+{
+	return true;
+}
+
+
+bool p2MyModule::PostUpdate()
+{
+	return true;
+}
+
+// Called before quitting
+bool p2MyModule::CleanUp()
+{
+	LOG("cleanup mymodule");
+	
+	return true;
+}
+

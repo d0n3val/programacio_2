@@ -15,6 +15,7 @@ p2App::p2App(const char* config_file)
 	input = new p2Input();
 	win = new p2Window();
 	render = new p2Render();
+	tex = new p2Textures;
 	
 	// Put in order of awake / Start / Update
 	// Reverse order of CleanUp
@@ -22,6 +23,7 @@ p2App::p2App(const char* config_file)
 	AddModule(input);
 	AddModule(win);
 	AddModule(render);
+	AddModule(tex);
 }
 
 // Destructor

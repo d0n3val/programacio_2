@@ -51,6 +51,9 @@
     <ClCompile Include="p2Render.cpp">
       <Filter>Source Files\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="p2Textures.cpp">
+      <Filter>Source Files\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2App.h">
@@ -86,5 +89,16 @@
     <ClInclude Include="p2Render.h">
       <Filter>Header Files\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="p2Textures.h">
+      <Filter>Header Files\Modules</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.ini">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="templates.txt">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

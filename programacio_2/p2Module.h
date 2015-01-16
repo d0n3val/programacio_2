@@ -21,7 +21,7 @@ public:
 	virtual bool PreUpdate() { return true; }
 	
 	// Called each loop iteration
-    virtual bool Update(float dt) = 0;
+    virtual bool Update(float dt) { return true; }
 
 	// Called each loop iteration
 	virtual bool PostUpdate() { return true; }

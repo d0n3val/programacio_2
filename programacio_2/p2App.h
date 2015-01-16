@@ -11,6 +11,7 @@
 #include "p2Window.h"
 #include "p2Input.h"
 #include "p2Render.h"
+#include "p2Textures.h"
 
 class p2App
 {
@@ -69,6 +70,7 @@ public:
 	p2Window*	win;
 	p2Input*	input;
 	p2Render*	render;
+	p2Textures*	tex;
 
 private:
 

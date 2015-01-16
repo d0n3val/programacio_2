@@ -127,7 +127,7 @@ bool p2Window::PostUpdate()
 // Called before quitting
 bool p2Window::CleanUp()
 {
-	LOG("window cleanup");
+	LOG("Destroying SDL window and quitting all SDL systems");
 	
 	//Destroy window
 	if(window != NULL)
