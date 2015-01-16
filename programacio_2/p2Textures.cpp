@@ -4,7 +4,7 @@
 #include "p2Textures.h"
 
 #include "SDL_image\include\SDL_image.h"
-#pragma comment( lib, "SDL_image/lib/x86/SDL2_image.lib" )
+#pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
 
 p2Textures::p2Textures() : p2Module()
 {
