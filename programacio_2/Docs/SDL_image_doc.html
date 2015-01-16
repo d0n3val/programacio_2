@@ -1,0 +1,2694 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on November, 3  2009 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>SDL_image 1.2.8: </TITLE>
+
+<META NAME="description" CONTENT="SDL_image 1.2.8: ">
+<META NAME="keywords" CONTENT="SDL_image 1.2.8: ">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC_Top"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1>SDL_image 1.2.8</H1></P><P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC1">1. Overview</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">The README from the SDL_image distribution</TD></TR>
+</TABLE>
+
+<br>
+<TABLE BORDER=0 CELLSPACING=0>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC2">2. Getting Started</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Using SDL_image</TD></TR>
+</TABLE>
+
+<br>
+<TABLE BORDER=0 CELLSPACING=0>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC5">3. Functions</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Functions supported by the SDL_image API</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC46">4. Defines</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Defined values/macros in the SDL_image API</TD></TR>
+</TABLE>
+
+<br>
+<TABLE BORDER=0 CELLSPACING=0>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC47">Index</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Index of selected words</TD></TR>
+</TABLE></BLOCKQUOTE>
+<HR SIZE=1>
+<A NAME="SEC1"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC2"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[ &lt;&lt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC2"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<A NAME="Overview"></A>
+<H1> 1. Overview </H1>
+<!--docid::SEC1::-->
+<P>
+
+<center>
+ <B>A Little Bit About Me</B>
+</center>
+</P><P>
+
+I am currently, as I write this document, a programmer for Raytheon.  There I do all sorts of communications, network, GUI, and other general programming tasks in C/C++ on the Solaris, Linux, and Windows Operating Systems.
+</P><P>
+
+Feel free to contact me: <A HREF="mailto:JonathanCAtkins@gmail.com">JonathanCAtkins@gmail.com</A><BR>
+</P><P>
+
+I am also usually on IRC at irc.freenode.net in the #SDL channel as LIM
+</P><P>
+
+<center>
+ <B>Why is this for you?</B>
+</center>
+</P><P>
+
+Images provide the basic visual building blocks for any user interface.  Colors and fun shapes are the stuff that we as kids looked at for hours at a time while trying to shoot down big aliens and rescue pixelated princesses.  Now it's our turn to make the images that others will remember later in life perhaps.  Now how do we get this dang images into our SDL programs, and be flexible in the handling of the images so that we don't even have to worry about what various formats they may be in?  This is where SDLimage makes all of our lives easier.  This document doesn't help you make artwork, but it will give you the functional knowledge on how to get that art into your game.  Now go forth and make your Stick Figure of Justice, someone else might fill in for your lack of artistry, at least you won't have to make much of an effort to include the new and better art into your code.
+</P><P>
+
+<A NAME="IDX1"></A>
+</P><P>
+
+This is the README, updated by me for accuracy, in the SDL_image source archive.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>SDL_image 1.2
+
+The latest version of this library is available from:
+<A HREF="http://www.libsdl.org/projects/SDL_image/">SDL_image Homepage</A>
+
+This is a simple library to load images of various formats as SDL surfaces.
+This library supports ICO(Icon)/CUR(Cursor)/BMP, PNM (PPM/PGM/PBM), XPM,
+LBM(IFF ILBM), PCX, GIF, JPEG, PNG, TGA, TIFF, and XV thumbnail formats.
+
+API:
+#include "SDL_image.h"
+
+	SDL_Surface *IMG_Load(const char *file);
+or
+	SDL_Surface *IMG_Load_RW(SDL_RWops *src, int freesrc);
+or
+	SDL_Surface *IMG_LoadTyped_RW(SDL_RWops *src, int freesrc, char *type);
+
+where type is a string specifying the format (i.e. "PNG" or "pcx").
+Note that IMG_Load_RW cannot load TGA images.
+
+To create a surface from an XPM image included in C source, use:
+
+	SDL_Surface *IMG_ReadXPMFromArray(char **xpm);
+
+An example program 'showimage' is included, with source in showimage.c
+
+JPEG support requires the JPEG library:
+    <A HREF="http://www.ijg.org/">IJG Homepage</A>
+PNG support requires the PNG library:
+    <A HREF="http://www.libpng.org/pub/png/libpng.html">PNG Homepage</A>
+  and the Zlib library:
+    <A HREF="http://www.gzip.org/zlib/">Zlib Homepage</A>
+TIFF support requires the TIFF library:
+    <A HREF="ftp://ftp.sgi.com/graphics/tiff/">SGI TIFF FTP Site</A>
+
+If you have these libraries installed in non-standard places, you can
+try adding those paths to the configure script, e.g.
+sh ./configure CPPFLAGS="-I/somewhere/include" LDFLAGS="-L/somewhere/lib"
+If this works, you may need to add /somewhere/lib to your LD_LIBRARY_PATH
+so shared library loading works correctly.
+
+This library is under the GNU Library General Public License, see the file
+"COPYING" for details.  Certain image loaders may be under a different
+license, see the individual image loader source files for details.
+</pre></td></tr></table></td></tr></table></P><P>
+
+<A NAME="Getting Started"></A>
+<HR SIZE="6">
+<A NAME="SEC2"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC1"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC3"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 2. Getting Started </H1>
+<!--docid::SEC2::-->
+<P>
+
+This assumes you have gotten SDL_image and installed it on your system.
+SDL_image has an README document in the source distribution to help you
+get it compiled and installed.  Well it at least points you to locations
+for the source code of some of the image libraries SDL_image can use.
+Most of the other image formats are builtin to SDL_image.
+</P><P>
+
+Generally, in UNIX-like environments, installation consists of:
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>./configure
+make
+make install
+</pre></td></tr></table></td></tr></table></P><P>
+
+SDL_image supports loading and decoding images from the following formats:<BR>
+<DL COMPACT>
+<DT><B>TGA</B>
+<DD>TrueVision Targa (MUST have .tga)
+<DT><B>BMP</B>
+<DD>Windows Bitmap(.bmp)
+<DT><B>PNM</B>
+<DD>Portable Anymap (.pnm)<BR>
+<CODE>.pbm</CODE> = Portable BitMap (mono)<BR>
+<CODE>.pgm</CODE> = Portable GreyMap (256 greys)<BR>
+<CODE>.ppm</CODE> = Portable PixMap (full color)
+<DT><B>XPM</B>
+<DD>X11 Pixmap (.xpm) can be #included directly in code<BR>
+This is NOT the same as XBM(X11 Bitmap) format, which is for monocolor images.
+<DT><B>XCF</B>
+<DD>GIMP native (.xcf) (XCF = eXperimental Computing Facility?)<BR>
+This format is always changing, and since there's no library supplied by the GIMP project to load XCF, the loader may frequently fail to load much of any image from an XCF file.  It's better to load this in GIMP and convert to a better supported image format.
+<DT><B>PCX</B>
+<DD>ZSoft IBM PC Paintbrush (.pcx)
+<DT><B>GIF</B>
+<DD>CompuServe Graphics Interchange Format (.gif)
+<DT><B>JPG</B>
+<DD>Joint Photographic Experts Group JFIF format (.jpg or .jpeg)
+<DT><B>TIF</B>
+<DD>Tagged Image File Format (.tif or .tiff)
+<DT><B>LBM</B>
+<DD>Interleaved Bitmap (.lbm or .iff) FORM : ILBM or PBM(packed bitmap)<BR>
+HAM6, HAM8, and 24bit types are not supported.
+<DT><B>PNG</B>
+<DD>Portable Network Graphics (.png)
+</DL>
+<P>
+
+You may also want to look at some demonstration code which may be downloaded from:<BR>
+<A HREF="http://www.jonatkins.org/SDL_image/">http://www.jonatkins.org/SDL_image/</A>
+</P><P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC3">2.1 Includes</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">The include files to use for SDL_image</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC4">2.2 Compiling</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Using the SDL_image library and header file.</TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="Includes"></A>
+<HR SIZE="6">
+<A NAME="SEC3"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC2"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC4"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC2"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC2"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 2.1 Includes </H2>
+<!--docid::SEC3::-->
+<P>
+
+To use SDL_image functions in a C/C++ source code file, you must use the 
+SDL_image.h include file:
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<CODE>  #include "SDL_image.h"</CODE>
+</td></tr></table></P><P>
+
+<A NAME="Compiling"></A>
+<HR SIZE="6">
+<A NAME="SEC4"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC3"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC2"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC2"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 2.2 Compiling </H2>
+<!--docid::SEC4::-->
+<P>
+
+To link with SDL_image you should use sdl-config to get the required SDL
+compilation options.  After that, compiling with SDL_image is quite easy.<BR>
+<B>Note</B>: Some systems may not have the SDL_image library and include file in the same place as the SDL library and includes are located, in that case you will need to add more -I and -L paths to these command lines.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+Simple Example for compiling an object file:
+</P><P>
+
+<CODE>  cc -c `sdl-config --cflags` mysource.c</CODE>
+</P><P>
+
+Simple Example for compiling an object file:
+</P><P>
+
+<CODE>  cc -o myprogram mysource.o `sdl-config --libs` -lSDL_image</CODE>
+</td></tr></table></P><P>
+
+Now <CODE>myprogram</CODE> is ready to run.
+</P><P>
+
+<A NAME="Functions"></A>
+<HR SIZE="6">
+<A NAME="SEC5"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC4"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC6"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC46"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC46"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 3. Functions </H1>
+<!--docid::SEC5::-->
+<P>
+
+These are the functions in the SDL_image API.
+</P><P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC6">3.1 General</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Versioning, Initialization and Cleanup</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC10">3.2 Loading</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">From Image Data to SDL_Surface</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC29">3.3 Info</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Image Type Detection</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC43">3.4 Errors</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Error Handling</TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="General"></A>
+<HR SIZE="6">
+<A NAME="SEC6"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC7"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 3.1 General </H2>
+<!--docid::SEC6::-->
+<P>
+
+These functions query, initialize, and cleanup the SDL_image library.
+</P><P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC7">3.1.1 IMG_Linked_Version</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Get version number</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC8">3.1.2 IMG_Init</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Initialize SDL_image</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC9">3.1.3 IMG_Quit</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Cleanup SDL_image</TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="IMG_Linked_Version"></A>
+<HR SIZE="6">
+<A NAME="SEC7"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC6"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC8"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC6"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.1.1 IMG_Linked_Version </H3>
+<!--docid::SEC7::-->
+<P>
+
+<CODE>const SDL_version *<B>IMG_Linked_Version</B>()</CODE><BR>
+<CODE>void <B>SDL_IMAGE_VERSION</B>(SDL_version *compile_version)</CODE>
+</P><P>
+
+This works similar to <CODE>SDL_Linked_Version</CODE> and <B>SDL_VERSION</B>.<BR>
+Using these you can compare the runtime version to the version that you compiled with.<BR>
+These functions/macros do not require any library initialization calls before using them.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>SDL_version compile_version;
+const SDL_version *link_version=IMG_Linked_Version();
+SDL_IMAGE_VERSION(&#38;compile_version);
+printf("compiled with SDL_image version: %d.%d.%d\n", 
+        compile_version.major,
+        compile_version.minor,
+        compile_version.patch);
+printf("running with SDL_image version: %d.%d.%d\n", 
+        link_version-&#62;major,
+        link_version-&#62;minor,
+        link_version-&#62;patch);
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC8">3.1.2 IMG_Init</A>
+</P><P>
+
+<A NAME="IMG_Init"></A>
+<HR SIZE="6">
+<A NAME="SEC8"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC7"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC9"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC9"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC6"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.1.2 IMG_Init </H3>
+<!--docid::SEC8::-->
+<P>
+
+<CODE>int <B>IMG_Init</B>(int <VAR>flags</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>flags</VAR>
+<DD>bitwise OR'd set of image formats to support by loading a library now.  The values you may OR together to pass in are:<BR>
+<B>IMG_INIT_JPG</B><BR>
+<B>IMG_INIT_PNG</B><BR>
+<B>IMG_INIT_TIF</B>
+</DL>
+<P>
+
+Initialize by loading support as indicated by the <VAR>flags</VAR>, or at least return success if support is already loaded.  You may call this multiple times, which will actually require you to call <CODE>IMG_Quit</CODE> just once to clean up.  You may call this function with a 0 to retrieve whether support was built-in or not loaded yet.<BR>
+<B>Note</B>: to load JPG, PNG, and/or TIF images you can call <CODE>IMG_Init</CODE> with the right <B>IMG_INIT_*</B> flags OR'd together before you program gets busy, to prevent a later hiccup while it loads the library, and to check that you do have the support that you need before you try and use it.<BR>
+<B>Note</B>: No initialization is needed nor performed when using the <CODE>IMG_isJPG</CODE>, <CODE>IMG_isPNG</CODE>, and <CODE>IMG_isTIF</CODE> functions.<BR>
+<B>Note</B>: this function does <I>not</I> always set the error string, so do not depend on <CODE>IMG_GetError</CODE> being meaningful all the time.
+</P><P>
+
+<B>Returns</B>: a bitmask of all the currently initted image loaders.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load support for the JPG and PNG image formats
+int flags=IMG_INIT_JPG|IMG_INIT_PNG;
+int initted=IMG_Init(flags);
+if(initted&#38;flags != flags) {
+    printf("IMG_Init: Failed to init required jpg and png support!\n");
+    printf("IMG_Init: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC9">3.1.3 IMG_Quit</A>
+</P><P>
+
+<A NAME="IMG_Quit"></A>
+<HR SIZE="6">
+<A NAME="SEC9"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC8"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC6"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.1.3 IMG_Quit </H3>
+<!--docid::SEC9::-->
+<P>
+
+<CODE>void <B>IMG_Quit</B>()</CODE>
+</P><P>
+
+This function cleans up all dynamically loaded library handles, freeing memory.  If support is required again it will be initialized again, either by <CODE>IMG_Init</CODE> or loading an image with dynamic support required.  You may call this function when IMG_Load functions are no longer needed for the JPG, PNG, and TIF image formats.  You only need to call this function once, no matter how many times <CODE>IMG_Init</CODE> was called.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// unload the dynamically loaded image libraries
+IMG_Quit();
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC8">3.1.2 IMG_Init</A>
+</P><P>
+
+<A NAME="Loading"></A>
+<HR SIZE="6">
+<A NAME="SEC10"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC9"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC11"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 3.2 Loading </H2>
+<!--docid::SEC10::-->
+<P>
+
+These functions create an <TT>SDL_Surface</TT> from image data either from a file, or
+SDL_RWop, or from an array of data in memory.
+</P><P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+</TABLE>
+<B>Automagic&nbsp;Loading</B>
+<br>
+<TABLE BORDER=0 CELLSPACING=0>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC11">3.2.1 IMG_Load</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load from a file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC12">3.2.2 IMG_Load_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load more format specifically with a SDL_RWop</TD></TR>
+</TABLE>
+<B>Specific&nbsp;Loaders</B>
+<br>
+<TABLE BORDER=0 CELLSPACING=0>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC16">3.2.6 IMG_LoadBMP_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load BMP using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC14">3.2.4 IMG_LoadCUR_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load CUR using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC21">3.2.11 IMG_LoadGIF_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load GIF using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC15">3.2.5 IMG_LoadICO_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load ICO using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC22">3.2.12 IMG_LoadJPG_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load JPG using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC26">3.2.16 IMG_LoadLBM_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load LBM using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC20">3.2.10 IMG_LoadPCX_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load PCX using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC24">3.2.14 IMG_LoadPNG_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load PNG using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC17">3.2.7 IMG_LoadPNM_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load PNM using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC25">3.2.15 IMG_LoadTGA_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load TGA using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC23">3.2.13 IMG_LoadTIF_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load TIF using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC19">3.2.9 IMG_LoadXCF_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load XCF using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC18">3.2.8 IMG_LoadXPM_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load XPM using a SDL_RWop</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC27">3.2.17 IMG_LoadXV_RW</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load XV  using a SDL_RWop</TD></TR>
+</TABLE>
+<B>Array&nbsp;Loaders</B>
+<br>
+<TABLE BORDER=0 CELLSPACING=0>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC28">3.2.18 IMG_ReadXPMFromArray</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Load XPM from compiled XPM data</TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="IMG_Load"></A>
+<HR SIZE="6">
+<A NAME="SEC11"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC12"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.1 IMG_Load </H3>
+<!--docid::SEC11::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_Load</B>(const char *<VAR>file</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>file</VAR>
+<DD>Image file name to load a surface from.
+</DL>
+<P>
+
+Load <VAR>file</VAR> for use as an image in a new surface.  This actually calls <CODE>IMG_LoadTyped_RW</CODE>, with the file extension used as the <VAR>type</VAR> string.  This can load all supported image files, including TGA as long as the filename ends with ".tga".  It is best to call this outside of event loops, and rather keep the loaded images around until you are really done with them, as disk speed and image conversion to a surface is not <I>that</I> speedy.  Don't forget to SDL_FreeSurface the returned surface pointer when you are through with it.<BR>
+<B>Note</B>: If the image format loader requires initialization, it will attempt to do that the first time it is needed if you have not already called <CODE>IMG_Init</CODE> to load support for your image format.<BR>
+<B>Note</B>: If the image format supports a transparent pixel, SDL_image will set the colorkey for the surface.  You can enable RLE acceleration on the surface afterwards by calling:<BR>
+<CODE> SDL_SetColorKey(image, SDL_RLEACCEL, image-&#62;format-&#62;colorkey); </CODE>
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, such as no support built for the image, or a file reading error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.png into image
+SDL_Surface *image;
+image=IMG_Load("sample.png");
+if(!image) {
+    printf("IMG_Load: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC8">3.1.2 IMG_Init</A>,
+<A HREF="SDL_image.html#SEC12">3.2.2 IMG_Load_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_Load_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC12"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC11"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC13"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC13"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.2 IMG_Load_RW </H3>
+<!--docid::SEC12::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_Load_RW</B>(SDL_RWops *<VAR>src</VAR>, int <VAR>freesrc</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The image is loaded from this.
+<DT><VAR>freesrc</VAR>
+<DD>A non-zero value mean is will automatically close/free the <VAR>src</VAR> for you.
+</DL>
+<P>
+
+Load <VAR>src</VAR> for use as a surface.  This can load all supported image formats, <B>except TGA</B>.
+Using <CODE>SDL_RWops</CODE> is not covered here, but they enable you to load from almost any source.<BR>
+<B>Note</B>: If the image format loader requires initialization, it will attempt to do that the first time it is needed if you have not already called <CODE>IMG_Init</CODE> to load support for your image format.<BR>
+<B>Note</B>: If the image format supports a transparent pixel, SDL_image will set the colorkey for the surface.  You can enable RLE acceleration on the surface afterwards by calling:<BR>
+<CODE> SDL_SetColorKey(image, SDL_RLEACCEL, image-&#62;format-&#62;colorkey); </CODE>
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.png in to image
+SDL_Surface *image;
+image=IMG_Load_RW(SDL_RWFromFile("sample.png", "rb"), 1);
+if(!image) {
+    printf("IMG_Load_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC8">3.1.2 IMG_Init</A>,
+<A HREF="SDL_image.html#SEC11">3.2.1 IMG_Load</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_LoadTyped_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC13"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC12"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC14"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC14"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.3 IMG_LoadTyped_RW </H3>
+<!--docid::SEC13::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadTyped_RW</B>(SDL_RWops *<VAR>src</VAR>, int <VAR>freesrc</VAR>, char *<VAR>type</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The image is loaded from this.
+<DT><VAR>freesrc</VAR>
+<DD>A non-zero value mean is will automatically close/free the <VAR>src</VAR> for you.
+<DT><VAR>type</VAR>
+<DD>A string that indicates which format type to interpret the image as.<BR>
+Here is a list of the currently recognized strings (case is not important):<BR>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>"BMP"
+"CUR"
+"GIF"
+"ICO"
+"JPG"
+"LBM"
+"PCX"
+"PNG"
+"PNM"
+"TGA"
+"TIF"
+"XCF"
+"XPM"
+"XV"
+</pre></td></tr></table></DL>
+<P>
+
+Load <VAR>src</VAR> for use as a surface.  This can load all supported image formats.  This method does not guarantee that the format specified by type is the format of the loaded image, except in the case when TGA format is specified (or any other non-magicable format in the future).
+Using <CODE>SDL_RWops</CODE> is not covered here, but they enable you to load from almost any source.<BR>
+<B>Note</B>: If the image format loader requires initialization, it will attempt to do that the first time it is needed if you have not already called <CODE>IMG_Init</CODE> to load support for your image format.<BR>
+<B>Note</B>: If the image format supports a transparent pixel, SDL_image will set the colorkey for the surface.  You can enable RLE acceleration on the surface afterwards by calling:<BR>
+<CODE> SDL_SetColorKey(image, SDL_RLEACCEL, image-&#62;format-&#62;colorkey); </CODE>
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.tga into image
+SDL_Surface *image;
+image=IMG_LoadTyped_RW(SDL_RWFromFile("sample.tga", "rb"), 1, "TGA");
+if(!image) {
+    printf("IMG_LoadTyped_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC8">3.1.2 IMG_Init</A>,
+<A HREF="SDL_image.html#SEC11">3.2.1 IMG_Load</A>,
+<A HREF="SDL_image.html#SEC12">3.2.2 IMG_Load_RW</A>
+</P><P>
+
+<A NAME="IMG_LoadCUR_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC14"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC13"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC15"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC15"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.4 IMG_LoadCUR_RW </H3>
+<!--docid::SEC14::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadCUR_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The icon image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a Windows Cursor image for use as a surface, if BMP support is compiled into the SDL_image library.  The CUR's mask is put into to per pixel alpha in the surface.  For files with multiple images, the first one found with the highest color count is chosen.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if BMP is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.cur into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.cur", "rb");
+image=IMG_LoadCUR_RW(rwop);
+if(!image) {
+    printf("IMG_LoadCUR_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC30">3.3.1 IMG_isCUR</A>
+</P><P>
+
+<A NAME="IMG_LoadICO_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC15"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC14"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC16"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC16"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.5 IMG_LoadICO_RW </H3>
+<!--docid::SEC15::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadICO_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The icon image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a Windows Icon image for use as a surface, if BMP support is compiled into the SDL_image library.  The ICO's mask is put into to per pixel alpha in the surface.  For files with multiple images, the first one found with the highest color count is chosen.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if BMP is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.ico into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.ico", "rb");
+image=IMG_LoadICO_RW(rwop);
+if(!image) {
+    printf("IMG_LoadICO_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC31">3.3.2 IMG_isICO</A>
+</P><P>
+
+<A NAME="IMG_LoadBMP_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC16"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC15"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC17"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC17"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.6 IMG_LoadBMP_RW </H3>
+<!--docid::SEC16::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadBMP_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The BMP image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a BMP image for use as a surface, if BMP support is compiled into the SDL_image library.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if BMP is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.bmp into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.bmp", "rb");
+image=IMG_LoadBMP_RW(rwop);
+if(!image) {
+    printf("IMG_LoadBMP_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC32">3.3.3 IMG_isBMP</A>
+</P><P>
+
+<A NAME="IMG_LoadPNM_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC17"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC16"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC18"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC18"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.7 IMG_LoadPNM_RW </H3>
+<!--docid::SEC17::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadPNM_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The PNM image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a PNM image for use as a surface, if PNM support is compiled into the SDL_image library.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if PNM is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.pnm into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.pnm", "rb");
+image=IMG_LoadPNM_RW(rwop);
+if(!image) {
+    printf("IMG_LoadPNM_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC33">3.3.4 IMG_isPNM</A>
+</P><P>
+
+<A NAME="IMG_LoadXPM_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC18"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC17"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC19"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC19"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.8 IMG_LoadXPM_RW </H3>
+<!--docid::SEC18::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadXPM_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The XPM image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a XPM image for use as a surface, if XPM support is compiled into the SDL_image library.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if XPM is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.xpm into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.xpm", "rb");
+image=IMG_LoadXPM_RW(rwop);
+if(!image) {
+    printf("IMG_LoadXPM_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC28">3.2.18 IMG_ReadXPMFromArray</A>,
+<A HREF="SDL_image.html#SEC34">3.3.5 IMG_isXPM</A>
+</P><P>
+
+<A NAME="IMG_LoadXCF_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC19"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC18"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC20"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.9 IMG_LoadXCF_RW </H3>
+<!--docid::SEC19::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadXCF_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The XCF image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a XCF image for use as a surface, if XCF support is compiled into the SDL_image library.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if XCF is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.xcf into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.xcf", "rb");
+image=IMG_LoadXCF_RW(rwop);
+if(!image) {
+    printf("IMG_LoadXCF_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC35">3.3.6 IMG_isXCF</A>
+</P><P>
+
+<A NAME="IMG_LoadPCX_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC20"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC19"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC21"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC12"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.10 IMG_LoadPCX_RW </H3>
+<!--docid::SEC20::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadPCX_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The PCX image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a PCX image for use as a surface, if PCX support is compiled into the SDL_image library.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if PCX is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.pcx into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.pcx", "rb");
+image=IMG_LoadPCX_RW(rwop);
+if(!image) {
+    printf("IMG_LoadPCX_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC36">3.3.7 IMG_isPCX</A>
+</P><P>
+
+<A NAME="IMG_LoadGIF_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC21"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC20"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC22"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC12"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.11 IMG_LoadGIF_RW </H3>
+<!--docid::SEC21::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadGIF_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The GIF image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a GIF image for use as a surface, if GIF support is compiled into the SDL_image library.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if GIF is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.gif into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.gif", "rb");
+image=IMG_LoadGIF_RW(rwop);
+if(!image) {
+    printf("IMG_LoadGIF_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC37">3.3.8 IMG_isGIF</A>
+</P><P>
+
+<A NAME="IMG_LoadJPG_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC22"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC21"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC23"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC12"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.12 IMG_LoadJPG_RW </H3>
+<!--docid::SEC22::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadJPG_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The JPG image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a JPG image for use as a surface, if JPG support is compiled into the SDL_image library.<BR>
+<B>Note</B>: If the image format loader requires initialization, it will attempt to do that the first time it is needed if you have not already called <CODE>IMG_Init</CODE> to load support for your image format.<BR>
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if JPG is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.jpg into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.jpg", "rb");
+image=IMG_LoadJPG_RW(rwop);
+if(!image) {
+    printf("IMG_LoadJPG_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC8">3.1.2 IMG_Init</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC38">3.3.9 IMG_isJPG</A>
+</P><P>
+
+<A NAME="IMG_LoadTIF_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC23"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC22"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC24"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC12"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.13 IMG_LoadTIF_RW </H3>
+<!--docid::SEC23::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadTIF_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The TIF image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a TIF image for use as a surface, if TIF support is compiled into the SDL_image library.<BR>
+<B>Note</B>: If the image format loader requires initialization, it will attempt to do that the first time it is needed if you have not already called <CODE>IMG_Init</CODE> to load support for your image format.<BR>
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if TIF is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.tif into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.tif", "rb");
+image=IMG_LoadTIF_RW(rwop);
+if(!image) {
+    printf("IMG_LoadTIF_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC8">3.1.2 IMG_Init</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC39">3.3.10 IMG_isTIF</A>
+</P><P>
+
+<A NAME="IMG_LoadPNG_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC24"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC23"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC25"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC12"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.14 IMG_LoadPNG_RW </H3>
+<!--docid::SEC24::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadPNG_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The PNG image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a PNG image for use as a surface, if PNG support is compiled into the SDL_image library.<BR>
+<B>Note</B>: If the image format loader requires initialization, it will attempt to do that the first time it is needed if you have not already called <CODE>IMG_Init</CODE> to load support for your image format.<BR>
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if PNG is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.png into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.png", "rb");
+image=IMG_LoadPNG_RW(rwop);
+if(!image) {
+    printf("IMG_LoadPNG_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC8">3.1.2 IMG_Init</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC40">3.3.11 IMG_isPNG</A>
+</P><P>
+
+<A NAME="IMG_LoadTGA_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC25"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC24"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC26"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC12"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.15 IMG_LoadTGA_RW </H3>
+<!--docid::SEC25::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadTGA_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The TGA image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a TGA image for use as a surface, if TGA support is compiled into the SDL_image library.  If you try to load a non TGA image, you might succeed even when it's not TGA image formatted data, this is because the TGA has no magic, which is a way of identifying a filetype from a signature in it's contents.  So be careful with this.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if TGA is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.tga into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.tga", "rb");
+image=IMG_LoadTGA_RW(rwop);
+if(!image) {
+    printf("IMG_LoadTGA_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_LoadLBM_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC26"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC25"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC27"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC12"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.16 IMG_LoadLBM_RW </H3>
+<!--docid::SEC26::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadLBM_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The LBM image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a LBM image for use as a surface, if LBM support is compiled into the SDL_image library.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if LBM is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.lbm into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.lbm", "rb");
+image=IMG_LoadLBM_RW(rwop);
+if(!image) {
+    printf("IMG_LoadLBM_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC41">3.3.12 IMG_isLBM</A>
+</P><P>
+
+<A NAME="IMG_LoadXV_RW"></A>
+<HR SIZE="6">
+<A NAME="SEC27"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC26"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC28"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC12"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.17 IMG_LoadXV_RW </H3>
+<!--docid::SEC27::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_LoadXV_RW</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD>The source SDL_RWops as a pointer.  The XV image is loaded from this.
+</DL>
+<P>
+
+Load <VAR>src</VAR> as a XV thumbnail image for use as a surface, if XV support is compiled into the SDL_image library.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if XV is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.xv into image
+SDL_Surface *image;
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.xv", "rb");
+image=IMG_LoadXV_RW(rwop);
+if(!image) {
+    printf("IMG_LoadXV_RW: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>,
+<A HREF="SDL_image.html#SEC42">3.3.13 IMG_isXV</A>
+</P><P>
+
+<A NAME="IMG_ReadXPMFromArray"></A>
+<HR SIZE="6">
+<A NAME="SEC28"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC27"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC12"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC10"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.2.18 IMG_ReadXPMFromArray </H3>
+<!--docid::SEC28::-->
+<P>
+
+<CODE>SDL_Surface *<B>IMG_ReadXPMFromArray</B>(char **<VAR>xpm</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>xpm</VAR>
+<DD>The source xpm data.  The XPM image is loaded from this.  XPM files are C header files that define a char **variable, that variable name is what you use here.
+</DL>
+<P>
+
+Load <VAR>xpm</VAR> as a XPM image for use as a surface, if XPM support is compiled into the SDL_image library.
+</P><P>
+
+<B>Returns</B>: a pointer to the image as a new <CODE>SDL_Surface</CODE>.  <B>NULL</B> is returned on errors, like if XPM is not supported, or a read error.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// load sample.xpm into image
+#include "sample.xpm"
+SDL_Surface *image;
+image=IMG_ReadXPMFromArray(sample_xpm);
+if(!image) {
+    printf("IMG_ReadXPMFromArray: %s\n", IMG_GetError());
+    // handle error
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC18">3.2.8 IMG_LoadXPM_RW</A>
+</P><P>
+
+<A NAME="Info"></A>
+<HR SIZE="6">
+<A NAME="SEC29"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC28"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC30"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 3.3 Info </H2>
+<!--docid::SEC29::-->
+<P>
+
+These functions are tests for specific file formats.
+They also show if the format is supported in the linked SDL_image library, assuming you have a valid image of that type.
+</P><P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC32">3.3.3 IMG_isBMP</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted BMP file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC30">3.3.1 IMG_isCUR</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted CUR file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC37">3.3.8 IMG_isGIF</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted GIF file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC31">3.3.2 IMG_isICO</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted ICO file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC38">3.3.9 IMG_isJPG</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted JPG file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC41">3.3.12 IMG_isLBM</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted LBM file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC36">3.3.7 IMG_isPCX</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted PCX file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC40">3.3.11 IMG_isPNG</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted PNG file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC33">3.3.4 IMG_isPNM</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted PNM file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC39">3.3.10 IMG_isTIF</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted TIF file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC35">3.3.6 IMG_isXCF</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted XCF file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC34">3.3.5 IMG_isXPM</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted XPM file</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC42">3.3.13 IMG_isXV</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Test for valid, supportted XV  file</TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="IMG_isCUR"></A>
+<HR SIZE="6">
+<A NAME="SEC30"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC31"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.1 IMG_isCUR </H3>
+<!--docid::SEC30::-->
+<P>
+
+<CODE>int <B>IMG_isCUR</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the BMP format is supported, then the image data is tested to see if it is readable as a CUR, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is a CUR and the BMP format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.cur to see if it is a CUR
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.cur", "rb");
+if(IMG_isCUR(rwop))
+	printf("sample.cur is a CUR file.\n");
+else
+	printf("sample.cur is not a CUR file, or BMP support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC14">3.2.4 IMG_LoadCUR_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isICO"></A>
+<HR SIZE="6">
+<A NAME="SEC31"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC30"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC32"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC32"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.2 IMG_isICO </H3>
+<!--docid::SEC31::-->
+<P>
+
+<CODE>int <B>IMG_isICO</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the BMP format is supported, then the image data is tested to see if it is readable as an ICO, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is an ICO and the BMP format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.ico to see if it is an ICO
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.ico", "rb");
+if(IMG_isICO(rwop))
+	printf("sample.ico is an ICO file.\n");
+else
+	printf("sample.ico is not an ICO file, or BMP support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC15">3.2.5 IMG_LoadICO_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isBMP"></A>
+<HR SIZE="6">
+<A NAME="SEC32"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC31"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC33"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC33"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.3 IMG_isBMP </H3>
+<!--docid::SEC32::-->
+<P>
+
+<CODE>int <B>IMG_isBMP</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the BMP format is supported, then the image data is tested to see if it is readable as a BMP, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is a BMP and the BMP format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.bmp to see if it is a BMP
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.bmp", "rb");
+if(IMG_isBMP(rwop))
+	printf("sample.bmp is a BMP file.\n");
+else
+	printf("sample.bmp is not a BMP file, or BMP support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC16">3.2.6 IMG_LoadBMP_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isPNM"></A>
+<HR SIZE="6">
+<A NAME="SEC33"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC32"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC34"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC34"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.4 IMG_isPNM </H3>
+<!--docid::SEC33::-->
+<P>
+
+<CODE>int <B>IMG_isPNM</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the PNM format is supported, then the image data is tested to see if it is readable as a PNM, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is a PNM and the PNM format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.pnm to see if it is a PNM
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.pnm", "rb");
+if(IMG_isPNM(rwop))
+	printf("sample.pnm is a PNM file.\n");
+else
+	printf("sample.pnm is not a PNM file, or PNM support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC17">3.2.7 IMG_LoadPNM_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isXPM"></A>
+<HR SIZE="6">
+<A NAME="SEC34"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC33"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC35"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC35"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.5 IMG_isXPM </H3>
+<!--docid::SEC34::-->
+<P>
+
+<CODE>int <B>IMG_isXPM</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the XPM format is supported, then the image data is tested to see if it is readable as a XPM, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is a XPM and the XPM format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.xpm to see if it is a XPM
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.xpm", "rb");
+if(IMG_isXPM(rwop))
+	printf("sample.xpm is a XPM file.\n");
+else
+	printf("sample.xpm is not a XPM file, or XPM support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC18">3.2.8 IMG_LoadXPM_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isXCF"></A>
+<HR SIZE="6">
+<A NAME="SEC35"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC34"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC36"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC36"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.6 IMG_isXCF </H3>
+<!--docid::SEC35::-->
+<P>
+
+<CODE>int <B>IMG_isXCF</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the XCF format is supported, then the image data is tested to see if it is readable as a XCF, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is a XCF and the XCF format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.xcf to see if it is a XCF
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.xcf", "rb");
+if(IMG_isXCF(rwop))
+	printf("sample.xcf is a XCF file.\n");
+else
+	printf("sample.xcf is not a XCF file, or XCF support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC19">3.2.9 IMG_LoadXCF_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isPCX"></A>
+<HR SIZE="6">
+<A NAME="SEC36"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC35"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC37"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC37"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.7 IMG_isPCX </H3>
+<!--docid::SEC36::-->
+<P>
+
+<CODE>int <B>IMG_isPCX</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the PCX format is supported, then the image data is tested to see if it is readable as a PCX, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is a PCX and the PCX format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.pcx to see if it is a PCX
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.pcx", "rb");
+if(IMG_isPCX(rwop))
+	printf("sample.pcx is a PCX file.\n");
+else
+	printf("sample.pcx is not a PCX file, or PCX support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC20">3.2.10 IMG_LoadPCX_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isGIF"></A>
+<HR SIZE="6">
+<A NAME="SEC37"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC36"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC38"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC38"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.8 IMG_isGIF </H3>
+<!--docid::SEC37::-->
+<P>
+
+<CODE>int <B>IMG_isGIF</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the GIF format is supported, then the image data is tested to see if it is readable as a GIF, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is a GIF and the GIF format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.gif to see if it is a GIF
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.gif", "rb");
+if(IMG_isGIF(rwop))
+	printf("sample.gif is a GIF file.\n");
+else
+	printf("sample.gif is not a GIF file, or GIF support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC21">3.2.11 IMG_LoadGIF_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isJPG"></A>
+<HR SIZE="6">
+<A NAME="SEC38"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC37"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC39"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.9 IMG_isJPG </H3>
+<!--docid::SEC38::-->
+<P>
+
+<CODE>int <B>IMG_isJPG</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the JPG format is supported, then the image data is tested to see if it is readable as a JPG, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is a JPG and the JPG format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.jpg to see if it is a JPG
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.jpg", "rb");
+if(IMG_isJPG(rwop))
+	printf("sample.jpg is a JPG file.\n");
+else
+	printf("sample.jpg is not a JPG file, or JPG support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC22">3.2.12 IMG_LoadJPG_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isTIF"></A>
+<HR SIZE="6">
+<A NAME="SEC39"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC38"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC40"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC31"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.10 IMG_isTIF </H3>
+<!--docid::SEC39::-->
+<P>
+
+<CODE>int <B>IMG_isTIF</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the TIF format is supported, then the image data is tested to see if it is readable as a TIF, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is a TIF and the TIF format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.tif to see if it is a TIF
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.tif", "rb");
+if(IMG_isTIF(rwop))
+	printf("sample.tif is a TIF file.\n");
+else
+	printf("sample.tif is not a TIF file, or TIF support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC23">3.2.13 IMG_LoadTIF_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isPNG"></A>
+<HR SIZE="6">
+<A NAME="SEC40"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC39"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC41"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC31"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.11 IMG_isPNG </H3>
+<!--docid::SEC40::-->
+<P>
+
+<CODE>int <B>IMG_isPNG</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the PNG format is supported, then the image data is tested to see if it is readable as a PNG, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is a PNG and the PNG format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.png to see if it is a PNG
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.png", "rb");
+if(IMG_isPNG(rwop))
+	printf("sample.png is a PNG file.\n");
+else
+	printf("sample.png is not a PNG file, or PNG support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC24">3.2.14 IMG_LoadPNG_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isLBM"></A>
+<HR SIZE="6">
+<A NAME="SEC41"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC40"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC42"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC31"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.12 IMG_isLBM </H3>
+<!--docid::SEC41::-->
+<P>
+
+<CODE>int <B>IMG_isLBM</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the LBM format is supported, then the image data is tested to see if it is readable as a LBM, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is a LBM and the LBM format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.lbm to see if it is a LBM
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.lbm", "rb");
+if(IMG_isLBM(rwop))
+	printf("sample.lbm is a LBM file.\n");
+else
+	printf("sample.lbm is not a LBM file, or LBM support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC26">3.2.16 IMG_LoadLBM_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="IMG_isXV"></A>
+<HR SIZE="6">
+<A NAME="SEC42"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC41"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC31"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC29"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.3.13 IMG_isXV </H3>
+<!--docid::SEC42::-->
+<P>
+
+<CODE>int <B>IMG_isXV</B>(SDL_RWops *<VAR>src</VAR>)</CODE>
+</P><P>
+
+<DL COMPACT>
+<DT><VAR>src</VAR>
+<DD><P>
+
+</DL>
+<P>
+
+If the XV format is supported, then the image data is tested to see if it is readable as an XV thumbnail, otherwise it returns false (Zero).
+</P><P>
+
+<B>Returns</B>: 1 if the image is an XV thumbnail and the XV format support is compiled into SDL_image.  0 is returned otherwise.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>// Test sample.xv to see if it is an XV thumbnail
+SDL_RWops *rwop;
+rwop=SDL_RWFromFile("sample.xv", "rb");
+if(IMG_isXV(rwop))
+	printf("sample.xv is an XV file.\n");
+else
+	printf("sample.xv is not an XV file, or XV support is not available.\n");
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC27">3.2.17 IMG_LoadXV_RW</A>,
+<A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+</P><P>
+
+<A NAME="Errors"></A>
+<HR SIZE="6">
+<A NAME="SEC43"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC42"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC44"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC46"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 3.4 Errors </H2>
+<!--docid::SEC43::-->
+<P>
+
+These functions are used for error status strings that should help the user
+and developer understand why a function failed.
+</P><P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC44">3.4.1 IMG_SetError</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Set the current error string</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="SDL_image.html#SEC45">3.4.2 IMG_GetError</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Get the current error string</TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="IMG_SetError"></A>
+<HR SIZE="6">
+<A NAME="SEC44"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC45"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC46"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.4.1 IMG_SetError </H3>
+<!--docid::SEC44::-->
+<P>
+
+<CODE>void <B>IMG_SetError</B>(const char *<VAR>fmt</VAR>, ...)</CODE>
+</P><P>
+
+This is the same as SDL_SetError, which sets the error string which may be fetched with IMG_GetError (or SDL_GetError).
+This functions acts like printf, except that it is limited to <B>SDL_ERRBUFIZE</B>(1024) chars in length.  It only accepts the following format types: <CODE>%s, %d, %f, %p</CODE>.  No variations are supported, like <CODE>%.2f</CODE> would not work. For any more specifics read the SDL docs.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>int myimagefunc(int i) {
+    IMG_SetError("myimagefunc is not implemented! %d was passed in.",i);
+    return(-1);
+}
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC45">3.4.2 IMG_GetError</A>
+</P><P>
+
+<A NAME="IMG_GetError"></A>
+<HR SIZE="6">
+<A NAME="SEC45"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC44"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC46"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC5"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC43"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC46"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H3> 3.4.2 IMG_GetError </H3>
+<!--docid::SEC45::-->
+<P>
+
+<CODE>char *<B>IMG_GetError</B>()</CODE>
+</P><P>
+
+This is the same as SDL_GetError, which returns the last error set as a string
+which you may use to tell the user what happened when an error status has been returned
+from an SDL_image function call.
+</P><P>
+
+<B>Returns</B>: a char pointer (string) containing a humam readble version or the reason for the last error that occured.
+</P><P>
+
+<table border=1 cellspacing=0><tr><td bgcolor=silver>
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>printf("Oh My Goodness, an error : %s", IMG_GetError());
+</pre></td></tr></table></td></tr></table></P><P>
+
+<B>See Also</B>:<BR>
+<A HREF="SDL_image.html#SEC44">3.4.1 IMG_SetError</A>
+</P><P>
+
+<A NAME="Defines"></A>
+<HR SIZE="6">
+<A NAME="SEC46"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC45"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[ &lt;&lt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[ &gt;&gt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 4. Defines </H1>
+<!--docid::SEC46::-->
+<P>
+
+<DL COMPACT>
+<A NAME="IDX2"></A>
+<DT><B>IMG_MAJOR_VERSION</B>
+<DD><CODE>1</CODE><BR>
+SDL_image library major number at compilation time
+<A NAME="IDX3"></A>
+<DT><B>IMG_MINOR_VERSION</B>
+<DD><CODE>2</CODE><BR>
+SDL_image library minor number at compilation time
+<DT><B>IMG_PATCHLEVEL</B>
+<DD><A NAME="IDX4"></A>
+<CODE>8</CODE><BR>
+SDL_image library patch level at compilation time
+<A NAME="IDX5"></A>
+<DT><B>IMG_INIT_JPG</B>
+<DD><CODE>1</CODE><BR>
+IMG_Init JPG image format support flag
+<A NAME="IDX6"></A>
+<DT><B>IMG_INIT_PNG</B>
+<DD><CODE>2</CODE><BR>
+IMG_Init PNG image format support flag
+<A NAME="IDX7"></A>
+<DT><B>IMG_INIT_TIF</B>
+<DD><CODE>4</CODE><BR>
+IMG_Init TIF image format support flag
+</DL>
+<P>
+
+<A NAME="Index"></A>
+<HR SIZE="6">
+<A NAME="SEC47"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC46"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[ &gt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[ &lt;&lt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[ &gt;&gt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> Index </H1>
+<!--docid::SEC47::-->
+<P>
+
+<table><tr><th valign=top>Jump to: &nbsp; </th><td><A HREF="SDL_image.html#cp_I" style="text-decoration:none"><b>I</b></A>
+ &nbsp; 
+<A HREF="SDL_image.html#cp_R" style="text-decoration:none"><b>R</b></A>
+ &nbsp; 
+<A HREF="SDL_image.html#cp_S" style="text-decoration:none"><b>S</b></A>
+ &nbsp; 
+</td></tr></table><br><P></P>
+<TABLE border=0>
+<TR><TD></TD><TH ALIGN=LEFT>Index Entry</TH><TH ALIGN=LEFT> Section</TH></TR>
+<TR><TD COLSPAN=3> <HR></TD></TR>
+<TR><TH><A NAME="cp_I"></A>I</TH><TD></TD><TD></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC45"><CODE>IMG_GetError</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC45">3.4.2 IMG_GetError</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC8"><CODE>IMG_Init</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC8">3.1.2 IMG_Init</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#IDX5">IMG_INIT_JPG</A></TD><TD valign=top><A HREF="SDL_image.html#SEC46">4. Defines</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#IDX6">IMG_INIT_PNG</A></TD><TD valign=top><A HREF="SDL_image.html#SEC46">4. Defines</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#IDX7">IMG_INIT_TIF</A></TD><TD valign=top><A HREF="SDL_image.html#SEC46">4. Defines</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC32"><CODE>IMG_isBMP</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC32">3.3.3 IMG_isBMP</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC30"><CODE>IMG_isCUR</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC30">3.3.1 IMG_isCUR</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC37"><CODE>IMG_isGIF</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC37">3.3.8 IMG_isGIF</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC31"><CODE>IMG_isICO</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC31">3.3.2 IMG_isICO</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC38"><CODE>IMG_isJPG</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC38">3.3.9 IMG_isJPG</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC41"><CODE>IMG_isLBM</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC41">3.3.12 IMG_isLBM</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC36"><CODE>IMG_isPCX</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC36">3.3.7 IMG_isPCX</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC40"><CODE>IMG_isPNG</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC40">3.3.11 IMG_isPNG</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC33"><CODE>IMG_isPNM</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC33">3.3.4 IMG_isPNM</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC39"><CODE>IMG_isTIF</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC39">3.3.10 IMG_isTIF</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC35"><CODE>IMG_isXCF</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC35">3.3.6 IMG_isXCF</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC34"><CODE>IMG_isXPM</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC34">3.3.5 IMG_isXPM</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC42"><CODE>IMG_isXV</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC42">3.3.13 IMG_isXV</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC7"><CODE>IMG_Linked_Version</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC7">3.1.1 IMG_Linked_Version</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC11"><CODE>IMG_Load</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC11">3.2.1 IMG_Load</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC12"><CODE>IMG_Load_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC12">3.2.2 IMG_Load_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC16"><CODE>IMG_LoadBMP_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC16">3.2.6 IMG_LoadBMP_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC14"><CODE>IMG_LoadCUR_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC14">3.2.4 IMG_LoadCUR_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC21"><CODE>IMG_LoadGIF_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC21">3.2.11 IMG_LoadGIF_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC15"><CODE>IMG_LoadICO_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC15">3.2.5 IMG_LoadICO_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC22"><CODE>IMG_LoadJPG_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC22">3.2.12 IMG_LoadJPG_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC26"><CODE>IMG_LoadLBM_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC26">3.2.16 IMG_LoadLBM_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC20"><CODE>IMG_LoadPCX_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC20">3.2.10 IMG_LoadPCX_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC24"><CODE>IMG_LoadPNG_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC24">3.2.14 IMG_LoadPNG_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC17"><CODE>IMG_LoadPNM_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC17">3.2.7 IMG_LoadPNM_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC25"><CODE>IMG_LoadTGA_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC25">3.2.15 IMG_LoadTGA_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC23"><CODE>IMG_LoadTIF_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC23">3.2.13 IMG_LoadTIF_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC13"><CODE>IMG_LoadTyped_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC19"><CODE>IMG_LoadXCF_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC19">3.2.9 IMG_LoadXCF_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC18"><CODE>IMG_LoadXPM_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC18">3.2.8 IMG_LoadXPM_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC27"><CODE>IMG_LoadXV_RW</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC27">3.2.17 IMG_LoadXV_RW</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#IDX2">IMG_MAJOR_VERSION</A></TD><TD valign=top><A HREF="SDL_image.html#SEC46">4. Defines</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#IDX3">IMG_MINOR_VERSION</A></TD><TD valign=top><A HREF="SDL_image.html#SEC46">4. Defines</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#IDX4">IMG_PATCHLEVEL</A></TD><TD valign=top><A HREF="SDL_image.html#SEC46">4. Defines</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC9"><CODE>IMG_Quit</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC9">3.1.3 IMG_Quit</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC28"><CODE>IMG_ReadXPMFromArray</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC28">3.2.18 IMG_ReadXPMFromArray</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC44"><CODE>IMG_SetError</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC44">3.4.1 IMG_SetError</A></TD></TR>
+<TR><TD COLSPAN=3> <HR></TD></TR>
+<TR><TH><A NAME="cp_R"></A>R</TH><TD></TD><TD></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#IDX1">README</A></TD><TD valign=top><A HREF="SDL_image.html#SEC1">1. Overview</A></TD></TR>
+<TR><TD COLSPAN=3> <HR></TD></TR>
+<TR><TH><A NAME="cp_S"></A>S</TH><TD></TD><TD></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC4">sdl-config</A></TD><TD valign=top><A HREF="SDL_image.html#SEC4">2.2 Compiling</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC7"><CODE>SDL_IMAGE_VERSION</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC7">3.1.1 IMG_Linked_Version</A></TD></TR>
+<TR><TD></TD><TD valign=top><A HREF="SDL_image.html#SEC10"><CODE>SDL_Surface</CODE></A></TD><TD valign=top><A HREF="SDL_image.html#SEC10">3.2 Loading</A></TD></TR>
+<TR><TD COLSPAN=3> <HR></TD></TR>
+</TABLE><P></P><table><tr><th valign=top>Jump to: &nbsp; </th><td><A HREF="SDL_image.html#cp_I" style="text-decoration:none"><b>I</b></A>
+ &nbsp; 
+<A HREF="SDL_image.html#cp_R" style="text-decoration:none"><b>R</b></A>
+ &nbsp; 
+<A HREF="SDL_image.html#cp_S" style="text-decoration:none"><b>S</b></A>
+ &nbsp; 
+</td></tr></table><br></P><P>
+
+<HR SIZE="6">
+<A NAME="SEC_Contents"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1>Table of Contents</H1>
+<UL>
+<A NAME="TOC1" HREF="SDL_image.html#SEC1">1. Overview</A>
+<BR>
+<A NAME="TOC2" HREF="SDL_image.html#SEC2">2. Getting Started</A>
+<BR>
+<UL>
+<A NAME="TOC3" HREF="SDL_image.html#SEC3">2.1 Includes</A>
+<BR>
+<A NAME="TOC4" HREF="SDL_image.html#SEC4">2.2 Compiling</A>
+<BR>
+</UL>
+<A NAME="TOC5" HREF="SDL_image.html#SEC5">3. Functions</A>
+<BR>
+<UL>
+<A NAME="TOC6" HREF="SDL_image.html#SEC6">3.1 General</A>
+<BR>
+<UL>
+<A NAME="TOC7" HREF="SDL_image.html#SEC7">3.1.1 IMG_Linked_Version</A>
+<BR>
+<A NAME="TOC8" HREF="SDL_image.html#SEC8">3.1.2 IMG_Init</A>
+<BR>
+<A NAME="TOC9" HREF="SDL_image.html#SEC9">3.1.3 IMG_Quit</A>
+<BR>
+</UL>
+<A NAME="TOC10" HREF="SDL_image.html#SEC10">3.2 Loading</A>
+<BR>
+<UL>
+<A NAME="TOC11" HREF="SDL_image.html#SEC11">3.2.1 IMG_Load</A>
+<BR>
+<A NAME="TOC12" HREF="SDL_image.html#SEC12">3.2.2 IMG_Load_RW</A>
+<BR>
+<A NAME="TOC13" HREF="SDL_image.html#SEC13">3.2.3 IMG_LoadTyped_RW</A>
+<BR>
+<A NAME="TOC14" HREF="SDL_image.html#SEC14">3.2.4 IMG_LoadCUR_RW</A>
+<BR>
+<A NAME="TOC15" HREF="SDL_image.html#SEC15">3.2.5 IMG_LoadICO_RW</A>
+<BR>
+<A NAME="TOC16" HREF="SDL_image.html#SEC16">3.2.6 IMG_LoadBMP_RW</A>
+<BR>
+<A NAME="TOC17" HREF="SDL_image.html#SEC17">3.2.7 IMG_LoadPNM_RW</A>
+<BR>
+<A NAME="TOC18" HREF="SDL_image.html#SEC18">3.2.8 IMG_LoadXPM_RW</A>
+<BR>
+<A NAME="TOC19" HREF="SDL_image.html#SEC19">3.2.9 IMG_LoadXCF_RW</A>
+<BR>
+<A NAME="TOC20" HREF="SDL_image.html#SEC20">3.2.10 IMG_LoadPCX_RW</A>
+<BR>
+<A NAME="TOC21" HREF="SDL_image.html#SEC21">3.2.11 IMG_LoadGIF_RW</A>
+<BR>
+<A NAME="TOC22" HREF="SDL_image.html#SEC22">3.2.12 IMG_LoadJPG_RW</A>
+<BR>
+<A NAME="TOC23" HREF="SDL_image.html#SEC23">3.2.13 IMG_LoadTIF_RW</A>
+<BR>
+<A NAME="TOC24" HREF="SDL_image.html#SEC24">3.2.14 IMG_LoadPNG_RW</A>
+<BR>
+<A NAME="TOC25" HREF="SDL_image.html#SEC25">3.2.15 IMG_LoadTGA_RW</A>
+<BR>
+<A NAME="TOC26" HREF="SDL_image.html#SEC26">3.2.16 IMG_LoadLBM_RW</A>
+<BR>
+<A NAME="TOC27" HREF="SDL_image.html#SEC27">3.2.17 IMG_LoadXV_RW</A>
+<BR>
+<A NAME="TOC28" HREF="SDL_image.html#SEC28">3.2.18 IMG_ReadXPMFromArray</A>
+<BR>
+</UL>
+<A NAME="TOC29" HREF="SDL_image.html#SEC29">3.3 Info</A>
+<BR>
+<UL>
+<A NAME="TOC30" HREF="SDL_image.html#SEC30">3.3.1 IMG_isCUR</A>
+<BR>
+<A NAME="TOC31" HREF="SDL_image.html#SEC31">3.3.2 IMG_isICO</A>
+<BR>
+<A NAME="TOC32" HREF="SDL_image.html#SEC32">3.3.3 IMG_isBMP</A>
+<BR>
+<A NAME="TOC33" HREF="SDL_image.html#SEC33">3.3.4 IMG_isPNM</A>
+<BR>
+<A NAME="TOC34" HREF="SDL_image.html#SEC34">3.3.5 IMG_isXPM</A>
+<BR>
+<A NAME="TOC35" HREF="SDL_image.html#SEC35">3.3.6 IMG_isXCF</A>
+<BR>
+<A NAME="TOC36" HREF="SDL_image.html#SEC36">3.3.7 IMG_isPCX</A>
+<BR>
+<A NAME="TOC37" HREF="SDL_image.html#SEC37">3.3.8 IMG_isGIF</A>
+<BR>
+<A NAME="TOC38" HREF="SDL_image.html#SEC38">3.3.9 IMG_isJPG</A>
+<BR>
+<A NAME="TOC39" HREF="SDL_image.html#SEC39">3.3.10 IMG_isTIF</A>
+<BR>
+<A NAME="TOC40" HREF="SDL_image.html#SEC40">3.3.11 IMG_isPNG</A>
+<BR>
+<A NAME="TOC41" HREF="SDL_image.html#SEC41">3.3.12 IMG_isLBM</A>
+<BR>
+<A NAME="TOC42" HREF="SDL_image.html#SEC42">3.3.13 IMG_isXV</A>
+<BR>
+</UL>
+<A NAME="TOC43" HREF="SDL_image.html#SEC43">3.4 Errors</A>
+<BR>
+<UL>
+<A NAME="TOC44" HREF="SDL_image.html#SEC44">3.4.1 IMG_SetError</A>
+<BR>
+<A NAME="TOC45" HREF="SDL_image.html#SEC45">3.4.2 IMG_GetError</A>
+<BR>
+</UL>
+</UL>
+<A NAME="TOC46" HREF="SDL_image.html#SEC46">4. Defines</A>
+<BR>
+<A NAME="TOC47" HREF="SDL_image.html#SEC47">Index</A>
+<BR>
+</UL>
+<HR SIZE=1>
+<A NAME="SEC_OVERVIEW"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1>Short Table of Contents</H1>
+<BLOCKQUOTE>
+<A NAME="TOC1" HREF="SDL_image.html#SEC1">1. Overview</A>
+<BR>
+<A NAME="TOC2" HREF="SDL_image.html#SEC2">2. Getting Started</A>
+<BR>
+<A NAME="TOC5" HREF="SDL_image.html#SEC5">3. Functions</A>
+<BR>
+<A NAME="TOC46" HREF="SDL_image.html#SEC46">4. Defines</A>
+<BR>
+<A NAME="TOC47" HREF="SDL_image.html#SEC47">Index</A>
+<BR>
+
+</BLOCKQUOTE>
+<HR SIZE=1>
+<A NAME="SEC_About"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC47">Index</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="SDL_image.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1>About this document</H1>
+This document was generated on <I>November, 3  2009</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+<P></P>  
+The buttons in the navigation panels have the following meaning:
+<P></P>
+<table border = "1">
+<TR>
+<TH> Button </TH>
+<TH> Name </TH>
+<TH> Go to </TH>
+<TH> From 1.2.3 go to</TH>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ &lt; ] </TD>
+<TD ALIGN="CENTER">
+Back
+</TD>
+<TD>
+previous section in reading order
+</TD>
+<TD>
+1.2.2
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ &gt; ] </TD>
+<TD ALIGN="CENTER">
+Forward
+</TD>
+<TD>
+next section in reading order
+</TD>
+<TD>
+1.2.4
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ &lt;&lt; ] </TD>
+<TD ALIGN="CENTER">
+FastBack
+</TD>
+<TD>
+previous or up-and-previous section 
+</TD>
+<TD>
+1.1
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ Up ] </TD>
+<TD ALIGN="CENTER">
+Up
+</TD>
+<TD>
+up section
+</TD>
+<TD>
+1.2
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ &gt;&gt; ] </TD>
+<TD ALIGN="CENTER">
+FastForward
+</TD>
+<TD>
+next or up-and-next section
+</TD>
+<TD>
+1.3
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [Top] </TD>
+<TD ALIGN="CENTER">
+Top
+</TD>
+<TD>
+cover (top) of document
+</TD>
+<TD>
+ &nbsp; 
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [Contents] </TD>
+<TD ALIGN="CENTER">
+Contents
+</TD>
+<TD>
+table of contents
+</TD>
+<TD>
+ &nbsp; 
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [Index] </TD>
+<TD ALIGN="CENTER">
+Index
+</TD>
+<TD>
+concept index
+</TD>
+<TD>
+ &nbsp; 
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ ? ] </TD>
+<TD ALIGN="CENTER">
+About
+</TD>
+<TD>
+this page
+</TD>
+<TD>
+ &nbsp; 
+</TD>
+</TR>
+</TABLE>
+<P></P>
+where the <STRONG> Example </STRONG> assumes that the current position 
+is at <STRONG> Subsubsection One-Two-Three </STRONG> of a document of 
+the following structure:
+<UL>
+<LI> 1. Section One  </LI>
+<UL>
+<LI>1.1 Subsection One-One</LI>
+<UL>
+<LI> ... </LI>
+</UL>
+<LI>1.2 Subsection One-Two</LI>
+<UL>
+<LI>1.2.1 Subsubsection One-Two-One
+</LI><LI>1.2.2 Subsubsection One-Two-Two
+</LI><LI>1.2.3 Subsubsection One-Two-Three &nbsp; &nbsp; <STRONG>
+&lt;== Current Position </STRONG>
+</LI><LI>1.2.4 Subsubsection One-Two-Four
+</LI></UL>
+<LI>1.3 Subsection One-Three</LI>
+<UL>
+<LI> ... </LI>
+</UL>
+<LI>1.4 Subsection One-Four</LI>
+</UL>
+</UL>
+
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>November, 3  2009</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

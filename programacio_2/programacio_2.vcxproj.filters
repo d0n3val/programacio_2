@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Modules">
       <UniqueIdentifier>{0c79e20e-92b1-4c61-bb68-0cd4e0111bfc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Docs">
+      <UniqueIdentifier>{577cbd13-265c-488e-928f-d0895cd5247d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -97,8 +100,17 @@
     <None Include="config.ini">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="templates.txt">
+    <None Include="Docs\templates.txt">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Docs\SDL2\APIByCategory.html">
+      <Filter>Resource Files\Docs</Filter>
+    </None>
+    <None Include="Docs\SDL2\FrontPage.html">
+      <Filter>Resource Files\Docs</Filter>
+    </None>
+    <None Include="Docs\SDL_image_doc.html">
+      <Filter>Resource Files\Docs</Filter>
     </None>
   </ItemGroup>
 </Project>

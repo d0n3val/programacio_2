@@ -92,7 +92,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="config.ini" />
-    <None Include="templates.txt" />
+    <None Include="Docs\SDL2\APIByCategory.html" />
+    <None Include="Docs\SDL2\FrontPage.html" />
+    <None Include="Docs\SDL_image_doc.html" />
+    <None Include="Docs\templates.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
