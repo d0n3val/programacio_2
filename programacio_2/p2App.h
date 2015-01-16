@@ -13,49 +13,67 @@
 
 class p2App
 {
-    public:
+public:
 
-        // Constructor
-        p2App(const char* );
+    // Constructor
+    p2App(const char* );
 
-        // Destructor
-        virtual ~p2App();
+    // Destructor
+    virtual ~p2App();
 
-        // Called before render is available
-        bool Awake();
+    // Called before render is available
+    bool Awake();
 
-        // Called before the first frame
-        bool Start();
+    // Called before the first frame
+    bool Start();
 
-        // Called each loop iteration
-        bool Update();
+    // Called each loop iteration
+    bool Update();
 
-        // Called before quitting
-        bool CleanUp();
+    // Called before quitting
+    bool CleanUp();
 
-		// Add a new module to handle
-		void AddModule(p2Module* module);
+	// Add a new module to handle
+	void AddModule(p2Module* module);
 
-	public:
+private:
 
-		p2RefBool	pause;
-		p2IniReader	config;
-		Uint32		frames;
-		int			fps_counter;
-		int			last_frame_ms;
-		int			last_fps;
-		int			capped_ms;
+	// Call modules before each loop iteration
+    void PrepareUpdate();
 
-		// Modules
-		p2Window*	win;
-		p2Input*	input;
+	// Call modules before each loop iteration
+    void FinishUpdate();
 
-    private:
+	// Call modules before each loop iteration
+    bool PreUpdate();
 
-        bool				quitting;
-		p2Timer				ms_timer;
-		p2Timer				fps_timer;
-		p2list<p2Module*>	modules;
+	// Call modules on each loop iteration
+    bool DoUpdate();
+
+	// Call modules after each loop iteration
+    bool PostUpdate();
+
+public:
+
+	p2RefBool	pause;
+	p2IniReader	config;
+	Uint32		frames;
+	float		dt;
+	int			fps_counter;
+	int			last_frame_ms;
+	int			last_fps;
+	int			capped_ms;
+
+	// Modules
+	p2Window*	win;
+	p2Input*	input;
+
+private:
+
+    bool				quitting;
+	p2Timer				ms_timer;
+	p2Timer				fps_timer;
+	p2list<p2Module*>	modules;
 };
 
 #endif

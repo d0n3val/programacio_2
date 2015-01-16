@@ -28,7 +28,8 @@ public:
     bool Start();
 
     // Called each loop iteration
-    bool Update(float dt);
+    bool PreUpdate();
+	bool Update(float dt);
 
     // Called before quitting
     bool CleanUp();

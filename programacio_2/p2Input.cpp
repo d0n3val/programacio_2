@@ -39,10 +39,10 @@ bool p2Input::Start()
 }
 
 // Called each loop iteration
-bool p2Input::Update(float dt)
+bool p2Input::PreUpdate()
 {
+	static SDL_Event event;
 	CleanKeys();
-	SDL_Event event;
 
     while (SDL_PollEvent(&event) != 0) 
 	{
@@ -79,6 +79,11 @@ bool p2Input::Update(float dt)
 		 }
     }
 
+	return true;
+}
+
+bool p2Input::Update(float dt)
+{
 	return true;
 }
 

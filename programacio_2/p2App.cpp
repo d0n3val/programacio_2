@@ -82,9 +82,82 @@ bool p2App::Update()
 {
 	bool ret = true;
 
-	float dt = (float)ms_timer.Read() / 1000.0f;
+	PrepareUpdate();
 
+	ret = PreUpdate();
+	
+	if(ret == true)
+		ret = DoUpdate();
+
+	if(ret == true)
+		ret = PostUpdate();
+
+	FinishUpdate();
+
+	return ret;
+}
+
+void p2App::PrepareUpdate()
+{
+	dt = (float)ms_timer.Read() / 1000.0f;
 	ms_timer.Start();
+}
+
+
+void p2App::FinishUpdate()
+{
+	// In background mode leave some time for OS to do stuff
+	if(pause.Get() == true)
+		SDL_Delay(33);
+
+	// Recap on framecount and fps
+	++frames;
+	++fps_counter;
+
+	if(fps_timer.Read() >= 1000)
+	{
+		last_fps = fps_counter;
+		fps_counter = 0;
+		fps_timer.Start();
+	}
+
+	last_frame_ms = ms_timer.Read();
+
+	// cap fps
+	if(last_frame_ms < capped_ms)
+		SDL_Delay(capped_ms - last_frame_ms);
+}
+
+// Call modules before each loop iteration
+bool p2App::PreUpdate()
+{
+	bool ret = true;
+
+	p2list_item<p2Module*>* item;
+
+	item = modules.start;
+	p2Module* pModule = NULL;
+
+	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	{
+		pModule = item->data;
+
+		if(pModule->Active == false)
+			continue;
+
+		if(pause.Get() == true && pModule->UpdateOnPause == false)
+			continue;
+
+		ret = item->data->PreUpdate();
+	}
+
+	return ret;
+}
+
+// Call modules on each loop iteration
+bool p2App::DoUpdate()
+{
+	bool ret = true;
 
 	p2list_item<p2Module*>* item;
 
@@ -104,24 +177,32 @@ bool p2App::Update()
 		ret = item->data->Update(dt);
 	}
 
-	// In background mode leave some time for OS to do stuff
-	if(pause.Get() == true)
-		SDL_Delay(33);
+	return ret;
+}
 
-	++frames;
-	++fps_counter;
+// Call modules after each loop iteration
+bool p2App::PostUpdate()
+{
+	bool ret = true;
 
-	if(fps_timer.Read() >= 1000)
+	p2list_item<p2Module*>* item;
+
+	item = modules.start;
+	p2Module* pModule = NULL;
+
+	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
-		last_fps = fps_counter;
-		fps_counter = 0;
-		fps_timer.Start();
-	}
+		pModule = item->data;
 
-	last_frame_ms = ms_timer.Read();
-	if(last_frame_ms < capped_ms)
-		SDL_Delay(capped_ms - last_frame_ms);
-		
+		if(pModule->Active == false)
+			continue;
+
+		if(pause.Get() == true && pModule->UpdateOnPause == false)
+			continue;
+
+		ret = item->data->PostUpdate();
+	}
+	
 	return ret;
 }
 

@@ -76,6 +76,21 @@ bool p2Window::Start()
 	return true;
 }
 
+// Add last frame fps stadistics in the title
+bool p2Window::PreUpdate()
+{
+	if(App->last_fps >= 0)
+	{
+		static char framerate[255];
+		sprintf_s(framerate, "%s - %d fps (%d/%d ms)", title, App->last_fps, App->last_frame_ms, App->capped_ms);
+		SDL_SetWindowTitle(window, framerate);
+	}
+	else
+		SDL_SetWindowTitle(window, title);
+
+	return true;
+}
+
 // Called each loop iteration
 bool p2Window::Update(float dt)
 {
@@ -100,13 +115,15 @@ bool p2Window::Update(float dt)
 			LOG("Leaving background mode");
 	}
 
+	return ret;
+}
+
+// Swap buffers
+bool p2Window::PostUpdate()
+{
 	SDL_UpdateWindowSurface( window );
 
-	char framerate[255];
-	sprintf_s(framerate, "%s - %d fps (%d/%d ms | %.3f dt)", title, App->last_fps, App->last_frame_ms, App->capped_ms, dt);// SDL_GetWindowTitle(window));//, App->last_frametime);
-	SDL_SetWindowTitle(window, framerate);
-
-	return ret;
+	return true;
 }
 
 // Called before quitting
