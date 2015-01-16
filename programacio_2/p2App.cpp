@@ -1,8 +1,5 @@
 #include "p2Log.h"
 #include "p2App.h"
-#include "p2Window.h"
-#include "p2Input.h"
-#include "p2Timer.h"
 
 // Constructor
 p2App::p2App(const char* config_file)
@@ -17,12 +14,14 @@ p2App::p2App(const char* config_file)
 
 	input = new p2Input();
 	win = new p2Window();
+	render = new p2Render();
 	
 	// Put in order of awake / Start / Update
 	// Reverse order of CleanUp
 
 	AddModule(input);
 	AddModule(win);
+	AddModule(render);
 }
 
 // Destructor

@@ -10,6 +10,7 @@
 // Modules
 #include "p2Window.h"
 #include "p2Input.h"
+#include "p2Render.h"
 
 class p2App
 {
@@ -67,6 +68,7 @@ public:
 	// Modules
 	p2Window*	win;
 	p2Input*	input;
+	p2Render*	render;
 
 private:
 

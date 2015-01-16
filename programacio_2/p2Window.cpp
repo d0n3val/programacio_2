@@ -121,8 +121,6 @@ bool p2Window::Update(float dt)
 // Swap buffers
 bool p2Window::PostUpdate()
 {
-	SDL_UpdateWindowSurface( window );
-
 	return true;
 }
 

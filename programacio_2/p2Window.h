@@ -34,13 +34,14 @@ public:
 	// Changae title
     void SetTitle(const char* new_title);
 
-private:
+public:
 	//The window we'll be rendering to
 	SDL_Window* window;
 	
 	//The surface contained by the window
 	SDL_Surface* screen_surface;
 
+private:
 	char	title[255]; 
 };
 
