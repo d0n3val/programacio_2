@@ -27,7 +27,7 @@ public:
 	TTF_Font* const Load(const char* path, int size = 12);
 
 	// Create a surface from text
-	SDL_Surface* Print(const char* text, SDL_Color color);
+	SDL_Texture* Print(const char* text, SDL_Color color, TTF_Font* font = NULL);
 
 public:
 

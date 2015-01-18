@@ -93,7 +93,7 @@
     <ClInclude Include="p2Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.ini" />
+    <None Include="..\p2_engine\config.ini" />
     <None Include="Docs\SDL2\APIByCategory.html" />
     <None Include="Docs\SDL2\FrontPage.html" />
     <None Include="Docs\SDL_image_doc.html" />

@@ -63,7 +63,7 @@ TTF_Font* const p2Fonts::Load(const char* path, int size)
 	}
 	else
 	{
-		LOG("Successfully loaded font from %s", path);
+		LOG("Successfully loaded font %s size %d", path, size);
 		fonts.add(font);
 	}
 
@@ -71,9 +71,21 @@ TTF_Font* const p2Fonts::Load(const char* path, int size)
 }
 
 // Print text using font
-SDL_Surface* p2Fonts::Print(const char* text, SDL_Color color)
+SDL_Texture* p2Fonts::Print(const char* text, SDL_Color color, TTF_Font* font)
 {
-	SDL_Surface* ret = NULL;
+	SDL_Texture* ret = NULL;
+
+	SDL_Surface* surface = TTF_RenderText_Solid( (font) ? font : default, text, color );
+
+	if(surface == NULL)
+	{
+		LOG( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
+	}
+	else
+	{
+		ret = App->tex->LoadSurface(surface);
+		SDL_FreeSurface( surface );
+	}
 
 	return ret;
 }

@@ -2,7 +2,7 @@
     #define __P2INPUT_H__
 
 #include "p2Module.h"
-#include "SDL\include\SDL.h"
+#include "SDL/include/SDL.h"
 
 enum p2EventWindow
 {

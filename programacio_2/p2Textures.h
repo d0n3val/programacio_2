@@ -1,7 +1,7 @@
 #ifndef __P2TEXTURES_H__
     #define __P2TEXTURES_H__
 
-#include "SDL\include\SDL.h"
+#include "SDL/include/SDL.h"
 #include "p2Module.h"
 
 class p2Textures : public p2Module
@@ -29,6 +29,7 @@ public:
 
 	// Load Texture
 	SDL_Texture* const Load(const char* path);
+	SDL_Texture* const LoadSurface(SDL_Surface* surface);
 
 public:
 

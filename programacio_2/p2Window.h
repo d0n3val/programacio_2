@@ -2,7 +2,7 @@
     #define __P2WINDOW_H__
 
 #include "p2Module.h"
-#include "SDL\include\SDL.h"
+#include "SDL/include/SDL.h"
 
 class p2Window : public p2Module
 {

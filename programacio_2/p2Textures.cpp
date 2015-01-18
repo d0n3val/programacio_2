@@ -3,7 +3,7 @@
 #include "p2App.h"
 #include "p2Textures.h"
 
-#include "SDL_image\include\SDL_image.h"
+#include "SDL_image/include/SDL_image.h"
 #pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
 
 p2Textures::p2Textures() : p2Module()
@@ -40,7 +40,13 @@ bool p2Textures::Start()
 	LOG("start textures");
 	bool ret = true;
 
-	example = Load("textures/test.png");
+	SDL_Color col;
+	col.r = 255;
+	col.g = 255;
+	col.b = 0;
+	col.a = 255;
+
+	example = App->fonts->Print("Hello World", col);
 
 	return ret;
 }
@@ -91,18 +97,25 @@ SDL_Texture* const p2Textures::Load(const char* path)
 	}
 	else
 	{
-        texture = SDL_CreateTextureFromSurface( App->render->renderer, surface );
-        if( texture == NULL )
-        {
-            LOG( "Unable to create texture from surface at %s! SDL Error: %s\n", path, SDL_GetError() );
-        }
-		else
-		{
-			LOG("Successfully loaded texture from %s", path);
-			textures.add(texture);
-		}
-
+		texture = LoadSurface(surface);
         SDL_FreeSurface( surface );
+	}
+
+	return texture;
+}
+
+// Translate a surface into a texture
+SDL_Texture* const p2Textures::LoadSurface(SDL_Surface* surface)
+{
+	SDL_Texture* texture = SDL_CreateTextureFromSurface( App->render->renderer, surface );
+
+    if( texture == NULL )
+    {
+        LOG( "Unable to create texture from surface! SDL Error: %s\n", SDL_GetError() );
+    }
+	else
+	{
+		textures.add(texture);
 	}
 
 	return texture;

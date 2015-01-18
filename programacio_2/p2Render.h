@@ -1,7 +1,7 @@
 #ifndef __P2RENDER_H__
     #define __P2RENDER_H__
 
-#include "SDL\include\SDL.h"
+#include "SDL/include/SDL.h"
 #include "p2Module.h"
 
 class p2Render : public p2Module

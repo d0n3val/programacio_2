@@ -103,9 +103,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.ini">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="Docs\templates.txt">
       <Filter>Resource Files</Filter>
     </None>
@@ -117,6 +114,9 @@
     </None>
     <None Include="Docs\SDL_image_doc.html">
       <Filter>Resource Files\Docs</Filter>
+    </None>
+    <None Include="..\p2_engine\config.ini">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>
