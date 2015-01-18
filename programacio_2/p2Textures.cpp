@@ -40,7 +40,7 @@ bool p2Textures::Start()
 	LOG("start textures");
 	bool ret = true;
 
-	example = Load("c:\\UPC\\programacio_2\\programacio_2\\Textures\\test.png");
+	example = Load("textures/test.png");
 
 	return ret;
 }
