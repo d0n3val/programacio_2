@@ -12,6 +12,7 @@
 #include "p2Input.h"
 #include "p2Render.h"
 #include "p2Textures.h"
+#include "p2Fonts.h"
 
 class p2App
 {
@@ -71,6 +72,7 @@ public:
 	p2Input*	input;
 	p2Render*	render;
 	p2Textures*	tex;
+	p2Fonts*	fonts;
 
 private:
 
