@@ -18,9 +18,6 @@ public:
     // Called before render is available
     bool Awake();
 
-    // Called before the first frame
-    bool Start();
-
     // Called before quitting
     bool CleanUp();
 

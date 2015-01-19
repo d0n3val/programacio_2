@@ -48,21 +48,6 @@ bool p2Audio::Awake()
 	return ret;
 }
 
-// Called before the first frame
-bool p2Audio::Start()
-{
-	LOG("start audio");
-	bool ret = true;
-
-	//PlayMusic("audio/music/music_adventure.ogg", 0.0f);
-
-	//int fx = LoadFx("audio/fx/hello_man.wav");
-	
-	//PlayFx(fx);
-
-	return ret;
-}
-
 // Called before quitting
 bool p2Audio::CleanUp()
 {
@@ -128,6 +113,7 @@ bool p2Audio::PlayMusic(const char* path, float fade_time)
 		}
 	}
 
+	LOG("Successfully playing %s", path);
 	return ret;
 }
 

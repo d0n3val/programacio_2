@@ -73,17 +73,31 @@ bool p2Input::PreUpdate()
 			break;
 
 			case SDL_KEYDOWN:
-				if(event.key.keysym.sym == SDLK_ESCAPE)
-					windowEvents[WE_QUIT] = true;
+			case SDL_KEYUP:
+
+				int code = event.key.keysym.sym;
+				p2KeyState state = KS_IDLE;
+
+				if(event.key.repeat != 0)
+					state = KS_REPEAT;
+				else
+					if(event.key.state == SDL_PRESSED)
+						state = KS_DOWN;
+					else
+						state = KS_UP;
+
+				if(	code > 127) 
+				{
+					code -= (127 + 1073741881); // https://wiki.libsdl.org/SDLKeycodeLookup
+				}
+
+				keyState[code] = state;
+				LOG("Key %d changes state to %d", code, state);
+					
 			break;
 		 }
     }
 
-	return true;
-}
-
-bool p2Input::Update(float dt)
-{
 	return true;
 }
 
@@ -103,9 +117,26 @@ void p2Input::CleanKeys()
 	for(int i = 0; i < WE_COUNT; ++i)
 		windowEvents[i] = false;
 
+	for(int i = 0; i < NUM_KEYS; ++i)
+		keyState[i] = KS_IDLE;
 }
 
 bool p2Input::GetWindowEvent(p2EventWindow ev)
 {
 	return windowEvents[ev];
+}
+
+bool p2Input::GetKeyDown(int code)
+{
+	return keyState[code] == KS_DOWN;
+}
+
+bool p2Input::GetKeyRepeat(int code)
+{
+	return keyState[code] == KS_REPEAT;
+}
+
+bool p2Input::GetKeyUp(int code)
+{
+	return keyState[code] == KS_UP;
 }

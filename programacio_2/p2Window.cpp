@@ -99,6 +99,9 @@ bool p2Window::Update(float dt)
 	if(App->input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
 
+	if(App->input->GetKeyDown(SDLK_ESCAPE) == true)
+		ret = false;
+
 	if(App->input->GetWindowEvent(WE_HIDE) == true)
 	{
 		if(App->pause.Get() == false)
