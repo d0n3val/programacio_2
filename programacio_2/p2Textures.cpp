@@ -21,8 +21,8 @@ bool p2Textures::Awake()
 	LOG("Init Image library");
 	bool ret = true;
 	 	
-	// load support for the JPG and PNG image formats
-	int flags = IMG_INIT_JPG;
+	// load support for the PNG image format
+	int flags = IMG_INIT_PNG;
 	int init = IMG_Init(flags);
 
 	if( init & flags != flags) 

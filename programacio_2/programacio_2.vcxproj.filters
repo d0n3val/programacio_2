@@ -60,6 +60,9 @@
     <ClCompile Include="p2Fonts.cpp">
       <Filter>Source Files\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="p2Audio.cpp">
+      <Filter>Source Files\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2App.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files\Modules</Filter>
     </ClInclude>
     <ClInclude Include="p2Fonts.h">
+      <Filter>Header Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Audio.h">
       <Filter>Header Files\Modules</Filter>
     </ClInclude>
   </ItemGroup>

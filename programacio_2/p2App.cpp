@@ -17,6 +17,7 @@ p2App::p2App(const char* config_file)
 	render = new p2Render();
 	tex = new p2Textures();
 	fonts = new p2Fonts();
+	audio = new p2Audio();
 	
 	// Put in order of awake / Start / Update
 	// Reverse order of CleanUp
@@ -26,12 +27,12 @@ p2App::p2App(const char* config_file)
 	AddModule(render);
 	AddModule(tex);
 	AddModule(fonts);
+	AddModule(audio);
 }
 
 // Destructor
 p2App::~p2App()
 {
-	modules.clear();
 }
 
 void p2App::AddModule(p2Module* module)

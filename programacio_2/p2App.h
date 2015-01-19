@@ -13,6 +13,7 @@
 #include "p2Render.h"
 #include "p2Textures.h"
 #include "p2Fonts.h"
+#include "p2Audio.h"
 
 class p2App
 {
@@ -73,6 +74,7 @@ public:
 	p2Render*	render;
 	p2Textures*	tex;
 	p2Fonts*	fonts;
+	p2Audio*	audio;
 
 private:
 

@@ -30,22 +30,25 @@ struct p2list_item
 template<class tdata>
 class p2list
 {
-  public:
-    const long&           size;
-    p2list_item<tdata>*   start;
-    p2list_item<tdata>*   end;
-  protected:
-    long  _size;
-  public:
+
+public:
+	
+	p2list_item<tdata>*   start;
+	p2list_item<tdata>*   end;
+
+protected:
+
+    long  size;
+
+public:
 
     /**
     * Constructor
     */
-    inline p2list() :
-    size( _size )
+    inline p2list()
     {
       start = end = NULL;
-      _size = 0;
+      size = 0;
     }
 
     /**
@@ -53,13 +56,21 @@ class p2list
     */
     ~p2list()
     {
-      clear();
+		clear();
     }
+
+    /**
+    * Get Size
+    */
+	long count()
+	{
+		return size;
+	}
 
     /**
     * Add new item
     */
-    inline void add( const tdata& item )
+    void add( const tdata& item )
     {
       p2list_item<tdata>*   p_data_item;
 
@@ -76,13 +87,13 @@ class p2list
         end = p_data_item;
       }
 
-      ++_size;
+      ++size;
     }
 
     /**
     * Deletes an item from the list
     */
-    inline bool del( p2list_item<tdata>* item = NULL )
+    bool del( p2list_item<tdata>* item = NULL )
     {
       assert( item != NULL );
 
@@ -112,8 +123,8 @@ class p2list
         }
       }
 
-      delete( item );
-      --_size;
+      RELEASE( item );
+      --size;
 
       return( true );
     }
@@ -121,9 +132,9 @@ class p2list
     /**
     * Returns the first position of the list
     */
-    inline bool first( tdata* item ) const
+    bool first( tdata* item ) const
     {
-      if( _size <= 0 )
+      if( size <= 0 )
       {
         return( false );
       }
@@ -135,9 +146,9 @@ class p2list
     /**
     * Returns the last position of the list
     */
-    inline bool last( tdata* item ) const
+    bool last( tdata* item ) const
     {
-      if( _size <= 0 )
+      if( size <= 0 )
       {
         return( false );
       }
@@ -149,7 +160,7 @@ class p2list
     /**
     * Destroy and free all mem
     */
-    inline void clear()
+    void clear()
     {
       p2list_item<tdata>*   p_data;
       p2list_item<tdata>*   p_next;
@@ -158,11 +169,36 @@ class p2list
       while( p_data != NULL )
       {
         p_next = p_data->next;
-        delete( p_data );
+        RELEASE( p_data );
         p_data = p_next;
       }
       start = end = NULL;
-      _size = 0;
+      size = 0;
+    }
+
+	/**
+    * read / write operator access directly to a position in the list
+    */
+    tdata & operator  [] (const long index)
+    {
+      long                  pos;
+      p2list_item<tdata>*   p_item;
+
+      pos = 0;
+      p_item = start;
+
+      while( p_item != NULL )
+      {
+        if( pos == index )
+        {
+          break;
+        }
+
+        ++pos;
+        p_item = p_item->next;
+      }
+
+      return( p_item->data );
     }
 };
 #endif /*__p2list_H__*/
