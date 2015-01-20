@@ -5,6 +5,7 @@
 
 p2Render::p2Render() : p2Module()
 {
+	strncpy(name, "render", SHORT_STR);
 }
 
 // Destructor
@@ -39,7 +40,8 @@ bool p2Render::Start()
 {
 	LOG("render start");
 
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	// back background
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 	return true;
 }

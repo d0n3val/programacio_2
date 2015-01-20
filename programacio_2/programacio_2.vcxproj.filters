@@ -28,6 +28,12 @@
     <Filter Include="Resource Files\Docs">
       <UniqueIdentifier>{577cbd13-265c-488e-928f-d0895cd5247d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Tools\External">
+      <UniqueIdentifier>{bab11d13-79a6-4f5c-97c7-8e46b8838932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tools\External">
+      <UniqueIdentifier>{9e3742f4-10db-43ec-a66a-ec4f3d5e3356}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,6 +68,12 @@
     </ClCompile>
     <ClCompile Include="p2Audio.cpp">
       <Filter>Source Files\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="p2Map.cpp">
+      <Filter>Source Files\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="PugiXml\src\pugixml.cpp">
+      <Filter>Source Files\Tools\External</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +119,21 @@
     <ClInclude Include="p2Audio.h">
       <Filter>Header Files\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="p2Map.h">
+      <Filter>Header Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="PugiXml\src\pugiconfig.hpp">
+      <Filter>Header Files\Tools\External</Filter>
+    </ClInclude>
+    <ClInclude Include="PugiXml\src\pugixml.hpp">
+      <Filter>Header Files\Tools\External</Filter>
+    </ClInclude>
+    <ClInclude Include="base64\base64.h">
+      <Filter>Header Files\Tools\External</Filter>
+    </ClInclude>
+    <ClInclude Include="trim.h">
+      <Filter>Header Files\Tools\External</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Docs\templates.txt">
@@ -122,6 +149,9 @@
       <Filter>Resource Files\Docs</Filter>
     </None>
     <None Include="..\p2_engine\config.ini">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\p2_engine\maps\desert.tmx">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

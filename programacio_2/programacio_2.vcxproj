@@ -73,12 +73,15 @@
     <ClCompile Include="p2IniReader.cpp" />
     <ClCompile Include="p2Input.cpp" />
     <ClCompile Include="p2Log.cpp" />
+    <ClCompile Include="p2Map.cpp" />
     <ClCompile Include="p2Render.cpp" />
     <ClCompile Include="p2Textures.cpp" />
     <ClCompile Include="p2Timer.cpp" />
     <ClCompile Include="p2Window.cpp" />
+    <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="base64\base64.h" />
     <ClInclude Include="p2Audio.h" />
     <ClInclude Include="p2Fonts.h" />
     <ClInclude Include="p2IniReader.h" />
@@ -87,15 +90,20 @@
     <ClInclude Include="p2App.h" />
     <ClInclude Include="p2Defs.h" />
     <ClInclude Include="p2List.h" />
+    <ClInclude Include="p2Map.h" />
     <ClInclude Include="p2Module.h" />
     <ClInclude Include="p2RefBool.h" />
     <ClInclude Include="p2Render.h" />
     <ClInclude Include="p2Textures.h" />
     <ClInclude Include="p2Timer.h" />
     <ClInclude Include="p2Window.h" />
+    <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
+    <ClInclude Include="PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="trim.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\p2_engine\config.ini" />
+    <None Include="..\p2_engine\maps\desert.tmx" />
     <None Include="Docs\SDL2\APIByCategory.html" />
     <None Include="Docs\SDL2\FrontPage.html" />
     <None Include="Docs\SDL_image_doc.html" />

@@ -4,7 +4,8 @@
 
 p2Input::p2Input() : p2Module()
 {
-	UpdateOnPause = true;
+	update_on_pause = true;
+	strncpy(name, "input", SHORT_STR);
 }
 
 // Destructor

@@ -18,6 +18,7 @@ p2App::p2App(const char* config_file)
 	tex = new p2Textures();
 	fonts = new p2Fonts();
 	audio = new p2Audio();
+	map = new p2Map();
 	
 	// Put in order of awake / Start / Update
 	// Reverse order of CleanUp
@@ -28,6 +29,7 @@ p2App::p2App(const char* config_file)
 	AddModule(tex);
 	AddModule(fonts);
 	AddModule(audio);
+	AddModule(map);
 }
 
 // Destructor
@@ -146,10 +148,10 @@ bool p2App::PreUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->Active == false)
+		if(pModule->active == false)
 			continue;
 
-		if(pause.Get() == true && pModule->UpdateOnPause == false)
+		if(pause.Get() == true && pModule->update_on_pause == false)
 			continue;
 
 		ret = item->data->PreUpdate();
@@ -172,10 +174,10 @@ bool p2App::DoUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->Active == false)
+		if(pModule->active == false)
 			continue;
 
-		if(pause.Get() == true && pModule->UpdateOnPause == false)
+		if(pause.Get() == true && pModule->update_on_pause == false)
 			continue;
 
 		ret = item->data->Update(dt);
@@ -198,10 +200,10 @@ bool p2App::PostUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->Active == false)
+		if(pModule->active == false)
 			continue;
 
-		if(pause.Get() == true && pModule->UpdateOnPause == false)
+		if(pause.Get() == true && pModule->update_on_pause == false)
 			continue;
 
 		ret = item->data->PostUpdate();

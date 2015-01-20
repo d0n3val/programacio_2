@@ -10,7 +10,8 @@ p2Window::p2Window() : p2Module()
 {
 	window = NULL;
 	screen_surface = NULL;
-	UpdateOnPause = true;
+	update_on_pause = true;
+	strncpy(name, "window", SHORT_STR);
 }
 
 // Destructor
@@ -81,7 +82,7 @@ bool p2Window::PreUpdate()
 {
 	if(App->last_fps >= 0)
 	{
-		static char framerate[255];
+		static char framerate[MID_STR];
 		sprintf_s(framerate, "%s - %d fps (%d/%d ms)", title, App->last_fps, App->last_frame_ms, App->capped_ms);
 		SDL_SetWindowTitle(window, framerate);
 	}
@@ -145,5 +146,5 @@ bool p2Window::CleanUp()
 // Set new window title
 void p2Window::SetTitle(const char* new_title)
 {
-	strcpy_s(title, 255, new_title);
+	strcpy_s(title, MID_STR, new_title);
 }

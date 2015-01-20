@@ -4,6 +4,8 @@
 // Memory Leaks reporter -------------------
 #define _CRTDBG_MAP_ALLOC
 
+#include <stdio.h>
+
 //  NULL just in case ----------------------
 
   #ifdef NULL
@@ -32,5 +34,18 @@
                               \
     x = NULL;                    \
   }
+
+// Standard string size
+#define SHORT_STR	32
+#define MID_STR		255
+#define HUGE_STR	8192
+
+// Joins a path and file
+inline const char* const PATH(const char* folder, const char *file)
+{
+	static char path[MID_STR];
+	sprintf_s(path, MID_STR, "%s/%s", folder, file);
+	return path;
+}
 
 #endif

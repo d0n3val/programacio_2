@@ -42,7 +42,7 @@ public:
 	SDL_Surface* screen_surface;
 
 private:
-	char	title[255]; 
+	char	title[MID_STR]; 
 };
 
 #endif // __P2WINDOW_H__

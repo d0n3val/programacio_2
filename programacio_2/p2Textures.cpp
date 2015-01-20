@@ -8,6 +8,7 @@
 
 p2Textures::p2Textures() : p2Module()
 {
+	strncpy(name, "textures", SHORT_STR);
 }
 
 // Destructor

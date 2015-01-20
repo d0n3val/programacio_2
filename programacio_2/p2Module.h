@@ -7,9 +7,9 @@ class p2Module
 {
 public:
 
-	p2Module() { Active = false; UpdateOnPause = false; App = NULL; }
+	p2Module() : active(false), update_on_pause(false), App(NULL) {}
 
-	void Init(p2App* App) { this->App = App; Active = true; }
+	void Init(p2App* App) { this->App = App; active = true; }
 
     // Called before render is available
 	virtual bool Awake() { return true; }
@@ -31,10 +31,11 @@ public:
 
 public:
 
-	bool	Active;
-	bool	UpdateOnPause;
+	char	name[SHORT_STR];
+	bool	active;
+	bool	update_on_pause;
 	p2App*	App;
-	
+
 };
 
 #endif // __P2MODULE_H__

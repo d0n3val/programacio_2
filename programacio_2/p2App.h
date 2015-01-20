@@ -14,6 +14,7 @@
 #include "p2Textures.h"
 #include "p2Fonts.h"
 #include "p2Audio.h"
+#include "p2Map.h"
 
 class p2App
 {
@@ -75,6 +76,7 @@ public:
 	p2Textures*	tex;
 	p2Fonts*	fonts;
 	p2Audio*	audio;
+	p2Map*		map;
 
 private:
 

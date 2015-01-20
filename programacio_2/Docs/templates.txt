@@ -36,7 +36,7 @@ public:
 
 };
 
-#endif // __P2MODULE_H__
+#endif // __P2MYMODULE_H__
 
 ----------------------------------------------------
 mymodule.cpp ---------------------------------------
@@ -59,7 +59,7 @@ p2MyModule::~p2MyModule()
 // Called before render is available
 bool p2MyModule::Awake()
 {
-	LOG("awake mymodule");
+	LOG("awake p2MyModule");
 	bool ret = true;
 
 	return ret;
@@ -68,7 +68,7 @@ bool p2MyModule::Awake()
 // Called before the first frame
 bool p2MyModule::Start()
 {
-	LOG("start mymodule");
+	LOG("start p2MyModule");
 	bool ret = true;
 
 	return ret;
@@ -94,7 +94,7 @@ bool p2MyModule::PostUpdate()
 // Called before quitting
 bool p2MyModule::CleanUp()
 {
-	LOG("cleanup mymodule");
+	LOG("cleanup p2MyModule");
 	
 	return true;
 }

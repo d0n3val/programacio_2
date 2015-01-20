@@ -16,11 +16,11 @@ void p2IniReader::SetFile(const char* file)
 // ---------------------------------------------
 char* p2IniReader::GetString(const char* section, const char* key, const char* default)
 {
-	char* result = new char[255];
+	char* result = new char[MID_STR];
 
-	memset(result, 0, 255);
+	memset(result, 0, MID_STR);
 
-	GetPrivateProfileString(section, key, default, result, 255, file_name); 
+	GetPrivateProfileString(section, key, default, result, MID_STR, file_name); 
 
 	return result;
 }

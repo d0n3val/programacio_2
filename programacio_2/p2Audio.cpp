@@ -8,6 +8,7 @@
 p2Audio::p2Audio() : p2Module()
 {
 	music = NULL;
+	strncpy(name, "audio", SHORT_STR);
 }
 
 // Destructor

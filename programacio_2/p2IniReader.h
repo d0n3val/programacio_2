@@ -17,7 +17,7 @@ public:
 
 public:
 
-	char file_name[255];
+	char file_name[MID_STR];
 
 };
 
