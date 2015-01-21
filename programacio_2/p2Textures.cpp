@@ -41,14 +41,6 @@ bool p2Textures::Start()
 	LOG("start textures");
 	bool ret = true;
 
-	SDL_Color col;
-	col.r = 255;
-	col.g = 255;
-	col.b = 0;
-	col.a = 255;
-
-	example = App->fonts->Print("Hello World", col);
-
 	return ret;
 }
 
@@ -60,7 +52,7 @@ bool p2Textures::PreUpdate()
 
 bool p2Textures::Update(float dt)
 {
-	SDL_RenderCopy(App->render->renderer, example, NULL, NULL);
+	
 	return true;
 }
 

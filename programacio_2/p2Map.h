@@ -6,6 +6,14 @@
 #include "p2List.h"
 #include "p2Module.h"
 
+enum MapTypes
+{
+	MAPTYPE_UNKNOWN = 0,
+	MAPTYPE_ORTHOGONAL,
+	MAPTYPE_ISOMETRIC,
+	MAPTYPE_STAGGERED
+};
+
 struct TerrainType
 {
 	char name[MID_STR];
@@ -27,9 +35,15 @@ struct TileSet
 	int					firstgid;
 	int					margin;
 	int					spacing;
-	int					width;
-	int					height;
+	int					tile_width;
+	int					tile_height;
 	SDL_Texture*		texture;
+	int					tex_width;
+	int					tex_height;
+	int					num_tiles_width;
+	int					num_tiles_height;
+	int					offset_x;
+	int					offset_y;
 	p2list<TerrainType>	terrain_types;
 	p2list<TileType>	tile_types;
 };
@@ -42,9 +56,9 @@ struct MapLayer
 	unsigned __int32* data;
 
 	MapLayer() : data(NULL)	{}
-	~MapLayer() { RELEASE(data); }
+	~MapLayer() { /*LOG("release map data****");*/ RELEASE(data); }
 
-	inline unsigned __int32 Get(int x, int y) { return data[(y*x)+x]; }
+	inline unsigned __int32 Get(int x, int y) { return data[(y*width)+x]; }
 };
 
 struct MapData
@@ -53,9 +67,12 @@ struct MapData
 	int					height;
 	int					tile_width;
 	int					tile_height;
+	SDL_Color			background_color;
+	MapTypes			type;
 	TileSet				tileset;
-	p2list<MapLayer>	layers;
+	p2list<MapLayer *>	layers;
 };
+
 
 class p2Map : public p2Module
 {
@@ -79,6 +96,8 @@ public:
 
 	// Load new map
 	bool Load(const char* path);
+	
+	SDL_Rect GetTileRect(int id);
 
 private:
 
@@ -98,8 +117,10 @@ private:
 
 	pugi::xml_document	map_file;
 	pugi::xml_document	tileset_file;
+	pugi::xml_node		tileset_node;
 
 	char				folder[MID_STR];
+	bool				map_loaded;
 };
 
 #endif // __P2MAP_H__

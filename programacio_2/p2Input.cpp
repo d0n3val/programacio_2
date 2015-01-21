@@ -35,7 +35,7 @@ bool p2Input::Awake()
 // Called before the first frame
 bool p2Input::Start()
 {
-	LOG("input start");
+	CleanKeys();
 	return true;
 }
 
@@ -75,7 +75,7 @@ bool p2Input::PreUpdate()
 
 			case SDL_KEYDOWN:
 			case SDL_KEYUP:
-
+				{
 				int code = event.key.keysym.sym;
 				p2KeyState state = KS_IDLE;
 
@@ -93,9 +93,27 @@ bool p2Input::PreUpdate()
 				}
 
 				keyState[code] = state;
-				LOG("Key %d changes state to %d", code, state);
-					
+				//LOG("Key %d changes state to %d", code, state);
+				}
+
 			break;
+
+			case SDL_MOUSEBUTTONDOWN:
+				mouse_buttons[event.button.button-1] = KS_DOWN;
+				//LOG("Mouse button %d down", event.button.button-1);
+			break;
+
+			case SDL_MOUSEBUTTONUP:
+				mouse_buttons[event.button.button-1] = KS_UP;
+				//LOG("Mouse button %d up", event.button.button-1);
+			break;
+
+			case SDL_MOUSEMOTION:
+				mouse_motion_x = event.motion.xrel;
+				mouse_motion_y = event.motion.yrel;
+				//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
+			break;
+
 		 }
     }
 
@@ -120,6 +138,11 @@ void p2Input::CleanKeys()
 
 	for(int i = 0; i < NUM_KEYS; ++i)
 		keyState[i] = KS_IDLE;
+
+	for(int i = 0; i < NUM_MOUSE_BUTTONS; ++i)
+		(mouse_buttons[i] == KS_DOWN || mouse_buttons[i] == KS_REPEAT ) ? mouse_buttons[i] = KS_REPEAT : mouse_buttons[i] = KS_IDLE;
+
+	mouse_motion_x = mouse_motion_y = 0;
 }
 
 bool p2Input::GetWindowEvent(p2EventWindow ev)
@@ -140,4 +163,25 @@ bool p2Input::GetKeyRepeat(int code)
 bool p2Input::GetKeyUp(int code)
 {
 	return keyState[code] == KS_UP;
+}
+
+bool p2Input::GetMouseButtonDown(int code)
+{
+	return mouse_buttons[code-1] == KS_DOWN;
+}
+
+bool p2Input::GetMouseButtonRepeat(int code)
+{
+	return mouse_buttons[code-1] == KS_REPEAT;
+}
+
+bool p2Input::GetMouseButtonUp(int code)
+{
+	return mouse_buttons[code-1] == KS_UP;
+}
+
+void p2Input::GetMouseMotion(int &x, int &y)
+{
+	x = mouse_motion_x;
+	y = mouse_motion_y;
 }

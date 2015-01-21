@@ -27,10 +27,17 @@ public:
     // Called before quitting
     bool CleanUp();
 
+	// Blit
+	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section = NULL);
+
+	// Set background color
+	void SetBackgroundColor(SDL_Color color);
+
 public:
 
 	SDL_Renderer*	renderer;
-
+	SDL_Rect		camera;
+	SDL_Color		background;
 };
 
 #endif // __P2RENDER_H__

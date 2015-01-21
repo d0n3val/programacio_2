@@ -5,6 +5,7 @@
 #include "SDL/include/SDL.h"
 
 #define NUM_KEYS 352
+#define NUM_MOUSE_BUTTONS 5
 
 enum p2EventWindow
 {
@@ -57,7 +58,11 @@ public:
 
 	// Get mouse / axis position
 	//bool GetMousePosition(int &x, int &y);
-	
+	void GetMouseMotion(int &x, int &y);
+
+	bool GetMouseButtonDown(int code);
+	bool GetMouseButtonRepeat(int code);
+	bool GetMouseButtonUp(int code);
 
 private:
 	void CleanKeys();
@@ -65,6 +70,9 @@ private:
 private:
 	bool		windowEvents[WE_COUNT];
 	p2KeyState	keyState[NUM_KEYS];
+	p2KeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
+	int			mouse_motion_x;
+	int			mouse_motion_y;
 };
 
 #endif // __P2INPUT_H__
