@@ -63,6 +63,7 @@ bool p2Audio::CleanUp()
 	{
 		Mix_FreeChunk(item->data);
 	}
+	fx.clear();
 
 	Mix_CloseAudio();
 	Mix_Quit();

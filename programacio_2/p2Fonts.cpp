@@ -49,6 +49,8 @@ bool p2Fonts::CleanUp()
 		TTF_CloseFont(item->data);
 	}
 
+	fonts.clear();
+
 	TTF_Quit();
 	return true;
 }

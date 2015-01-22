@@ -74,6 +74,8 @@ bool p2Textures::CleanUp()
 		SDL_DestroyTexture(item->data);
 	}
 
+	textures.clear();
+
 	IMG_Quit();
 	return true;
 }

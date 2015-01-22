@@ -9,6 +9,7 @@ p2App::p2App(const char* config_file)
 	last_frame_ms = -1;
 	last_fps = -1;
 	capped_ms = -1;
+	fps_counter = 0;
 
 	config.SetFile(config_file);
 
@@ -20,7 +21,7 @@ p2App::p2App(const char* config_file)
 	audio = new p2Audio();
 	map = new p2Map();
 	
-	// Put in order of awake / Start / Update
+	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 
 	AddModule(input);
@@ -35,6 +36,7 @@ p2App::p2App(const char* config_file)
 // Destructor
 p2App::~p2App()
 {
+	modules.clear();
 }
 
 void p2App::AddModule(p2Module* module)
@@ -225,6 +227,15 @@ bool p2App::CleanUp()
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}
+
+	// release modules
+	item = modules.end;
+	while( item != NULL )
+	{
+		RELEASE(item->data);
+		item = item->prev;
+	}
+	modules.clear();
 
 	return ret;
 }

@@ -1,9 +1,6 @@
 #ifndef __P2DEFS_H__
     #define __P2DEFS_H__
 
-// Memory Leaks reporter -------------------
-#define _CRTDBG_MAP_ALLOC
-
 #include <stdio.h>
 
 //  NULL just in case ----------------------

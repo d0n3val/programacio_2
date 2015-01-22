@@ -134,6 +134,9 @@
     <ClInclude Include="trim.h">
       <Filter>Header Files\Tools\External</Filter>
     </ClInclude>
+    <ClInclude Include="p2PerfTimer.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Docs\templates.txt">

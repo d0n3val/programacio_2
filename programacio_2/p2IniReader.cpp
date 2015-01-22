@@ -16,7 +16,7 @@ void p2IniReader::SetFile(const char* file)
 // ---------------------------------------------
 char* p2IniReader::GetString(const char* section, const char* key, const char* default)
 {
-	char* result = new char[MID_STR];
+	static char result[MID_STR];
 
 	memset(result, 0, MID_STR);
 

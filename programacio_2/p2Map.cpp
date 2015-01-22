@@ -117,7 +117,21 @@ bool p2Map::PostUpdate()
 bool p2Map::CleanUp()
 {
 	LOG("Unloading map");
-	
+
+	data.tileset.terrain_types.clear(); 
+	data.tileset.tile_types.clear();
+	// Render all layers
+	p2list_item<MapLayer*>* item;
+
+	item = data.layers.start;
+	while( item != NULL )
+	{
+		RELEASE(item->data);
+		item = item->next;
+	}
+
+	data.layers.clear();
+
 	return true;
 }
 

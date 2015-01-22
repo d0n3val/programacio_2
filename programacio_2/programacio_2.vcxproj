@@ -92,6 +92,7 @@
     <ClInclude Include="p2List.h" />
     <ClInclude Include="p2Map.h" />
     <ClInclude Include="p2Module.h" />
+    <ClInclude Include="p2PerfTimer.h" />
     <ClInclude Include="p2RefBool.h" />
     <ClInclude Include="p2Render.h" />
     <ClInclude Include="p2Textures.h" />
