@@ -56,7 +56,7 @@ struct MapLayer
 	unsigned __int32* data;
 
 	MapLayer() : data(NULL)	{}
-	~MapLayer() { /*LOG("release map data****");*/ RELEASE(data); }
+	~MapLayer() { RELEASE(data); }
 
 	inline unsigned __int32 Get(int x, int y) { return data[(y*width)+x]; }
 };

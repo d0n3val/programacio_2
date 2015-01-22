@@ -5,7 +5,7 @@
 
 p2Render::p2Render() : p2Module()
 {
-	strncpy(name, "render", SHORT_STR);
+	strncpy_s(name, "render", SHORT_STR);
 
 	background.r = 0;
 	background.g = 0;

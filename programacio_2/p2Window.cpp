@@ -11,7 +11,7 @@ p2Window::p2Window() : p2Module()
 	window = NULL;
 	screen_surface = NULL;
 	update_on_pause = true;
-	strncpy(name, "window", SHORT_STR);
+	strncpy_s(name, "window", SHORT_STR);
 }
 
 // Destructor

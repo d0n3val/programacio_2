@@ -47,7 +47,7 @@ char* b64_encode(const char *source, unsigned int length) {
 			out [3] = '=';
 		}
 		r_pos = (i/3)*4;
-		strcpy(res+r_pos, out);
+		strncpy_s(res+r_pos, mlen, out, mlen);
 	}
 	return res;
 }

@@ -21,6 +21,7 @@ const char* strrspn( const char* s, const char* delimiters )
 #endif
 
 #ifndef STRNCPY0
+#define _CRT_SECURE_NO_WARNINGS
 /*
   A non-standard helper function:
   A strncpy() that guarantees termination of the result string.
@@ -28,12 +29,12 @@ const char* strrspn( const char* s, const char* delimiters )
 */
 char* strncpy0( char* result, const char* s, size_t n )
 {
-  strncpy( result, s, n );
+  strncpy_s( result, n, s, n );
   result[ n ] = '\0';
   return result;
 }
 #endif 
-
+/*
 char* trim_right_copy( char* result, const char* s, const char* delimiters )
 {
   return strncpy0( result, s, strrspn( s, delimiters ) - s );
@@ -50,7 +51,7 @@ char* trim_copy( char* result, const char* s, const char* delimiters )
   result[ strrspn( result, delimiters ) - result ] = '\0';
   return result;
 }
-
+*/
 char* trim_right_inplace( char* s, const char* delimiters )
 {
   s[ strrspn( s, delimiters ) - s ] = '\0';

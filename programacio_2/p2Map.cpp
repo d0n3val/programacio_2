@@ -12,7 +12,7 @@
 
 p2Map::p2Map() : p2Module()
 {
-	strncpy(name, "map", SHORT_STR);
+	strncpy_s(name, "map", SHORT_STR);
 	map_loaded = false;
 }
 
@@ -27,7 +27,7 @@ bool p2Map::Awake()
 	LOG("Loading Map");
 	bool ret = true;
 
-	strncpy(folder, App->config.GetString("maps", "folder", "maps/"), MID_STR);
+	strncpy_s(folder, App->config.GetString("maps", "folder", "maps/"), MID_STR);
 
 	if(Load(App->config.GetString("maps", "map", "desert.tmx")) == true)
 	{
@@ -210,7 +210,7 @@ bool p2Map::LoadMap()
 		data.tile_height = map.attribute("tileheight").as_int();
 
 		char buf[SHORT_STR];
-		strncpy(buf, map.attribute("backgroundcolor").as_string(), SHORT_STR);
+		strncpy_s(buf, map.attribute("backgroundcolor").as_string(), SHORT_STR);
 
 		if(strlen(buf) > 0)
 		{
@@ -218,13 +218,13 @@ bool p2Map::LoadMap()
 
 			char r[3], g[3], b[3];
 
-			sprintf(r, "%c%c", buf[1], buf[2]);
-			sprintf(g, "%c%c", buf[3], buf[4]);
-			sprintf(b, "%c%c", buf[5], buf[6]);
+			sprintf_s(r, "%c%c", buf[1], buf[2]);
+			sprintf_s(g, "%c%c", buf[3], buf[4]);
+			sprintf_s(b, "%c%c", buf[5], buf[6]);
 			
-			sscanf(r, "%x", &data.background_color.r);
-			sscanf(g, "%x", &data.background_color.g);
-			sscanf(b, "%x", &data.background_color.b);
+			sscanf_s(r, "%x", &data.background_color.r);
+			sscanf_s(g, "%x", &data.background_color.g);
+			sscanf_s(b, "%x", &data.background_color.b);
 
 			data.background_color.a = 0;
 		}
@@ -236,7 +236,7 @@ bool p2Map::LoadMap()
 			data.background_color.a = 0;
 		}
 
-		strncpy(buf, map.attribute("orientation").as_string(), SHORT_STR);
+		strncpy_s(buf, map.attribute("orientation").as_string(), SHORT_STR);
 
 		if(strncmp(buf, "orthogonal", SHORT_STR) == 0)
 			data.type = MAPTYPE_ORTHOGONAL;
@@ -296,7 +296,7 @@ bool p2Map::LoadTilesetDetails()
 {
 	bool ret = true;
 
-	strncpy(data.tileset.name, tileset_node.attribute("name").as_string(), MID_STR);
+	strncpy_s(data.tileset.name, tileset_node.attribute("name").as_string(), MID_STR);
 	data.tileset.tile_width = tileset_node.attribute("tilewidth").as_int();
 	data.tileset.tile_height = tileset_node.attribute("tileheight").as_int();
 	data.tileset.margin = tileset_node.attribute("margin").as_int();
@@ -373,7 +373,7 @@ bool p2Map::LoadTilesetTerrains()
 		{
 			TerrainType terrain_type;
 
-			strncpy(terrain_type.name, terrain.attribute("name").as_string(), MID_STR);
+			strncpy_s(terrain_type.name, terrain.attribute("name").as_string(), MID_STR);
 			terrain_type.tile = terrain.attribute("tile").as_int();
 
 			data.tileset.terrain_types.add(terrain_type);
@@ -399,10 +399,11 @@ bool p2Map::LoadTilesetTileTypes()
 		tile_type.id = tile.attribute("id").as_int();
 			
 		char types[MID_STR];
-		strncpy(types, tile.attribute("terrain").as_string(), MID_STR);
+		strncpy_s(types, tile.attribute("terrain").as_string(), MID_STR);
 			
+		char* tmp;
 		char* item;
-		item = strtok (types,",");
+		item = strtok_s (types, ",", &tmp);
 		int i = 0;
 		while (item != NULL)
 		{
@@ -421,7 +422,7 @@ bool p2Map::LoadTilesetTileTypes()
 				tile_type.bottom_right = &data.tileset.terrain_types[atoi(item)];
 			break;
 			}
-			item = strtok(NULL, ",");
+			item = strtok_s(NULL, ",", &tmp);
 			++i;
 		}
 
@@ -445,7 +446,7 @@ bool p2Map::LoadLayer(pugi::xml_node node)
 
 	MapLayer *layer = new MapLayer();
 
-	strncpy(layer->name, node.attribute("name").as_string(), MID_STR);
+	strncpy_s(layer->name, node.attribute("name").as_string(), MID_STR);
 	layer->width = node.attribute("width").as_int();
 	layer->height = node.attribute("height").as_int();
 
@@ -462,17 +463,21 @@ bool p2Map::LoadLayer(pugi::xml_node node)
 	else
 	{
 		// decode base 64 then unzip ...
-		char buffer[16384];
+		unsigned long buffer_len = 1 + strlen(layer_data.text().as_string());
+		char *buffer = new char[buffer_len];
 		
-		trim_copy(buffer, layer_data.text().as_string(), "\n\r ");
+		strncpy_s(buffer,buffer_len, layer_data.text().as_string(), buffer_len);
+		trim_inplace(buffer, "\n\r ");
 
 		char* decoded;
 		unsigned int decoded_len;
 		
 		decoded = b64_decode( buffer, &decoded_len );
+		
+		RELEASE(buffer);
 
-		unsigned long buffer_len = 16384;
-		unsigned int lenght_data;
+		buffer_len = decoded_len * 10;
+		buffer = new char[buffer_len];
 
 		int result = uncompress((Bytef *) buffer, &buffer_len, (Bytef *)decoded, decoded_len);
 
@@ -488,6 +493,8 @@ bool p2Map::LoadLayer(pugi::xml_node node)
 			layer->data = new unsigned __int32[buffer_len];
 			memcpy(layer->data, buffer, buffer_len);
 		}
+
+		RELEASE(buffer);
 	}
 
 	data.layers.add(layer);

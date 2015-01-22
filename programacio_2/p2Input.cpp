@@ -5,7 +5,7 @@
 p2Input::p2Input() : p2Module()
 {
 	update_on_pause = true;
-	strncpy(name, "input", SHORT_STR);
+	strncpy_s(name, "input", SHORT_STR);
 
 	for(int i = 0; i < NUM_MOUSE_BUTTONS; ++i)
 		mouse_buttons[i] = KS_IDLE;

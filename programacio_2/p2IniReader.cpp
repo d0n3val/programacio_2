@@ -36,10 +36,10 @@ bool p2IniReader::GetBool(const char* section, const char* key, bool default)
 {
 	char* result = GetString(section, key, "false");
 
-	if(stricmp(result, "true") == 0)
+	if(_stricmp(result, "true") == 0)
 		return true;
 
-	if(stricmp(result, "false") == 0)
+	if(_stricmp(result, "false") == 0)
 		return false;
 
 	return default;

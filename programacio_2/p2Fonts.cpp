@@ -7,7 +7,7 @@
 
 p2Fonts::p2Fonts() : p2Module()
 {
-	strncpy(name, "fonts", SHORT_STR);
+	strncpy_s(name, "fonts", SHORT_STR);
 }
 
 // Destructor

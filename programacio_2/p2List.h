@@ -36,7 +36,7 @@ public:
 	p2list_item<tdata>*   start;
 	p2list_item<tdata>*   end;
 
-protected:
+private:
 
     long  size;
 

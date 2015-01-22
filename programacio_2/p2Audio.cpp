@@ -8,7 +8,7 @@
 p2Audio::p2Audio() : p2Module()
 {
 	music = NULL;
-	strncpy(name, "audio", SHORT_STR);
+	strncpy_s(name, "audio", SHORT_STR);
 }
 
 // Destructor
@@ -33,7 +33,7 @@ bool p2Audio::Awake()
 	int flags = MIX_INIT_OGG;
 	int init = Mix_Init(flags);
 
-	if( init & flags != flags) 
+	if( (init & flags) != flags) 
 	{
 		LOG("Could not initialize Mixer lib. Mix_Init: %s", Mix_GetError());
 		ret = false;

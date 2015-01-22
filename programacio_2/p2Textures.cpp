@@ -8,7 +8,7 @@
 
 p2Textures::p2Textures() : p2Module()
 {
-	strncpy(name, "textures", SHORT_STR);
+	strncpy_s(name, "textures", SHORT_STR);
 }
 
 // Destructor
@@ -26,7 +26,7 @@ bool p2Textures::Awake()
 	int flags = IMG_INIT_PNG;
 	int init = IMG_Init(flags);
 
-	if( init & flags != flags) 
+	if( (init & flags) != flags) 
 	{
 		LOG("Could not initialize Image lib. IMG_Init: %s", IMG_GetError());
 		ret = false;

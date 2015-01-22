@@ -16,9 +16,8 @@
     if( x != NULL )        \
     {                      \
       delete x;            \
+	  x = NULL;              \
     }                      \
-                        \
-    x = NULL;              \
   }
 
 // Deletes an array of buffers
@@ -27,9 +26,9 @@
     if( x != NULL )              \
     {                            \
       delete[] x;                \
+	  x = NULL;                    \
     }                            \
                               \
-    x = NULL;                    \
   }
 
 // Standard string size
