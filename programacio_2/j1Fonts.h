@@ -1,21 +1,21 @@
-#ifndef __P2FONTS_H__
-    #define __P2FONTS_H__
+#ifndef __j1FONTS_H__
+    #define __j1FONTS_H__
 
 #include "SDL\include\SDL.h"
 #include "SDL_TTF\include\SDL_ttf.h"
-#include "p2Module.h"
+#include "j1Module.h"
 
 #define DEFAULT_FONT "fonts/open_sans/OpenSans-Regular.ttf"
 #define DEFAULT_FONT_SIZE 12
 
-class p2Fonts : public p2Module
+class j1Fonts : public j1Module
 {
 public:
 
-	p2Fonts();
+	j1Fonts();
 
     // Destructor
-    virtual ~p2Fonts();
+    virtual ~j1Fonts();
 
     // Called before render is available
     bool Awake();
@@ -36,4 +36,4 @@ public:
 };
 
 
-#endif // __P2FONTS_H__
+#endif // __j1FONTS_H__

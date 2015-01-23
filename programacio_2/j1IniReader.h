@@ -1,14 +1,14 @@
-#ifndef __P2INIREADER_H__
-  #define __P2INIREADER_H__
+#ifndef __j1INIREADER_H__
+  #define __j1INIREADER_H__
 
 #include "p2Defs.h"
 
-class p2IniReader
+class j1IniReader
 {
 
 public:
 
-			p2IniReader();
+			j1IniReader();
 
 	void	SetFile(const char* file_name);
 	char*	GetString(const char* section, const char* key, const char* default = NULL);
@@ -21,4 +21,4 @@ public:
 
 };
 
-#endif /*__P2INIREADER_H__*/
+#endif /*__j1INIREADER_H__*/

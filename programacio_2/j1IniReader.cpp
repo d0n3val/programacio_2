@@ -1,20 +1,20 @@
 #include <Windows.h>
 #include <string.h>
-#include "p2IniReader.h"
+#include "j1IniReader.h"
 
-p2IniReader::p2IniReader()
+j1IniReader::j1IniReader()
 {
 	memset(file_name, 0, 255);
 }
 
 // ---------------------------------------------
-void p2IniReader::SetFile(const char* file)
+void j1IniReader::SetFile(const char* file)
 {
 	strncpy_s(file_name, file, 256);
 }
 
 // ---------------------------------------------
-char* p2IniReader::GetString(const char* section, const char* key, const char* default)
+char* j1IniReader::GetString(const char* section, const char* key, const char* default)
 {
 	static char result[MID_STR];
 
@@ -26,13 +26,13 @@ char* p2IniReader::GetString(const char* section, const char* key, const char* d
 }
 
 // ---------------------------------------------
-int p2IniReader::GetInt(const char* section, const char* key, int default)
+int j1IniReader::GetInt(const char* section, const char* key, int default)
 {
 	return GetPrivateProfileInt(section, key, default, file_name);
 }
 
 // ---------------------------------------------
-bool p2IniReader::GetBool(const char* section, const char* key, bool default)
+bool j1IniReader::GetBool(const char* section, const char* key, bool default)
 {
 	char* result = GetString(section, key, "false");
 

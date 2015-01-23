@@ -1,17 +1,17 @@
-#ifndef __P2WINDOW_H__
-    #define __P2WINDOW_H__
+#ifndef __j1WINDOW_H__
+    #define __j1WINDOW_H__
 
-#include "p2Module.h"
+#include "j1Module.h"
 #include "SDL/include/SDL.h"
 
-class p2Window : public p2Module
+class j1Window : public j1Module
 {
 public:
 
-	p2Window();
+	j1Window();
 
     // Destructor
-    virtual ~p2Window();
+    virtual ~j1Window();
 
     // Called before render is available
     bool Awake();
@@ -45,4 +45,4 @@ private:
 	char	title[MID_STR]; 
 };
 
-#endif // __P2WINDOW_H__
+#endif // __j1WINDOW_H__

@@ -1,12 +1,12 @@
 #include "p2Defs.h"
 #include "p2Log.h"
-#include "p2App.h"
-#include "p2Window.h"
+#include "j1App.h"
+#include "j1Window.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-p2Window::p2Window() : p2Module()
+j1Window::j1Window() : j1Module()
 {
 	window = NULL;
 	screen_surface = NULL;
@@ -15,12 +15,12 @@ p2Window::p2Window() : p2Module()
 }
 
 // Destructor
-p2Window::~p2Window()
+j1Window::~j1Window()
 {
 }
 
 // Called before render is available
-bool p2Window::Awake()
+bool j1Window::Awake()
 {
 	LOG("Init SDL window & surface");
 	bool ret = true;
@@ -36,7 +36,7 @@ bool p2Window::Awake()
 		//Create window
 		int width = App->config.GetInt("window", "width", SCREEN_WIDTH);
 		int height = App->config.GetInt("window", "height", SCREEN_HEIGHT);
-		char* title = App->config.GetString("window", "title", "P2 Engine");
+		char* title = App->config.GetString("window", "title", "j1 Engine");
 
 		Uint32 flags = SDL_WINDOW_SHOWN;
 
@@ -71,19 +71,19 @@ bool p2Window::Awake()
 }
 
 // Called before the first frame
-bool p2Window::Start()
+bool j1Window::Start()
 {
 	LOG("window start");
 	return true;
 }
 
 // Add last frame fps stadistics in the title
-bool p2Window::PreUpdate()
+bool j1Window::PreUpdate()
 {
 	if(App->last_fps >= 0)
 	{
 		static char framerate[MID_STR];
-		sprintf_s(framerate, "%s - %d fps (%d/%d ms)", title, App->last_fps, App->last_frame_ms, App->capped_ms);
+		sprintf_s(framerate, MID_STR, "%s - %d fps (%d/%d ms)", title, App->last_fps, App->last_frame_ms, App->capped_ms);
 		SDL_SetWindowTitle(window, framerate);
 	}
 	else
@@ -93,7 +93,7 @@ bool p2Window::PreUpdate()
 }
 
 // Called each loop iteration
-bool p2Window::Update(float dt)
+bool j1Window::Update(float dt)
 {
 	bool ret = true;
 
@@ -123,13 +123,13 @@ bool p2Window::Update(float dt)
 }
 
 // Swap buffers
-bool p2Window::PostUpdate()
+bool j1Window::PostUpdate()
 {
 	return true;
 }
 
 // Called before quitting
-bool p2Window::CleanUp()
+bool j1Window::CleanUp()
 {
 	LOG("Destroying SDL window and quitting all SDL systems");
 	
@@ -144,7 +144,7 @@ bool p2Window::CleanUp()
 }
 
 // Set new window title
-void p2Window::SetTitle(const char* new_title)
+void j1Window::SetTitle(const char* new_title)
 {
 	strcpy_s(title, MID_STR, new_title);
 }

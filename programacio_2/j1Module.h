@@ -1,15 +1,15 @@
-#ifndef __P2MODULE_H__
-    #define __P2MODULE_H__
+#ifndef __j1MODULE_H__
+    #define __j1MODULE_H__
 
-class p2App;
+class j1App;
 
-class p2Module
+class j1Module
 {
 public:
 
-	p2Module() : active(false), update_on_pause(false), App(NULL) {}
+	j1Module() : active(false), update_on_pause(false), App(NULL) {}
 
-	void Init(p2App* App) { this->App = App; active = true; }
+	void Init(j1App* App) { this->App = App; active = true; }
 
     // Called before render is available
 	virtual bool Awake() { return true; }
@@ -34,8 +34,8 @@ public:
 	char	name[SHORT_STR];
 	bool	active;
 	bool	update_on_pause;
-	p2App*	App;
+	j1App*	App;
 
 };
 
-#endif // __P2MODULE_H__
+#endif // __j1MODULE_H__

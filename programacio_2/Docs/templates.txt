@@ -2,19 +2,19 @@
 mymodule.h   ---------------------------------------
 ----------------------------------------------------
 
-#ifndef __P2MYMODULE_H__
-    #define __P2MYMODULE_H__
+#ifndef __j1MYMODULE_H__
+    #define __j1MYMODULE_H__
 
-#include "p2Module.h"
+#include "j1Module.h"
 
-class p2MyModule : public p2Module
+class j1MyModule : public j1Module
 {
 public:
 
-	p2MyModule();
+	j1MyModule();
 
     // Destructor
-    virtual ~p2MyModule();
+    virtual ~j1MyModule();
 
     // Called before render is available
     bool Awake();
@@ -36,7 +36,7 @@ public:
 
 };
 
-#endif // __P2MYMODULE_H__
+#endif // __j1MYMODULE_H__
 
 ----------------------------------------------------
 mymodule.cpp ---------------------------------------
@@ -44,57 +44,57 @@ mymodule.cpp ---------------------------------------
 
 #include "p2Defs.h"
 #include "p2Log.h"
-#include "p2App.h"
-#include "p2MyModule.h"
+#include "j1App.h"
+#include "j1MyModule.h"
 
-p2MyModule::p2MyModule() : p2Module()
+j1MyModule::j1MyModule() : j1Module()
 {
 }
 
 // Destructor
-p2MyModule::~p2MyModule()
+j1MyModule::~j1MyModule()
 {
 }
 
 // Called before render is available
-bool p2MyModule::Awake()
+bool j1MyModule::Awake()
 {
-	LOG("awake p2MyModule");
+	LOG("awake j1MyModule");
 	bool ret = true;
 
 	return ret;
 }
 
 // Called before the first frame
-bool p2MyModule::Start()
+bool j1MyModule::Start()
 {
-	LOG("start p2MyModule");
+	LOG("start j1MyModule");
 	bool ret = true;
 
 	return ret;
 }
 
 // Called each loop iteration
-bool p2MyModule::PreUpdate()
+bool j1MyModule::PreUpdate()
 {
 	return true;
 }
 
-bool p2MyModule::Update(float dt)
+bool j1MyModule::Update(float dt)
 {
 	return true;
 }
 
 
-bool p2MyModule::PostUpdate()
+bool j1MyModule::PostUpdate()
 {
 	return true;
 }
 
 // Called before quitting
-bool p2MyModule::CleanUp()
+bool j1MyModule::CleanUp()
 {
-	LOG("cleanup p2MyModule");
+	LOG("cleanup j1MyModule");
 	
 	return true;
 }

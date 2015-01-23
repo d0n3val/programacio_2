@@ -2,6 +2,7 @@
     #define __P2DEFS_H__
 
 #include <stdio.h>
+#include "p2Assert.h"
 
 //  NULL just in case ----------------------
 

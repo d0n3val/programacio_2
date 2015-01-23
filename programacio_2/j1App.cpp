@@ -1,8 +1,9 @@
+#include "p2Defs.h"
 #include "p2Log.h"
-#include "p2App.h"
+#include "j1App.h"
 
 // Constructor
-p2App::p2App(const char* config_file)
+j1App::j1App(const char* config_file)
 {
 	quitting = false;
 	frames = 0;
@@ -13,13 +14,13 @@ p2App::p2App(const char* config_file)
 
 	config.SetFile(config_file);
 
-	input = new p2Input();
-	win = new p2Window();
-	render = new p2Render();
-	tex = new p2Textures();
-	fonts = new p2Fonts();
-	audio = new p2Audio();
-	map = new p2Map();
+	input = new j1Input();
+	win = new j1Window();
+	render = new j1Render();
+	tex = new j1Textures();
+	fonts = new j1Fonts();
+	audio = new j1Audio();
+	map = new j1Map();
 	
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -34,19 +35,21 @@ p2App::p2App(const char* config_file)
 }
 
 // Destructor
-p2App::~p2App()
+j1App::~j1App()
 {
 	modules.clear();
 }
 
-void p2App::AddModule(p2Module* module)
+void j1App::AddModule(j1Module* module)
 {
+	ASSERT_MSG(module, "arg is NULL");
+
 	module->Init(this);
 	modules.add(module);
 }
 
 // Called before render is available
-bool p2App::Awake()
+bool j1App::Awake()
 {
 	bool ret = true;
 
@@ -56,7 +59,7 @@ bool p2App::Awake()
 		capped_ms = 1000 / cap;
 	}
 
-	p2list_item<p2Module*>* item;
+	p2list_item<j1Module*>* item;
 
 	item = modules.start;
 	while( item != NULL && ret == true )
@@ -69,11 +72,11 @@ bool p2App::Awake()
 }
 
 // Called before the first frame
-bool p2App::Start()
+bool j1App::Start()
 {
 	bool ret = true;
 
-	p2list_item<p2Module*>* item;
+	p2list_item<j1Module*>* item;
 
 	item = modules.start;
 	while( item != NULL && ret == true )
@@ -86,7 +89,7 @@ bool p2App::Start()
 }
 
 // Called each loop iteration
-bool p2App::Update()
+bool j1App::Update()
 {
 	bool ret = true;
 
@@ -105,14 +108,14 @@ bool p2App::Update()
 	return ret;
 }
 
-void p2App::PrepareUpdate()
+void j1App::PrepareUpdate()
 {
 	dt = (float)ms_timer.Read() / 1000.0f;
 	ms_timer.Start();
 }
 
 
-void p2App::FinishUpdate()
+void j1App::FinishUpdate()
 {
 	// In background mode leave some time for OS to do stuff
 	if(pause.Get() == true)
@@ -137,14 +140,14 @@ void p2App::FinishUpdate()
 }
 
 // Call modules before each loop iteration
-bool p2App::PreUpdate()
+bool j1App::PreUpdate()
 {
 	bool ret = true;
 
-	p2list_item<p2Module*>* item;
+	p2list_item<j1Module*>* item;
 
 	item = modules.start;
-	p2Module* pModule = NULL;
+	j1Module* pModule = NULL;
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
@@ -163,14 +166,14 @@ bool p2App::PreUpdate()
 }
 
 // Call modules on each loop iteration
-bool p2App::DoUpdate()
+bool j1App::DoUpdate()
 {
 	bool ret = true;
 
-	p2list_item<p2Module*>* item;
+	p2list_item<j1Module*>* item;
 
 	item = modules.start;
-	p2Module* pModule = NULL;
+	j1Module* pModule = NULL;
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
@@ -189,14 +192,14 @@ bool p2App::DoUpdate()
 }
 
 // Call modules after each loop iteration
-bool p2App::PostUpdate()
+bool j1App::PostUpdate()
 {
 	bool ret = true;
 
-	p2list_item<p2Module*>* item;
+	p2list_item<j1Module*>* item;
 
 	item = modules.start;
-	p2Module* pModule = NULL;
+	j1Module* pModule = NULL;
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
@@ -215,11 +218,11 @@ bool p2App::PostUpdate()
 }
 
 // Called before quitting
-bool p2App::CleanUp()
+bool j1App::CleanUp()
 {
 	bool ret = true;
 
-	p2list_item<p2Module*>* item;
+	p2list_item<j1Module*>* item;
 
 	item = modules.end;
 	while( item != NULL && ret == true )

@@ -1,17 +1,17 @@
-#ifndef __P2RENDER_H__
-    #define __P2RENDER_H__
+#ifndef __j1RENDER_H__
+    #define __j1RENDER_H__
 
 #include "SDL/include/SDL.h"
-#include "p2Module.h"
+#include "j1Module.h"
 
-class p2Render : public p2Module
+class j1Render : public j1Module
 {
 public:
 
-	p2Render();
+	j1Render();
 
     // Destructor
-    virtual ~p2Render();
+    virtual ~j1Render();
 
     // Called before render is available
     bool Awake();
@@ -40,4 +40,4 @@ public:
 	SDL_Color		background;
 };
 
-#endif // __P2RENDER_H__
+#endif // __j1RENDER_H__

@@ -1,19 +1,19 @@
-#ifndef __P2AUDIO_H__
-    #define __P2AUDIO_H__
+#ifndef __j1AUDIO_H__
+    #define __j1AUDIO_H__
 
-#include "p2Module.h"
+#include "j1Module.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 
 #define DEFAULT_MUSIC_FADE_TIME 2.0f
 
-class p2Audio : public p2Module
+class j1Audio : public j1Module
 {
 public:
 
-	p2Audio();
+	j1Audio();
 
     // Destructor
-    virtual ~p2Audio();
+    virtual ~j1Audio();
 
     // Called before render is available
     bool Awake();
@@ -36,4 +36,4 @@ private:
 	p2list<Mix_Chunk*>	fx;
 };
 
-#endif // __P2AUDIO_H__
+#endif // __j1AUDIO_H__

@@ -1,23 +1,23 @@
 #include "p2Defs.h"
 #include "p2Log.h"
-#include "p2App.h"
-#include "p2Audio.h"
+#include "j1App.h"
+#include "j1Audio.h"
 
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
-p2Audio::p2Audio() : p2Module()
+j1Audio::j1Audio() : j1Module()
 {
 	music = NULL;
 	strncpy_s(name, "audio", SHORT_STR);
 }
 
 // Destructor
-p2Audio::~p2Audio()
+j1Audio::~j1Audio()
 {
 }
 
 // Called before render is available
-bool p2Audio::Awake()
+bool j1Audio::Awake()
 {
 	LOG("Loading Audio Mixer");
 	bool ret = true;
@@ -50,7 +50,7 @@ bool p2Audio::Awake()
 }
 
 // Called before quitting
-bool p2Audio::CleanUp()
+bool j1Audio::CleanUp()
 {
 	LOG("Freeing sound FX, closing Mixer and Audio subsystem");
 	
@@ -73,7 +73,7 @@ bool p2Audio::CleanUp()
 }
 
 // Play a music file
-bool p2Audio::PlayMusic(const char* path, float fade_time)
+bool j1Audio::PlayMusic(const char* path, float fade_time)
 {
 	bool ret = true;
 
@@ -120,7 +120,7 @@ bool p2Audio::PlayMusic(const char* path, float fade_time)
 }
 
 // Load WAV
-int p2Audio::LoadFx(const char* path)
+int j1Audio::LoadFx(const char* path)
 {
 	int ret = -1;
 
@@ -140,7 +140,7 @@ int p2Audio::LoadFx(const char* path)
 }
 
 // Play WAV
-bool p2Audio::PlayFx(int id, int repeat)
+bool j1Audio::PlayFx(int id, int repeat)
 {
 	bool ret = false;
 

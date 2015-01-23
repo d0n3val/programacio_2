@@ -1,9 +1,9 @@
 #include "p2Defs.h"
 #include "p2Log.h"
-#include "p2App.h"
-#include "p2Render.h"
+#include "j1App.h"
+#include "j1Render.h"
 
-p2Render::p2Render() : p2Module()
+j1Render::j1Render() : j1Module()
 {
 	strncpy_s(name, "render", SHORT_STR);
 
@@ -14,12 +14,12 @@ p2Render::p2Render() : p2Module()
 }
 
 // Destructor
-p2Render::~p2Render()
+j1Render::~j1Render()
 {
 }
 
 // Called before render is available
-bool p2Render::Awake()
+bool j1Render::Awake()
 {
 	LOG("Create SDL rendering context");
 	bool ret = true;
@@ -48,7 +48,7 @@ bool p2Render::Awake()
 }
 
 // Called before the first frame
-bool p2Render::Start()
+bool j1Render::Start()
 {
 	LOG("render start");
 
@@ -59,13 +59,13 @@ bool p2Render::Start()
 }
 
 // Called each loop iteration
-bool p2Render::PreUpdate()
+bool j1Render::PreUpdate()
 {
 	SDL_RenderClear(renderer);
 	return true;
 }
 
-bool p2Render::Update(float dt)
+bool j1Render::Update(float dt)
 {
 	int speed = 67;
 
@@ -80,14 +80,14 @@ bool p2Render::Update(float dt)
 	return true;
 }
 
-bool p2Render::PostUpdate()
+bool j1Render::PostUpdate()
 {
 	SDL_RenderPresent(renderer);
 	return true;
 }
 
 // Called before quitting
-bool p2Render::CleanUp()
+bool j1Render::CleanUp()
 {
 	LOG("Destroying SDL render");
 	
@@ -97,7 +97,7 @@ bool p2Render::CleanUp()
 }
 
 // Blit to screen
-bool p2Render::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section)
+bool j1Render::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section)
 {
 	bool ret = true;
 
@@ -125,7 +125,7 @@ bool p2Render::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section)
 	return ret;
 }
 
-void p2Render::SetBackgroundColor(SDL_Color color)
+void j1Render::SetBackgroundColor(SDL_Color color)
 {
 	background = color;
 }

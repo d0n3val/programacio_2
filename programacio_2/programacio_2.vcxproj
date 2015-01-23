@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7899CAD1-D499-4EDC-B5D9-67CA046B04F6}</ProjectGuid>
     <RootNamespace>programacio_2</RootNamespace>
+    <ProjectName>Motor 2D 1er</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -48,6 +49,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_MBCS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -70,45 +72,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="p2App.cpp" />
-    <ClCompile Include="p2Audio.cpp" />
-    <ClCompile Include="p2Fonts.cpp" />
-    <ClCompile Include="p2IniReader.cpp" />
-    <ClCompile Include="p2Input.cpp" />
+    <ClCompile Include="j1Main.cpp" />
+    <ClCompile Include="j1App.cpp" />
+    <ClCompile Include="j1Audio.cpp" />
+    <ClCompile Include="j1Fonts.cpp" />
+    <ClCompile Include="j1IniReader.cpp" />
+    <ClCompile Include="j1Input.cpp" />
     <ClCompile Include="p2Log.cpp" />
-    <ClCompile Include="p2Map.cpp" />
-    <ClCompile Include="p2Render.cpp" />
-    <ClCompile Include="p2Textures.cpp" />
-    <ClCompile Include="p2Timer.cpp" />
-    <ClCompile Include="p2Window.cpp" />
+    <ClCompile Include="j1Map.cpp" />
+    <ClCompile Include="j1Render.cpp" />
+    <ClCompile Include="j1Textures.cpp" />
+    <ClCompile Include="j1Timer.cpp" />
+    <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base64\base64.h" />
-    <ClInclude Include="p2Audio.h" />
-    <ClInclude Include="p2Fonts.h" />
-    <ClInclude Include="p2IniReader.h" />
-    <ClInclude Include="p2Input.h" />
+    <ClInclude Include="j1Audio.h" />
+    <ClInclude Include="j1Fonts.h" />
+    <ClInclude Include="j1IniReader.h" />
+    <ClInclude Include="j1Input.h" />
+    <ClInclude Include="p2Assert.h" />
     <ClInclude Include="p2Log.h" />
-    <ClInclude Include="p2App.h" />
+    <ClInclude Include="j1App.h" />
     <ClInclude Include="p2Defs.h" />
     <ClInclude Include="p2List.h" />
-    <ClInclude Include="p2Map.h" />
-    <ClInclude Include="p2Module.h" />
+    <ClInclude Include="j1Map.h" />
+    <ClInclude Include="j1Module.h" />
     <ClInclude Include="p2PerfTimer.h" />
     <ClInclude Include="p2RefBool.h" />
-    <ClInclude Include="p2Render.h" />
-    <ClInclude Include="p2Textures.h" />
-    <ClInclude Include="p2Timer.h" />
-    <ClInclude Include="p2Window.h" />
+    <ClInclude Include="j1Render.h" />
+    <ClInclude Include="j1Textures.h" />
+    <ClInclude Include="j1Timer.h" />
+    <ClInclude Include="j1Window.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
     <ClInclude Include="trim.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\p2_engine\config.ini" />
-    <None Include="..\p2_engine\maps\desert.tmx" />
     <None Include="Docs\SDL2\APIByCategory.html" />
     <None Include="Docs\SDL2\FrontPage.html" />
     <None Include="Docs\SDL_image_doc.html" />

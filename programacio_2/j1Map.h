@@ -1,10 +1,10 @@
-#ifndef __P2MAP_H__
-    #define __P2MAP_H__
+#ifndef __j1MAP_H__
+    #define __j1MAP_H__
 
 #include "PugiXml/src/pugixml.hpp"
-#include "p2Textures.h"
-#include "p2List.h"
-#include "p2Module.h"
+#include "j1Textures.h"
+#include "p2list.h"
+#include "j1Module.h"
 
 enum MapTypes
 {
@@ -74,14 +74,14 @@ struct MapData
 };
 
 
-class p2Map : public p2Module
+class j1Map : public j1Module
 {
 public:
 
-	p2Map();
+	j1Map();
 
     // Destructor
-    virtual ~p2Map();
+    virtual ~j1Map();
 
     // Called before render is available
     bool Awake();
@@ -123,4 +123,4 @@ private:
 	bool				map_loaded;
 };
 
-#endif // __P2MAP_H__
+#endif // __j1MAP_H__

@@ -3,7 +3,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "p2PerfTimer.h"
-#include "p2App.h"
+#include "j1App.h"
 
 #include "SDL/include/SDL.h"
 #pragma comment( lib, "SDL/libx86/SDL2.lib" )
@@ -22,12 +22,12 @@ enum MainState
 
 int main( int argc, char* args[] )
 {
-	LOG("P2 engine starting ...");
+	LOG("j1 engine starting ...");
 
 	MainState state = CREATE;
 	int result = EXIT_FAILURE;
-	p2App* p2 = NULL;
-	p2PerfTimer ptimer;
+	j1App* j1 = NULL;
+	j1PerfTimer ptimer;
 
 	while(state != EXIT)
 	{
@@ -40,9 +40,9 @@ int main( int argc, char* args[] )
 		case CREATE:
 			LOG("CREATION PHASE ===============================");
 
-			p2 = new p2App((argc>1) ? args[1] : "");
+			j1 = new j1App((argc>1) ? args[1] : "");
 
-			if(p2 != NULL)
+			if(j1 != NULL)
 				state = AWAKE;
 			else
 				state = FAIL;
@@ -53,7 +53,7 @@ int main( int argc, char* args[] )
 		// Awake all modules -----------------------------------------------
 		case AWAKE:
 			LOG("AWAKE PHASE ===============================");
-			if(p2->Awake() == true)
+			if(j1->Awake() == true)
 				state = START;
 			else
 			{
@@ -67,7 +67,7 @@ int main( int argc, char* args[] )
 		// Call all modules before first frame  ----------------------------
 		case START:
 			LOG("START PHASE ===============================");
-			if(p2->Start() == true)
+			if(j1->Start() == true)
 			{
 				state = LOOP;
 				LOG("PHASE FINISHED: %.2f ms", ptimer.ReadMs());
@@ -82,16 +82,16 @@ int main( int argc, char* args[] )
 
 		// Loop all modules until we are asked to leave ---------------------
 		case LOOP:
-			if(p2->Update() == false)
+			if(j1->Update() == false)
 				state = CLEAN;
 		break;
 
 		// Cleanup allocated memory -----------------------------------------
 		case CLEAN:
 			LOG("CLEANUP PHASE ===============================");
-			if(p2->CleanUp() == true)
+			if(j1->CleanUp() == true)
 			{
-				RELEASE(p2);
+				RELEASE(j1);
 				result = EXIT_SUCCESS;
 				state = EXIT;
 			}

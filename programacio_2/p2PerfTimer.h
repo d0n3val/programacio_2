@@ -1,15 +1,15 @@
-#ifndef __P2PERFTIMER_H__
-    #define __P2PERFTIMER_H__
+#ifndef __j1PERFTIMER_H__
+    #define __j1PERFTIMER_H__
 
 #include "p2Defs.h"
 #include "SDL\include\SDL.h"
 
-struct p2PerfTimer
+struct j1PerfTimer
 {
 public:
 
     // Constructor
-	p2PerfTimer() 
+	j1PerfTimer() 
 	{ 
 		frequency = (double) SDL_GetPerformanceFrequency() / 1000.0f; 
 		Start(); 
@@ -41,4 +41,4 @@ public:
 	double	frequency;
 };
 
-#endif //__P2PERFTIMER_H__
+#endif //__j1PERFTIMER_H__

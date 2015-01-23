@@ -1,30 +1,30 @@
-#ifndef __P2APP_H__
-    #define __P2APP_H__
+#ifndef __j1APP_H__
+    #define __j1APP_H__
 
-#include "p2List.h"
+#include "p2list.h"
 #include "p2RefBool.h"
-#include "p2Timer.h"
-#include "p2IniReader.h"
-#include "p2Module.h"
+#include "j1Timer.h"
+#include "j1IniReader.h"
+#include "j1Module.h"
 
 // Modules
-#include "p2Window.h"
-#include "p2Input.h"
-#include "p2Render.h"
-#include "p2Textures.h"
-#include "p2Fonts.h"
-#include "p2Audio.h"
-#include "p2Map.h"
+#include "j1Window.h"
+#include "j1Input.h"
+#include "j1Render.h"
+#include "j1Textures.h"
+#include "j1Fonts.h"
+#include "j1Audio.h"
+#include "j1Map.h"
 
-class p2App
+class j1App
 {
 public:
 
     // Constructor
-    p2App(const char* );
+    j1App(const char* );
 
     // Destructor
-    virtual ~p2App();
+    virtual ~j1App();
 
     // Called before render is available
     bool Awake();
@@ -39,7 +39,7 @@ public:
     bool CleanUp();
 
 	// Add a new module to handle
-	void AddModule(p2Module* module);
+	void AddModule(j1Module* module);
 
 private:
 
@@ -61,7 +61,7 @@ private:
 public:
 
 	p2RefBool	pause;
-	p2IniReader	config;
+	j1IniReader	config;
 	Uint32		frames;
 	float		dt;
 	int			fps_counter;
@@ -70,20 +70,20 @@ public:
 	int			capped_ms;
 
 	// Modules
-	p2Window*	win;
-	p2Input*	input;
-	p2Render*	render;
-	p2Textures*	tex;
-	p2Fonts*	fonts;
-	p2Audio*	audio;
-	p2Map*		map;
+	j1Window*	win;
+	j1Input*	input;
+	j1Render*	render;
+	j1Textures*	tex;
+	j1Fonts*	fonts;
+	j1Audio*	audio;
+	j1Map*		map;
 
 private:
 
     bool				quitting;
-	p2Timer				ms_timer;
-	p2Timer				fps_timer;
-	p2list<p2Module*>	modules;
+	j1Timer				ms_timer;
+	j1Timer				fps_timer;
+	p2list<j1Module*>	modules;
 };
 
 #endif

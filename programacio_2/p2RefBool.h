@@ -1,5 +1,5 @@
-#ifndef __P2REFBOOL_H__
-    #define __P2REFBOOL_H__
+#ifndef __j1REFBOOL_H__
+    #define __j1REFBOOL_H__
 
 class p2RefBool
 {
@@ -13,4 +13,4 @@ private:
 	int	value;
 };
 
-#endif // __P2REFBOOL_H__
+#endif // __j1REFBOOL_H__

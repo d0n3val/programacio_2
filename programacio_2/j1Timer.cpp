@@ -1,27 +1,27 @@
 
-#include "p2Timer.h"
+#include "j1Timer.h"
 
-p2Timer::p2Timer()
+j1Timer::j1Timer()
 {
 	Start();
 }
 
 // ---------------------------------------------
-void p2Timer::Start()
+void j1Timer::Start()
 {
 	running = true;
 	started_at = SDL_GetTicks();
 }
 
 // ---------------------------------------------
-void p2Timer::Stop()
+void j1Timer::Stop()
 {
 	running = false;
 	stopped_at = SDL_GetTicks();
 }
 
 // ---------------------------------------------
-Uint32 p2Timer::Read()
+Uint32 j1Timer::Read()
 {
 	if(running == true)
 		return SDL_GetTicks() - started_at;

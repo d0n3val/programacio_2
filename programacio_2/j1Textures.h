@@ -1,17 +1,17 @@
-#ifndef __P2TEXTURES_H__
-    #define __P2TEXTURES_H__
+#ifndef __j1TEXTURES_H__
+    #define __j1TEXTURES_H__
 
 #include "SDL/include/SDL.h"
-#include "p2Module.h"
+#include "j1Module.h"
 
-class p2Textures : public p2Module
+class j1Textures : public j1Module
 {
 public:
 
-	p2Textures();
+	j1Textures();
 
     // Destructor
-    virtual ~p2Textures();
+    virtual ~j1Textures();
 
     // Called before render is available
     bool Awake();
@@ -39,4 +39,4 @@ public:
 };
 
 
-#endif // __P2TEXTURES_H__
+#endif // __j1TEXTURES_H__

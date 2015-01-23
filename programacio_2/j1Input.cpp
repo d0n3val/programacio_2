@@ -1,8 +1,8 @@
 #include "p2Defs.h"
 #include "p2Log.h"
-#include "p2Input.h"
+#include "j1Input.h"
 
-p2Input::p2Input() : p2Module()
+j1Input::j1Input() : j1Module()
 {
 	update_on_pause = true;
 	strncpy_s(name, "input", SHORT_STR);
@@ -12,12 +12,12 @@ p2Input::p2Input() : p2Module()
 }
 
 // Destructor
-p2Input::~p2Input()
+j1Input::~j1Input()
 {
 }
 
 // Called before render is available
-bool p2Input::Awake()
+bool j1Input::Awake()
 {
 	LOG("Init SDL event system");
 	bool ret = true;
@@ -36,14 +36,14 @@ bool p2Input::Awake()
 }
 
 // Called before the first frame
-bool p2Input::Start()
+bool j1Input::Start()
 {
 	CleanKeys();
 	return true;
 }
 
 // Called each loop iteration
-bool p2Input::PreUpdate()
+bool j1Input::PreUpdate()
 {
 	static SDL_Event event;
 	CleanKeys();
@@ -80,7 +80,7 @@ bool p2Input::PreUpdate()
 			case SDL_KEYUP:
 				{
 				int code = event.key.keysym.sym;
-				p2KeyState state = KS_IDLE;
+				j1KeyState state = KS_IDLE;
 
 				if(event.key.repeat != 0)
 					state = KS_REPEAT;
@@ -124,7 +124,7 @@ bool p2Input::PreUpdate()
 }
 
 // Called before quitting
-bool p2Input::CleanUp()
+bool j1Input::CleanUp()
 {
 	LOG("Quitting SDL event subsystem");
 
@@ -134,7 +134,7 @@ bool p2Input::CleanUp()
 }
 
 // ---------
-void p2Input::CleanKeys()
+void j1Input::CleanKeys()
 {
 	for(int i = 0; i < WE_COUNT; ++i)
 		windowEvents[i] = false;
@@ -148,42 +148,42 @@ void p2Input::CleanKeys()
 	mouse_motion_x = mouse_motion_y = 0;
 }
 
-bool p2Input::GetWindowEvent(p2EventWindow ev)
+bool j1Input::GetWindowEvent(j1EventWindow ev)
 {
 	return windowEvents[ev];
 }
 
-bool p2Input::GetKeyDown(int code)
+bool j1Input::GetKeyDown(int code)
 {
 	return keyState[code] == KS_DOWN;
 }
 
-bool p2Input::GetKeyRepeat(int code)
+bool j1Input::GetKeyRepeat(int code)
 {
 	return keyState[code] == KS_REPEAT;
 }
 
-bool p2Input::GetKeyUp(int code)
+bool j1Input::GetKeyUp(int code)
 {
 	return keyState[code] == KS_UP;
 }
 
-bool p2Input::GetMouseButtonDown(int code)
+bool j1Input::GetMouseButtonDown(int code)
 {
 	return mouse_buttons[code-1] == KS_DOWN;
 }
 
-bool p2Input::GetMouseButtonRepeat(int code)
+bool j1Input::GetMouseButtonRepeat(int code)
 {
 	return mouse_buttons[code-1] == KS_REPEAT;
 }
 
-bool p2Input::GetMouseButtonUp(int code)
+bool j1Input::GetMouseButtonUp(int code)
 {
 	return mouse_buttons[code-1] == KS_UP;
 }
 
-void p2Input::GetMouseMotion(int &x, int &y)
+void j1Input::GetMouseMotion(int &x, int &y)
 {
 	x = mouse_motion_x;
 	y = mouse_motion_y;

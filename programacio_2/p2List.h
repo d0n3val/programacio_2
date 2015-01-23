@@ -1,5 +1,5 @@
-#ifndef __P2LIST_H__
-  #define __P2LIST_H__
+#ifndef __p2list_H__
+  #define __p2list_H__
 
 #include "p2Defs.h"
 

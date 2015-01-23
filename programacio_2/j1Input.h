@@ -1,13 +1,13 @@
-#ifndef __P2INPUT_H__
-    #define __P2INPUT_H__
+#ifndef __j1INPUT_H__
+    #define __j1INPUT_H__
 
-#include "p2Module.h"
+#include "j1Module.h"
 #include "SDL/include/SDL.h"
 
 #define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
 
-enum p2EventWindow
+enum j1EventWindow
 {
 	WE_QUIT = 0,
 	WE_HIDE = 1,
@@ -15,7 +15,7 @@ enum p2EventWindow
 	WE_COUNT
 };
 
-enum p2KeyState
+enum j1KeyState
 {
 	KS_IDLE = 0,
 	KS_DOWN,
@@ -23,15 +23,15 @@ enum p2KeyState
 	KS_UP
 };
 
-class p2Input : public p2Module
+class j1Input : public j1Module
 {
 
 public:
 
-	p2Input();
+	j1Input();
 
     // Destructor
-    virtual ~p2Input();
+    virtual ~j1Input();
 
     // Called before render is available
     bool Awake();
@@ -46,7 +46,7 @@ public:
     bool CleanUp();
 
 	// Gather relevant win events
-	bool GetWindowEvent(p2EventWindow ev);
+	bool GetWindowEvent(j1EventWindow ev);
 
 	// Check key states (includes mouse and joy buttons)
 	bool GetKeyDown(int code);
@@ -69,10 +69,10 @@ private:
 
 private:
 	bool		windowEvents[WE_COUNT];
-	p2KeyState	keyState[NUM_KEYS];
-	p2KeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
+	j1KeyState	keyState[NUM_KEYS];
+	j1KeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
 	int			mouse_motion_x;
 	int			mouse_motion_y;
 };
 
-#endif // __P2INPUT_H__
+#endif // __j1INPUT_H__

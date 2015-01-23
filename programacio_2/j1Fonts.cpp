@@ -1,22 +1,22 @@
 #include "p2Defs.h"
 #include "p2Log.h"
-#include "p2App.h"
-#include "p2Fonts.h"
+#include "j1App.h"
+#include "j1Fonts.h"
 
 #pragma comment( lib, "SDL_ttf/libx86/SDL2_ttf.lib" )
 
-p2Fonts::p2Fonts() : p2Module()
+j1Fonts::j1Fonts() : j1Module()
 {
 	strncpy_s(name, "fonts", SHORT_STR);
 }
 
 // Destructor
-p2Fonts::~p2Fonts()
+j1Fonts::~j1Fonts()
 {
 }
 
 // Called before render is available
-bool p2Fonts::Awake()
+bool j1Fonts::Awake()
 {
 	LOG("Init True Type Font library");
 	bool ret = true;
@@ -38,7 +38,7 @@ bool p2Fonts::Awake()
 }
 
 // Called before quitting
-bool p2Fonts::CleanUp()
+bool j1Fonts::CleanUp()
 {
 	LOG("Freeing True Type fonts and library");
 
@@ -56,7 +56,7 @@ bool p2Fonts::CleanUp()
 }
 
 // Load new texture from file path
-TTF_Font* const p2Fonts::Load(const char* path, int size)
+TTF_Font* const j1Fonts::Load(const char* path, int size)
 {
 	TTF_Font* font = TTF_OpenFont(path, size);
 
@@ -74,7 +74,7 @@ TTF_Font* const p2Fonts::Load(const char* path, int size)
 }
 
 // Print text using font
-SDL_Texture* p2Fonts::Print(const char* text, SDL_Color color, TTF_Font* font)
+SDL_Texture* j1Fonts::Print(const char* text, SDL_Color color, TTF_Font* font)
 {
 	SDL_Texture* ret = NULL;
 

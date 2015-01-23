@@ -1,7 +1,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
-#include "p2App.h"
-#include "p2Map.h"
+#include "j1App.h"
+#include "j1Map.h"
 #include "base64/base64.h"
 #include "zlib/include/zlib.h"
 #include "trim.h"
@@ -10,19 +10,19 @@
 
 #pragma comment( lib, "zlib/libx86/zdll.lib" )
 
-p2Map::p2Map() : p2Module()
+j1Map::j1Map() : j1Module()
 {
 	strncpy_s(name, "map", SHORT_STR);
 	map_loaded = false;
 }
 
 // Destructor
-p2Map::~p2Map()
+j1Map::~j1Map()
 {
 }
 
 // Called before render is available
-bool p2Map::Awake()
+bool j1Map::Awake()
 {
 	LOG("Loading Map");
 	bool ret = true;
@@ -39,12 +39,12 @@ bool p2Map::Awake()
 }
 
 // Called each loop iteration
-bool p2Map::PreUpdate()
+bool j1Map::PreUpdate()
 {
 	return true;
 }
 
-SDL_Rect p2Map::GetTileRect(int id)
+SDL_Rect j1Map::GetTileRect(int id)
 {
 	int relative_id = id - data.tileset.firstgid;
 	SDL_Rect rect;
@@ -58,7 +58,7 @@ SDL_Rect p2Map::GetTileRect(int id)
 	return rect;
 }
 
-bool p2Map::Update(float dt)
+bool j1Map::Update(float dt)
 {
 	// Render all layers
 	p2list_item<MapLayer*>* item;
@@ -95,6 +95,11 @@ bool p2Map::Update(float dt)
 					pos_x = (x * tile_half_width) - (y * tile_half_width);
 					pos_y = (y * tile_half_height) + (x * tile_half_height);
 				}
+				else
+				{
+					LOG("Unknown map type");
+					continue;
+				}
 
 				App->render->Blit(data.tileset.texture, pos_x + data.tileset.offset_x, pos_y + data.tileset.offset_y, &r);
 				
@@ -108,13 +113,13 @@ bool p2Map::Update(float dt)
 }
 
 
-bool p2Map::PostUpdate()
+bool j1Map::PostUpdate()
 {
 	return true;
 }
 
 // Called before quitting
-bool p2Map::CleanUp()
+bool j1Map::CleanUp()
 {
 	LOG("Unloading map");
 
@@ -136,7 +141,7 @@ bool p2Map::CleanUp()
 }
 
 // Load new map
-bool p2Map::Load(const char* path)
+bool j1Map::Load(const char* path)
 {
 	bool ret = true;
 
@@ -191,7 +196,7 @@ bool p2Map::Load(const char* path)
 }
 
 // Load map general properties
-bool p2Map::LoadMap()
+bool j1Map::LoadMap()
 {
 	bool ret = true;
 
@@ -251,7 +256,7 @@ bool p2Map::LoadMap()
 	return ret;
 }
 
-bool p2Map::LoadTileset()
+bool j1Map::LoadTileset()
 {
 	bool ret = true;
 
@@ -292,7 +297,7 @@ bool p2Map::LoadTileset()
 }
 
 
-bool p2Map::LoadTilesetDetails()
+bool j1Map::LoadTilesetDetails()
 {
 	bool ret = true;
 
@@ -318,7 +323,7 @@ bool p2Map::LoadTilesetDetails()
 	return ret;
 }
 
-bool p2Map::LoadTilesetImage()
+bool j1Map::LoadTilesetImage()
 {
 	bool ret = true;
 
@@ -353,7 +358,7 @@ bool p2Map::LoadTilesetImage()
 	return ret;
 }
 
-bool p2Map::LoadTilesetTerrains()
+bool j1Map::LoadTilesetTerrains()
 {
 	bool ret = true;
 
@@ -386,7 +391,7 @@ bool p2Map::LoadTilesetTerrains()
 }
 
 
-bool p2Map::LoadTilesetTileTypes()
+bool j1Map::LoadTilesetTileTypes()
 {
 	bool ret = true;
 
@@ -440,7 +445,7 @@ bool p2Map::LoadTilesetTileTypes()
 	return ret;
 }
 
-bool p2Map::LoadLayer(pugi::xml_node node)
+bool j1Map::LoadLayer(pugi::xml_node node)
 {
 	bool ret = true;
 
@@ -474,7 +479,7 @@ bool p2Map::LoadLayer(pugi::xml_node node)
 		
 		decoded = b64_decode( buffer, &decoded_len );
 		
-		RELEASE(buffer);
+		RELEASE_ARRAY(buffer);
 
 		buffer_len = decoded_len * 10;
 		buffer = new char[buffer_len];
@@ -494,7 +499,7 @@ bool p2Map::LoadLayer(pugi::xml_node node)
 			memcpy(layer->data, buffer, buffer_len);
 		}
 
-		RELEASE(buffer);
+		RELEASE_ARRAY(buffer);
 	}
 
 	data.layers.add(layer);

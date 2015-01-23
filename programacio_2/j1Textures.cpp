@@ -1,23 +1,23 @@
 #include "p2Defs.h"
 #include "p2Log.h"
-#include "p2App.h"
-#include "p2Textures.h"
+#include "j1App.h"
+#include "j1Textures.h"
 
 #include "SDL_image/include/SDL_image.h"
 #pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
 
-p2Textures::p2Textures() : p2Module()
+j1Textures::j1Textures() : j1Module()
 {
 	strncpy_s(name, "textures", SHORT_STR);
 }
 
 // Destructor
-p2Textures::~p2Textures()
+j1Textures::~j1Textures()
 {
 }
 
 // Called before render is available
-bool p2Textures::Awake()
+bool j1Textures::Awake()
 {
 	LOG("Init Image library");
 	bool ret = true;
@@ -36,7 +36,7 @@ bool p2Textures::Awake()
 }
 
 // Called before the first frame
-bool p2Textures::Start()
+bool j1Textures::Start()
 {
 	LOG("start textures");
 	bool ret = true;
@@ -45,25 +45,25 @@ bool p2Textures::Start()
 }
 
 // Called each loop iteration
-bool p2Textures::PreUpdate()
+bool j1Textures::PreUpdate()
 {
 	return true;
 }
 
-bool p2Textures::Update(float dt)
+bool j1Textures::Update(float dt)
 {
 	
 	return true;
 }
 
 
-bool p2Textures::PostUpdate()
+bool j1Textures::PostUpdate()
 {
 	return true;
 }
 
 // Called before quitting
-bool p2Textures::CleanUp()
+bool j1Textures::CleanUp()
 {
 	LOG("Freeing textures and Image library");
 
@@ -81,7 +81,7 @@ bool p2Textures::CleanUp()
 }
 
 // Load new texture from file path
-SDL_Texture* const p2Textures::Load(const char* path)
+SDL_Texture* const j1Textures::Load(const char* path)
 {
 	SDL_Texture* texture = NULL;
 	SDL_Surface* surface = IMG_Load(path);
@@ -100,7 +100,7 @@ SDL_Texture* const p2Textures::Load(const char* path)
 }
 
 // Translate a surface into a texture
-SDL_Texture* const p2Textures::LoadSurface(SDL_Surface* surface)
+SDL_Texture* const j1Textures::LoadSurface(SDL_Surface* surface)
 {
 	SDL_Texture* texture = SDL_CreateTextureFromSurface( App->render->renderer, surface );
 
