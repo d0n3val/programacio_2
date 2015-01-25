@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="j1Window.cpp">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Audio.cpp">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Fonts.cpp">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1App.cpp">
+      <Filter>Projecte 1 ==============</Filter>
+    </ClCompile>
+    <ClCompile Include="j1IniReader.cpp">
+      <Filter>Projecte 1 ==============\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Input.cpp">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Map.cpp">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Main.cpp">
+      <Filter>Projecte 1 ==============</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Render.cpp">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Textures.cpp">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Timer.cpp">
+      <Filter>Projecte 1 ==============\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="p2Log.cpp">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClCompile>
+    <ClCompile Include="p2String.cpp">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClCompile>
+    <ClCompile Include="PugiXml\src\pugixml.cpp">
+      <Filter>Projecte 1 ==============\Tools\External</Filter>
+    </ClCompile>
+    <ClCompile Include="p2Vector2.cpp">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClCompile>
+    <ClCompile Include="j1EntityManager.cpp">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="j1Window.h">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Audio.h">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Fonts.h">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1App.h">
+      <Filter>Projecte 1 ==============</Filter>
+    </ClInclude>
+    <ClInclude Include="j1IniReader.h">
+      <Filter>Projecte 1 ==============\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Input.h">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Map.h">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Module.h">
+      <Filter>Projecte 1 ==============</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Render.h">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Textures.h">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Timer.h">
+      <Filter>Projecte 1 ==============\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="p2String.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Assert.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Defs.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+    <ClInclude Include="p2List.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Log.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+    <ClInclude Include="p2PerfTimer.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+    <ClInclude Include="p2RefBool.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+    <ClInclude Include="base64\base64.h">
+      <Filter>Projecte 1 ==============\Tools\External</Filter>
+    </ClInclude>
+    <ClInclude Include="PugiXml\src\pugiconfig.hpp">
+      <Filter>Projecte 1 ==============\Tools\External</Filter>
+    </ClInclude>
+    <ClInclude Include="PugiXml\src\pugixml.hpp">
+      <Filter>Projecte 1 ==============\Tools\External</Filter>
+    </ClInclude>
+    <ClInclude Include="trim.h">
+      <Filter>Projecte 1 ==============\Tools\External</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Vector2.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+    <ClInclude Include="j1EntityManager.h">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Entity.h">
+      <Filter>Projecte 1 ==============\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Tree.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Docs\SDL2\APIByCategory.html">
+      <Filter>Projecte 1 ==============\Docs</Filter>
+    </None>
+    <None Include="Docs\SDL2\FrontPage.html">
+      <Filter>Projecte 1 ==============\Docs</Filter>
+    </None>
+    <None Include="Docs\templates.txt">
+      <Filter>Projecte 1 ==============\Docs</Filter>
+    </None>
+    <None Include="Docs\SDL_image_doc.html">
+      <Filter>Projecte 1 ==============\Docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Projecte 1 ==============">
+      <UniqueIdentifier>{cb944693-b9d0-484c-bad2-02d5a7cdbec6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Programacio 2 ===========">
+      <UniqueIdentifier>{a8bfab6a-5472-4969-943e-861a8b493f08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projecte 1 ==============\Docs">
+      <UniqueIdentifier>{e08f769a-eb00-4711-9ed4-571f474813f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projecte 1 ==============\Tools">
+      <UniqueIdentifier>{42c748be-4a37-49de-970f-5be811d06b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projecte 1 ==============\Modules">
+      <UniqueIdentifier>{244722d1-90ce-423d-8e7a-556211865a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projecte 1 ==============\Tools\External">
+      <UniqueIdentifier>{6b41dfa6-e244-4402-b642-0242f3517d09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projecte 1 ==============\Entities">
+      <UniqueIdentifier>{21dc4c6d-d051-436d-ac91-e3365b1318c9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

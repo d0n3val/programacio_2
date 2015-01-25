@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "programacio_2", "programacio_2\programacio_2.vcxproj", "{7899CAD1-D499-4EDC-B5D9-67CA046B04F6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Unit Test", "UnitTest1\UnitTest1.vcxproj", "{82443916-3835-4C1E-9E18-4117BBDC4F79}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Motor 2D 1er", "Motor2D_1er\Motor2D_1er.vcxproj", "{2AF9969B-F202-497B-AF30-7BEF9CE8005E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +11,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7899CAD1-D499-4EDC-B5D9-67CA046B04F6}.Debug|Win32.ActiveCfg = Debug|Win32
-		{7899CAD1-D499-4EDC-B5D9-67CA046B04F6}.Debug|Win32.Build.0 = Debug|Win32
-		{7899CAD1-D499-4EDC-B5D9-67CA046B04F6}.Release|Win32.ActiveCfg = Release|Win32
-		{7899CAD1-D499-4EDC-B5D9-67CA046B04F6}.Release|Win32.Build.0 = Release|Win32
+		{82443916-3835-4C1E-9E18-4117BBDC4F79}.Debug|Win32.ActiveCfg = Debug|Win32
+		{82443916-3835-4C1E-9E18-4117BBDC4F79}.Debug|Win32.Build.0 = Debug|Win32
+		{82443916-3835-4C1E-9E18-4117BBDC4F79}.Release|Win32.ActiveCfg = Release|Win32
+		{82443916-3835-4C1E-9E18-4117BBDC4F79}.Release|Win32.Build.0 = Release|Win32
+		{2AF9969B-F202-497B-AF30-7BEF9CE8005E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2AF9969B-F202-497B-AF30-7BEF9CE8005E}.Debug|Win32.Build.0 = Debug|Win32
+		{2AF9969B-F202-497B-AF30-7BEF9CE8005E}.Release|Win32.ActiveCfg = Release|Win32
+		{2AF9969B-F202-497B-AF30-7BEF9CE8005E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
