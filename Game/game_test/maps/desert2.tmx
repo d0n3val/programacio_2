@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" backgroundcolor="#ff8080" nextobjectid="1">
+ <tileset firstgid="1" source="desert.tsx"/>
+ <tileset firstgid="49" name="pc" tilewidth="64" tileheight="64">
+  <image source="../textures/SaraFullSheet.png" width="832" height="1344"/>
+ </tileset>
+ <layer name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmGFPwkAMhov7IEICKAmgRBlOYAqO/f9fZ4m7jJTL0Tt2pZB9eMKW3I2Ht93W0AGAByRBPiIwQIbIKGBviTwhPaQfwa2w+C08r/GMvCBjhfnF5pDVBJkiMwU+Njpw2t++Nebyirx5MIe4/U1ZIp8eZBH9coffF/KDrK7o58ovY+Yp4bdW6FcSL+q3g//+/xX2oz1Hz8/lRfuyCT/bfZCT/MzxOT+aa1P5bci58fHNL3Z9qSflu6ofl20Dfo8VXajfRS4S5jrD+4V+Q6jnC/NbXfSZ62z7QvymUM8XZtZyMWaus+2L2XvSpGCfczR5poI+IbOZhFdRfXKencfvn6yh7+fC8Ts4ldVaSb+9Qj/a19r8Qup7PF9I+e09/GiW2vKz1Vqzn2R+IbOZpN+9kCpwuBVoVrH+N2pr3NJyHf4AWpe3LQ==
+  </data>
+ </layer>
+</map>
