@@ -1,3 +1,8 @@
+// ----------------------------------------------------
+// j1Module.h
+// Interface for all engine modules
+// ----------------------------------------------------
+
 #ifndef __j1MODULE_H__
 #define __j1MODULE_H__
 

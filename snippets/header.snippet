@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets
+    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>File Header</Title>
+            <Author>Ricard Pillosu</Author>
+            <Description>Adds a comment header with file name and description of the file contents.</Description>
+            <Shortcut>head</Shortcut>
+        </Header>
+
+        <Snippet>
+
+            <Declarations>
+
+                <Literal>
+                    <ID>file_name</ID>
+                    <Tooltip>Current File Name</Tooltip>
+                    <Default>file.h</Default>
+                </Literal>
+
+                <Literal>
+                    <ID>description</ID>
+                    <Tooltip>Purpose of the code</Tooltip>
+                    <Default>Description of the purpose of the code</Default>
+                </Literal>
+
+            </Declarations>
+
+            <Code Language="CPP">
+                <![CDATA[// ----------------------------------------------------
+// $file_name$
+// $description$
+// ----------------------------------------------------
+
+$end$]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,23 @@
+CodeStyle doc for J1 Engine and P2 utilities
+
+Variable names: 
+	int my_property;
+	bool flags[20];
+
+Class names: 
+	p2MyAwesomeClass
+	j1NiceModule
+
+File names:
+	j1MyFile.h
+	p2MyCode.cpp
+
+File headers:
+// ----------------------------------------------------
+// mymodule.h
+// Purpose of the module
+// ----------------------------------------------------
+
+Function header:
+// Purpose of the function / method
+

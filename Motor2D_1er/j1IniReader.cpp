@@ -3,6 +3,7 @@
 #include "p2Assert.h"
 #include "j1IniReader.h"
 
+// ---------------------------------------------
 j1IniReader::j1IniReader() : tmp(MID_STR)
 {}
 
