@@ -132,16 +132,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Docs\SDL2\APIByCategory.html">
-      <Filter>Projecte 1 ==============\Docs</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="Docs\SDL2\FrontPage.html">
-      <Filter>Projecte 1 ==============\Docs</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="Docs\templates.txt">
-      <Filter>Projecte 1 ==============\Docs</Filter>
+      <Filter>Docs</Filter>
     </None>
     <None Include="Docs\SDL_image_doc.html">
-      <Filter>Projecte 1 ==============\Docs</Filter>
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="..\snippets\header.snippet">
+      <Filter>Docs\snippets</Filter>
+    </None>
+    <None Include="..\snippets\include.snippet">
+      <Filter>Docs\snippets</Filter>
+    </None>
+    <None Include="..\snippets\body.snippet">
+      <Filter>Docs\snippets</Filter>
+    </None>
+    <None Include="..\snippets\separator.snippet">
+      <Filter>Docs\snippets</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -150,9 +162,6 @@
     </Filter>
     <Filter Include="Programacio 2 ===========">
       <UniqueIdentifier>{a8bfab6a-5472-4969-943e-861a8b493f08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Projecte 1 ==============\Docs">
-      <UniqueIdentifier>{e08f769a-eb00-4711-9ed4-571f474813f9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Projecte 1 ==============\Tools">
       <UniqueIdentifier>{42c748be-4a37-49de-970f-5be811d06b38}</UniqueIdentifier>
@@ -166,5 +175,16 @@
     <Filter Include="Projecte 1 ==============\Entities">
       <UniqueIdentifier>{21dc4c6d-d051-436d-ac91-e3365b1318c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{e08f769a-eb00-4711-9ed4-571f474813f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs\snippets">
+      <UniqueIdentifier>{5e946775-4d35-4606-8865-9e2558771876}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\CodeStyle.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

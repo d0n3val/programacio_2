@@ -15,7 +15,6 @@ j1App::j1App(const char* config_file)
 	config.SetFile(config_file);
 
 	input = new j1Input();
-
 	win = new j1Window();
 	render = new j1Render();
 	tex = new j1Textures();
@@ -109,12 +108,14 @@ bool j1App::Update()
 	return ret;
 }
 
+// ---------------------------------------------
 void j1App::PrepareUpdate()
 {
 	dt = (float)ms_timer.Read() / 1000.0f;
 	ms_timer.Start();
 }
 
+// ---------------------------------------------
 void j1App::FinishUpdate()
 {
 	// In background mode leave some time for OS to do stuff

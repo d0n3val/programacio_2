@@ -1,6 +1,11 @@
+// ----------------------------------------------------
+// j1Timer.cpp
+// Body for CPU Tick Timer class
+// ----------------------------------------------------
 
 #include "j1Timer.h"
 
+// ---------------------------------------------
 j1Timer::j1Timer()
 {
 	Start();
@@ -32,3 +37,5 @@ Uint32 j1Timer::Read()
 		return stopped_at - started_at;
 	}
 }
+
+

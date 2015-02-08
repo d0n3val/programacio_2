@@ -118,10 +118,17 @@
     <ClInclude Include="trim.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\snippets\body.snippet" />
+    <None Include="..\snippets\header.snippet" />
+    <None Include="..\snippets\include.snippet" />
+    <None Include="..\snippets\separator.snippet" />
     <None Include="Docs\SDL2\APIByCategory.html" />
     <None Include="Docs\SDL2\FrontPage.html" />
     <None Include="Docs\SDL_image_doc.html" />
     <None Include="Docs\templates.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\CodeStyle.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
