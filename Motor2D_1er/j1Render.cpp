@@ -14,8 +14,7 @@ j1Render::j1Render() : j1Module()
 
 // Destructor
 j1Render::~j1Render()
-{
-}
+{}
 
 // Called before render is available
 bool j1Render::Awake()
@@ -25,15 +24,16 @@ bool j1Render::Awake()
 	// load flags
 	Uint32 flags = SDL_RENDERER_ACCELERATED;
 
-	if(App->config.GetBool("window", "vsync", false) == true) {
+	if(App->config.GetBool("window", "vsync", false) == true)
+	{
 		flags |= SDL_RENDERER_PRESENTVSYNC;
 	}
 
 	renderer = SDL_CreateRenderer(App->win->window, -1, flags);
 
-	if( renderer == NULL )
+	if(renderer == NULL)
 	{
-		LOG( "Could not create the renderer! SDL_Error: %s\n", SDL_GetError() );
+		LOG("Could not create the renderer! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 	else
@@ -70,7 +70,7 @@ bool j1Render::Update(float dt)
 	if(App->input->GetMouseButtonRepeat(SDL_BUTTON_LEFT) == true)
 	{
 		int x, y;
-		App->input->GetMouseMotion(x,y);
+		App->input->GetMouseMotion(x, y);
 		camera.x -= speed * x * dt;
 		camera.y -= speed * y * dt;
 	}

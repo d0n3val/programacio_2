@@ -12,31 +12,31 @@
 
 // Deletes a buffer
 #define RELEASE( x ) \
-  {                        \
+    {                        \
     if( x != NULL )        \
-    {                      \
+	    {                      \
       delete x;            \
 	  x = NULL;              \
-    }                      \
-  }
+	    }                      \
+    }
 
 // Deletes an array of buffers
 #define RELEASE_ARRAY( x ) \
-  {                              \
+    {                              \
     if( x != NULL )              \
-    {                            \
+	    {                            \
       delete[] x;                \
 	  x = NULL;                    \
-    }                            \
+	    }                            \
                               \
-  }
+    }
 
 #define IN_RANGE( value, min, max ) ( ((value) >= (min) && (value) <= (max)) ? 1 : 0 )
 #define MIN( a, b ) ( ((a) < (b)) ? (a) : (b) )
 #define MAX( a, b ) ( ((a) > (b)) ? (a) : (b) )
 #define TO_BOOL( a )  ( (a != 0) ? true : false )
 
-template <class VALUE_TYPE> inline void SWAP ( VALUE_TYPE& a, VALUE_TYPE& b )
+template <class VALUE_TYPE> inline void SWAP(VALUE_TYPE& a, VALUE_TYPE& b)
 {
 	VALUE_TYPE tmp = a;
 	a = b, b = tmp;

@@ -12,8 +12,7 @@ j1Fonts::j1Fonts() : j1Module()
 
 // Destructor
 j1Fonts::~j1Fonts()
-{
-}
+{}
 
 // Called before render is available
 bool j1Fonts::Awake()
@@ -21,9 +20,9 @@ bool j1Fonts::Awake()
 	LOG("Init True Type Font library");
 	bool ret = true;
 
-	if( TTF_Init() == -1 )
+	if(TTF_Init() == -1)
 	{
-		LOG( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+		LOG("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
 		ret = false;
 	}
 	else
@@ -74,16 +73,16 @@ TTF_Font* const j1Fonts::Load(const char* path, int size)
 SDL_Texture* j1Fonts::Print(const char* text, SDL_Color color, TTF_Font* font)
 {
 	SDL_Texture* ret = NULL;
-	SDL_Surface* surface = TTF_RenderText_Solid( (font) ? font : default, text, color );
+	SDL_Surface* surface = TTF_RenderText_Solid((font) ? font : default, text, color);
 
 	if(surface == NULL)
 	{
-		LOG( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
+		LOG("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
 	}
 	else
 	{
 		ret = App->tex->LoadSurface(surface);
-		SDL_FreeSurface( surface );
+		SDL_FreeSurface(surface);
 	}
 
 	return ret;

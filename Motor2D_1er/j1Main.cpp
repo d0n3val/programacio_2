@@ -20,9 +20,9 @@ enum MainState
 	EXIT
 };
 
-int main( int argc, char* args[] )
+int main(int argc, char* args[])
 {
-	LOG("j1 engine starting ...");
+	LOG("J1 engine starting ...");
 
 	MainState state = CREATE;
 	int result = EXIT_FAILURE;
@@ -36,11 +36,11 @@ int main( int argc, char* args[] )
 		switch(state)
 		{
 
-		// Allocate the engine --------------------------------------------
-		case CREATE:
+			// Allocate the engine --------------------------------------------
+			case CREATE:
 			LOG("CREATION PHASE ===============================");
 
-			j1 = new j1App((argc>1) ? args[1] : "");
+			j1 = new j1App((argc > 1) ? args[1] : "");
 
 			if(j1 != NULL)
 				state = AWAKE;
@@ -48,10 +48,10 @@ int main( int argc, char* args[] )
 				state = FAIL;
 
 			LOG("PHASE FINISHED: %.2f ms", ptimer.ReadMs());
-		break;
+			break;
 
-		// Awake all modules -----------------------------------------------
-		case AWAKE:
+			// Awake all modules -----------------------------------------------
+			case AWAKE:
 			LOG("AWAKE PHASE ===============================");
 			if(j1->Awake() == true)
 				state = START;
@@ -62,10 +62,10 @@ int main( int argc, char* args[] )
 			}
 
 			LOG("PHASE FINISHED: %.2f ms", ptimer.ReadMs());
-		break;
+			break;
 
-		// Call all modules before first frame  ----------------------------
-		case START:
+			// Call all modules before first frame  ----------------------------
+			case START:
 			LOG("START PHASE ===============================");
 			if(j1->Start() == true)
 			{
@@ -78,16 +78,16 @@ int main( int argc, char* args[] )
 				state = FAIL;
 				LOG("ERROR: Start failed");
 			}
-		break;
+			break;
 
-		// Loop all modules until we are asked to leave ---------------------
-		case LOOP:
+			// Loop all modules until we are asked to leave ---------------------
+			case LOOP:
 			if(j1->Update() == false)
 				state = CLEAN;
-		break;
+			break;
 
-		// Cleanup allocated memory -----------------------------------------
-		case CLEAN:
+			// Cleanup allocated memory -----------------------------------------
+			case CLEAN:
 			LOG("CLEANUP PHASE ===============================");
 			if(j1->CleanUp() == true)
 			{
@@ -99,14 +99,14 @@ int main( int argc, char* args[] )
 				state = FAIL;
 
 			LOG("PHASE FINISHED: %.2f ms", ptimer.ReadMs());
-		break;
+			break;
 
-		// Exit with errors and shame ---------------------------------------
-		case FAIL:
+			// Exit with errors and shame ---------------------------------------
+			case FAIL:
 			LOG("Exiting with errors :(");
 			result = EXIT_FAILURE;
 			state = EXIT;
-		break;
+			break;
 		}
 	}
 

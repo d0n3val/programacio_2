@@ -12,7 +12,7 @@ union p2Vector2
 	// Data
 	struct
 	{
-		float x,y;
+		float x, y;
 	};
 
 	float p[2];
@@ -22,11 +22,11 @@ union p2Vector2
 	p2Vector2& create(const p2Vector2& v);
 
 	// Math
-	p2Vector2 operator -(const p2Vector2& v ) const;
-	p2Vector2 operator +(const p2Vector2& v ) const;
+	p2Vector2 operator -(const p2Vector2& v) const;
+	p2Vector2 operator +(const p2Vector2& v) const;
 
-	p2Vector2 operator -=(const p2Vector2& v );
-	p2Vector2 operator +=(const p2Vector2& v );
+	p2Vector2 operator -=(const p2Vector2& v);
+	p2Vector2 operator +=(const p2Vector2& v);
 
 	p2Vector2 operator /(float f) const;
 	p2Vector2 operator *(float f) const;

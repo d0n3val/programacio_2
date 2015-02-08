@@ -13,8 +13,7 @@ j1Textures::j1Textures() : j1Module()
 
 // Destructor
 j1Textures::~j1Textures()
-{
-}
+{}
 
 // Called before render is available
 bool j1Textures::Awake()
@@ -25,7 +24,7 @@ bool j1Textures::Awake()
 	int flags = IMG_INIT_PNG;
 	int init = IMG_Init(flags);
 
-	if( (init & flags) != flags)
+	if((init & flags) != flags)
 	{
 		LOG("Could not initialize Image lib. IMG_Init: %s", IMG_GetError());
 		ret = false;
@@ -88,7 +87,7 @@ SDL_Texture* const j1Textures::Load(const char* path)
 	else
 	{
 		texture = LoadSurface(surface);
-		SDL_FreeSurface( surface );
+		SDL_FreeSurface(surface);
 	}
 
 	return texture;
@@ -97,11 +96,11 @@ SDL_Texture* const j1Textures::Load(const char* path)
 // Translate a surface into a texture
 SDL_Texture* const j1Textures::LoadSurface(SDL_Surface* surface)
 {
-	SDL_Texture* texture = SDL_CreateTextureFromSurface( App->render->renderer, surface );
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(App->render->renderer, surface);
 
-	if( texture == NULL )
+	if(texture == NULL)
 	{
-		LOG( "Unable to create texture from surface! SDL Error: %s\n", SDL_GetError() );
+		LOG("Unable to create texture from surface! SDL Error: %s\n", SDL_GetError());
 	}
 	else
 	{

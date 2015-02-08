@@ -45,24 +45,30 @@ public:
 	}
 
 	// Called before the first frame if it was activated before that
-	virtual void Start() {}
+	virtual void Start()
+	{}
 
 	// Called each loop iteration
-	virtual void FixedUpdate(float dt) {}
+	virtual void FixedUpdate(float dt)
+	{}
 
 	// Called each logic iteration
-	virtual void LogicUpdate(float dt) {}
+	virtual void LogicUpdate(float dt)
+	{}
 
 	// Called before quitting
-	virtual void CleanUp() {}
+	virtual void CleanUp()
+	{}
 
 private:
 
 	// Called every time the entity becomes active
-	virtual void OnActivate() {}
+	virtual void OnActivate()
+	{}
 
 	// Called every time the entity becomes inactive
-	virtual void OnDeactivate() {}
+	virtual void OnDeactivate()
+	{}
 
 public:
 

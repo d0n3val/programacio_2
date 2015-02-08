@@ -15,7 +15,7 @@ j1App::j1App(const char* config_file)
 	config.SetFile(config_file);
 
 	input = new j1Input();
-	
+
 	win = new j1Window();
 	render = new j1Render();
 	tex = new j1Textures();
@@ -23,7 +23,7 @@ j1App::j1App(const char* config_file)
 	audio = new j1Audio();
 	map = new j1Map();
 	entities = new j1EntityManager();
-	
+
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 
@@ -39,8 +39,7 @@ j1App::j1App(const char* config_file)
 
 // Destructor
 j1App::~j1App()
-{
-}
+{}
 
 void j1App::AddModule(j1Module* module)
 {
@@ -64,7 +63,7 @@ bool j1App::Awake()
 	p2List_item<j1Module*>* item;
 
 	item = modules.start;
-	while( item != NULL && ret == true )
+	while(item != NULL && ret == true)
 	{
 		ret = item->data->Awake();
 		item = item->next;
@@ -81,7 +80,7 @@ bool j1App::Start()
 	p2List_item<j1Module*>* item;
 
 	item = modules.start;
-	while( item != NULL && ret == true )
+	while(item != NULL && ret == true)
 	{
 		ret = item->data->Start();
 		item = item->next;
@@ -98,7 +97,7 @@ bool j1App::Update()
 	PrepareUpdate();
 
 	ret = PreUpdate();
-	
+
 	if(ret == true)
 		ret = DoUpdate();
 
@@ -214,7 +213,7 @@ bool j1App::PostUpdate()
 
 		ret = item->data->PostUpdate();
 	}
-	
+
 	return ret;
 }
 
@@ -226,7 +225,7 @@ bool j1App::CleanUp()
 	p2List_item<j1Module*>* item;
 
 	item = modules.end;
-	while( item != NULL && ret == true )
+	while(item != NULL && ret == true)
 	{
 		ret = item->data->CleanUp();
 		item = item->prev;
@@ -234,7 +233,7 @@ bool j1App::CleanUp()
 
 	// release modules
 	item = modules.end;
-	while( item != NULL )
+	while(item != NULL)
 	{
 		RELEASE(item->data);
 		item = item->prev;

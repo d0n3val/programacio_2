@@ -6,7 +6,7 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-j1Window::j1Window() : j1Module(),  final_title(MID_STR)
+j1Window::j1Window() : j1Module(), final_title(MID_STR)
 {
 	window = NULL;
 	screen_surface = NULL;
@@ -26,9 +26,9 @@ bool j1Window::Awake()
 	LOG("Init SDL window & surface");
 	bool ret = true;
 
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		LOG( "SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError() );
+		LOG("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 	else
@@ -39,33 +39,37 @@ bool j1Window::Awake()
 		title = App->config.GetString("window", "title", "No title");
 		Uint32 flags = SDL_WINDOW_SHOWN;
 
-		if(App->config.GetBool("window", "fullscreen", false) == true) {
+		if(App->config.GetBool("window", "fullscreen", false) == true)
+		{
 			flags |= SDL_WINDOW_FULLSCREEN;
 		}
 
-		if(App->config.GetBool("window", "borderless", false) == true) {
+		if(App->config.GetBool("window", "borderless", false) == true)
+		{
 			flags |= SDL_WINDOW_BORDERLESS;
 		}
 
-		if(App->config.GetBool("window", "resizable", false) == true) {
+		if(App->config.GetBool("window", "resizable", false) == true)
+		{
 			flags |= SDL_WINDOW_RESIZABLE;
 		}
 
-		if(App->config.GetBool("window", "fullscreen_windowed", false) == true) {
+		if(App->config.GetBool("window", "fullscreen_windowed", false) == true)
+		{
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 		}
 
-		window = SDL_CreateWindow( "", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags );
+		window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
 
-		if( window == NULL )
+		if(window == NULL)
 		{
-			LOG( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
+			LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 			ret = false;
 		}
 		else
 		{
 			//Get window surface
-			screen_surface = SDL_GetWindowSurface( window );
+			screen_surface = SDL_GetWindowSurface(window);
 		}
 	}
 
@@ -80,7 +84,8 @@ bool j1Window::PreUpdate()
 		final_title.create("%s - %d fps (%d/%d ms)", title.c_str(), App->last_fps, App->last_frame_ms, App->capped_ms);
 		SDL_SetWindowTitle(window, final_title.c_str());
 	}
-	else {
+	else
+	{
 		SDL_SetWindowTitle(window, title);
 	}
 
@@ -92,17 +97,20 @@ bool j1Window::Update(float dt)
 {
 	bool ret = true;
 
-	if(App->input->GetWindowEvent(WE_QUIT) == true) {
+	if(App->input->GetWindowEvent(WE_QUIT) == true)
+	{
 		ret = false;
 	}
 
-	if(App->input->GetKeyDown(SDLK_ESCAPE) == true) {
+	if(App->input->GetKeyDown(SDLK_ESCAPE) == true)
+	{
 		ret = false;
 	}
 
 	if(App->input->GetWindowEvent(WE_HIDE) == true)
 	{
-		if(App->pause.Get() == false) {
+		if(App->pause.Get() == false)
+		{
 			LOG("Entering background mode");
 		}
 
@@ -113,7 +121,8 @@ bool j1Window::Update(float dt)
 	{
 		App->pause.Unset();
 
-		if(App->pause.Get() == false) {
+		if(App->pause.Get() == false)
+		{
 			LOG("Leaving background mode");
 		}
 	}
@@ -133,8 +142,9 @@ bool j1Window::CleanUp()
 	LOG("Destroying SDL window and quitting all SDL systems");
 
 	//Destroy window
-	if(window != NULL) {
-		SDL_DestroyWindow( window );
+	if(window != NULL)
+	{
+		SDL_DestroyWindow(window);
 	}
 
 	//Quit SDL subsystems

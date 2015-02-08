@@ -23,7 +23,7 @@ p2Vector2& p2Vector2::create(const p2Vector2& v)
 }
 
 // Math ------------------------------------------------
-p2Vector2 p2Vector2::operator -(const p2Vector2 &v ) const
+p2Vector2 p2Vector2::operator -(const p2Vector2 &v) const
 {
 	p2Vector2 r;
 
@@ -33,7 +33,7 @@ p2Vector2 p2Vector2::operator -(const p2Vector2 &v ) const
 	return(r);
 }
 
-p2Vector2 p2Vector2::operator +(const p2Vector2 &v ) const
+p2Vector2 p2Vector2::operator +(const p2Vector2 &v) const
 {
 	p2Vector2 r;
 
@@ -43,7 +43,7 @@ p2Vector2 p2Vector2::operator +(const p2Vector2 &v ) const
 	return(r);
 }
 
-p2Vector2 p2Vector2::operator -=(const p2Vector2 &v )
+p2Vector2 p2Vector2::operator -=(const p2Vector2 &v)
 {
 	x -= v.x;
 	y -= v.y;
@@ -51,7 +51,7 @@ p2Vector2 p2Vector2::operator -=(const p2Vector2 &v )
 	return(*this);
 }
 
-p2Vector2 p2Vector2::operator +=(const p2Vector2 &v )
+p2Vector2 p2Vector2::operator +=(const p2Vector2 &v)
 {
 	x += v.x;
 	y += v.y;
@@ -119,7 +119,7 @@ bool p2Vector2::operator !=(const p2Vector2& v) const
 // Utils ------------------------------------------------
 bool p2Vector2::IsZero() const
 {
-	return (x == 0.0f && y == 0.0f); 
+	return (x == 0.0f && y == 0.0f);
 }
 
 p2Vector2& p2Vector2::SetToZero()

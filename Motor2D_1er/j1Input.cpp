@@ -7,15 +7,15 @@ j1Input::j1Input() : j1Module()
 	update_on_pause = true;
 	name.create("input");
 
-	for(int i = 0; i < NUM_MOUSE_BUTTONS; ++i) {
+	for(int i = 0; i < NUM_MOUSE_BUTTONS; ++i)
+	{
 		mouse_buttons[i] = KS_IDLE;
 	}
 }
 
 // Destructor
 j1Input::~j1Input()
-{
-}
+{}
 
 // Called before render is available
 bool j1Input::Awake()
@@ -24,9 +24,9 @@ bool j1Input::Awake()
 	bool ret = true;
 	SDL_Init(0);
 
-	if( SDL_InitSubSystem( SDL_INIT_EVENTS ) < 0 )
+	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
-		LOG( "SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError() );
+		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 
@@ -48,34 +48,34 @@ bool j1Input::PreUpdate()
 	static SDL_Event event;
 	CleanKeys();
 
-	while (SDL_PollEvent(&event) != 0)
+	while(SDL_PollEvent(&event) != 0)
 	{
 		switch(event.type)
 		{
 			case SDL_QUIT:
-				windowEvents[WE_QUIT] = true;
-				break;
+			windowEvents[WE_QUIT] = true;
+			break;
 
 			case SDL_WINDOWEVENT:
-				switch(event.window.event)
-				{
-					//case SDL_WINDOWEVENT_LEAVE:
-					case SDL_WINDOWEVENT_HIDDEN:
-					case SDL_WINDOWEVENT_MINIMIZED:
-					case SDL_WINDOWEVENT_FOCUS_LOST:
-						windowEvents[WE_HIDE] = true;
-						break;
-
-					//case SDL_WINDOWEVENT_ENTER:
-					case SDL_WINDOWEVENT_SHOWN:
-					case SDL_WINDOWEVENT_FOCUS_GAINED:
-					case SDL_WINDOWEVENT_MAXIMIZED:
-					case SDL_WINDOWEVENT_RESTORED:
-						windowEvents[WE_SHOW] = true;
-						break;
-				}
-
+			switch(event.window.event)
+			{
+				//case SDL_WINDOWEVENT_LEAVE:
+				case SDL_WINDOWEVENT_HIDDEN:
+				case SDL_WINDOWEVENT_MINIMIZED:
+				case SDL_WINDOWEVENT_FOCUS_LOST:
+				windowEvents[WE_HIDE] = true;
 				break;
+
+				//case SDL_WINDOWEVENT_ENTER:
+				case SDL_WINDOWEVENT_SHOWN:
+				case SDL_WINDOWEVENT_FOCUS_GAINED:
+				case SDL_WINDOWEVENT_MAXIMIZED:
+				case SDL_WINDOWEVENT_RESTORED:
+				windowEvents[WE_SHOW] = true;
+				break;
+			}
+
+			break;
 
 			case SDL_KEYDOWN:
 			case SDL_KEYUP:
@@ -83,17 +83,20 @@ bool j1Input::PreUpdate()
 				int code = event.key.keysym.sym;
 				j1KeyState state = KS_IDLE;
 
-				if(event.key.repeat != 0) {
+				if(event.key.repeat != 0)
+				{
 					state = KS_REPEAT;
 				}
-				else if(event.key.state == SDL_PRESSED) {
+				else if(event.key.state == SDL_PRESSED)
+				{
 					state = KS_DOWN;
 				}
-				else {
+				else
+				{
 					state = KS_UP;
 				}
 
-				if(	code > 127)
+				if(code > 127)
 				{
 					code -= (127 + 1073741881); // https://wiki.libsdl.org/SDLKeycodeLookup
 				}
@@ -104,20 +107,20 @@ bool j1Input::PreUpdate()
 			break;
 
 			case SDL_MOUSEBUTTONDOWN:
-				mouse_buttons[event.button.button-1] = KS_DOWN;
-				//LOG("Mouse button %d down", event.button.button-1);
-				break;
+			mouse_buttons[event.button.button - 1] = KS_DOWN;
+			//LOG("Mouse button %d down", event.button.button-1);
+			break;
 
 			case SDL_MOUSEBUTTONUP:
-				mouse_buttons[event.button.button-1] = KS_UP;
-				//LOG("Mouse button %d up", event.button.button-1);
-				break;
+			mouse_buttons[event.button.button - 1] = KS_UP;
+			//LOG("Mouse button %d up", event.button.button-1);
+			break;
 
 			case SDL_MOUSEMOTION:
-				mouse_motion_x = event.motion.xrel;
-				mouse_motion_y = event.motion.yrel;
-				//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
-				break;
+			mouse_motion_x = event.motion.xrel;
+			mouse_motion_y = event.motion.yrel;
+			//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
+			break;
 		}
 	}
 
@@ -135,16 +138,19 @@ bool j1Input::CleanUp()
 // ---------
 void j1Input::CleanKeys()
 {
-	for(int i = 0; i < WE_COUNT; ++i) {
+	for(int i = 0; i < WE_COUNT; ++i)
+	{
 		windowEvents[i] = false;
 	}
 
-	for(int i = 0; i < NUM_KEYS; ++i) {
+	for(int i = 0; i < NUM_KEYS; ++i)
+	{
 		keyState[i] = KS_IDLE;
 	}
 
-	for(int i = 0; i < NUM_MOUSE_BUTTONS; ++i) {
-		(mouse_buttons[i] == KS_DOWN || mouse_buttons[i] == KS_REPEAT ) ? mouse_buttons[i] = KS_REPEAT : mouse_buttons[i] = KS_IDLE;
+	for(int i = 0; i < NUM_MOUSE_BUTTONS; ++i)
+	{
+		(mouse_buttons[i] == KS_DOWN || mouse_buttons[i] == KS_REPEAT) ? mouse_buttons[i] = KS_REPEAT : mouse_buttons[i] = KS_IDLE;
 	}
 
 	mouse_motion_x = mouse_motion_y = 0;
@@ -172,17 +178,17 @@ bool j1Input::GetKeyUp(int code)
 
 bool j1Input::GetMouseButtonDown(int code)
 {
-	return mouse_buttons[code-1] == KS_DOWN;
+	return mouse_buttons[code - 1] == KS_DOWN;
 }
 
 bool j1Input::GetMouseButtonRepeat(int code)
 {
-	return mouse_buttons[code-1] == KS_REPEAT;
+	return mouse_buttons[code - 1] == KS_REPEAT;
 }
 
 bool j1Input::GetMouseButtonUp(int code)
 {
-	return mouse_buttons[code-1] == KS_UP;
+	return mouse_buttons[code - 1] == KS_UP;
 }
 
 void j1Input::GetMouseMotion(int& x, int& y)

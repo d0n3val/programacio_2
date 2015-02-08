@@ -43,7 +43,7 @@ public:
 		for(; item != NULL; item = item->next)
 		{
 			p2TreeNode* child = item->data;
-				
+
 			if(node == child)
 			{
 				childs.del(item);
@@ -67,7 +67,7 @@ public:
 		{
 			p2TreeNode* child = item->data;
 			result = child->FindRecursive(node);
-			
+
 			if(result != NULL)
 				break;
 		}
@@ -152,9 +152,9 @@ public:
 	bool DelRecursive(const tdata& data)
 	{
 		bool ret = false;
-		
+
 		p2TreeNode<tdata>* node = trunk.FindRecursive(data);
-		
+
 		if(node != NULL)
 		{
 			p2List<p2TreeNode<tdata>*> results;

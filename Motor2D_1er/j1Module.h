@@ -9,7 +9,8 @@ class j1Module
 {
 public:
 
-	j1Module() : active(false), update_on_pause(false), App(NULL) {}
+	j1Module() : active(false), update_on_pause(false), App(NULL)
+	{}
 
 	void Init(j1App* App)
 	{
@@ -36,17 +37,20 @@ public:
 	}
 
 	// Called each loop iteration
-	virtual bool Update(float dt) {
+	virtual bool Update(float dt)
+	{
 		return true;
 	}
 
 	// Called each loop iteration
-	virtual bool PostUpdate() {
+	virtual bool PostUpdate()
+	{
 		return true;
 	}
 
 	// Called before quitting
-	virtual bool CleanUp() {
+	virtual bool CleanUp()
+	{
 		return true;
 	}
 

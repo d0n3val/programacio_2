@@ -23,10 +23,12 @@ void j1Timer::Stop()
 // ---------------------------------------------
 Uint32 j1Timer::Read()
 {
-	if(running == true) {
+	if(running == true)
+	{
 		return SDL_GetTicks() - started_at;
 	}
-	else {
+	else
+	{
 		return stopped_at - started_at;
 	}
 }

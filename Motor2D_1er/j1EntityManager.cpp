@@ -17,8 +17,7 @@ j1EntityManager::j1EntityManager() : j1Module(), logic_updates_per_second(DEFAUL
 
 // Destructor
 j1EntityManager::~j1EntityManager()
-{
-}
+{}
 
 // Called before render is available
 bool j1EntityManager::Awake()
@@ -26,7 +25,7 @@ bool j1EntityManager::Awake()
 	LOG("Setting up Entity manager");
 	bool ret = true;
 	logic_updates_per_second = App->config.GetInt("entities", "updates_per_second ", DEFAULT_LOGIC_PER_SECOND);
-	update_ms_cycle = 1.0f/ (float) logic_updates_per_second;
+	update_ms_cycle = 1.0f / (float)logic_updates_per_second;
 	return ret;
 }
 
@@ -49,13 +48,15 @@ bool j1EntityManager::Update(float dt)
 {
 	accumulated_time += dt;
 
-	if(accumulated_time >= update_ms_cycle) {
+	if(accumulated_time >= update_ms_cycle)
+	{
 		do_logic = true;
 	}
 
 	UpdateRecursive(dt, &entities.trunk);
-	
-	if(do_logic == true) {
+
+	if(do_logic == true)
+	{
 		LOG("Did logic step after %f", accumulated_time);
 		accumulated_time = 0.0f;
 	}
@@ -71,7 +72,8 @@ void j1EntityManager::UpdateRecursive(float dt, p2TreeNode<j1Entity*>* node)
 	{
 		entity->FixedUpdate(dt);
 
-		if(do_logic == true) {
+		if(do_logic == true)
+		{
 			entity->LogicUpdate(accumulated_time);
 		}
 
@@ -97,7 +99,7 @@ bool j1EntityManager::CleanUp()
 	entities.trunk.GatherAllData(&list);
 	p2List_item<j1Entity*>* item = list.start;
 
-	while( item != NULL )
+	while(item != NULL)
 	{
 		RELEASE(item->data);
 		item = item->next;

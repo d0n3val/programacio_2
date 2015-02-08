@@ -1,5 +1,5 @@
 #ifndef __j1APP_H__
-    #define __j1APP_H__
+#define __j1APP_H__
 
 #include "p2List.h"
 #include "p2RefBool.h"
@@ -21,23 +21,23 @@ class j1App
 {
 public:
 
-    // Constructor
-    j1App(const char* );
+	// Constructor
+	j1App(const char*);
 
-    // Destructor
-    virtual ~j1App();
+	// Destructor
+	virtual ~j1App();
 
-    // Called before render is available
-    bool Awake();
+	// Called before render is available
+	bool Awake();
 
-    // Called before the first frame
-    bool Start();
+	// Called before the first frame
+	bool Start();
 
-    // Called each loop iteration
-    bool Update();
+	// Called each loop iteration
+	bool Update();
 
-    // Called before quitting
-    bool CleanUp();
+	// Called before quitting
+	bool CleanUp();
 
 	// Add a new module to handle
 	void AddModule(j1Module* module);
@@ -45,19 +45,19 @@ public:
 private:
 
 	// Call modules before each loop iteration
-    void PrepareUpdate();
+	void PrepareUpdate();
 
 	// Call modules before each loop iteration
-    void FinishUpdate();
+	void FinishUpdate();
 
 	// Call modules before each loop iteration
-    bool PreUpdate();
+	bool PreUpdate();
 
 	// Call modules on each loop iteration
-    bool DoUpdate();
+	bool DoUpdate();
 
 	// Call modules after each loop iteration
-    bool PostUpdate();
+	bool PostUpdate();
 
 public:
 
@@ -82,7 +82,7 @@ public:
 
 private:
 
-    bool				quitting;
+	bool				quitting;
 	j1Timer				ms_timer;
 	j1Timer				fps_timer;
 	p2List<j1Module*>	modules;

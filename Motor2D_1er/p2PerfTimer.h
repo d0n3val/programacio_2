@@ -11,7 +11,7 @@ public:
 	// Constructor
 	j1PerfTimer()
 	{
-		frequency = (double) SDL_GetPerformanceFrequency() / 1000.0f;
+		frequency = (double)SDL_GetPerformanceFrequency() / 1000.0f;
 		Start();
 	}
 
@@ -28,7 +28,7 @@ public:
 
 	inline double ReadMs()
 	{
-		return (double) ReadTicks() / frequency;
+		return (double)ReadTicks() / frequency;
 	}
 
 	inline Uint64 ReadTicks()

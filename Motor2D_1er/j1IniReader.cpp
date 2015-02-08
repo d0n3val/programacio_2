@@ -4,8 +4,7 @@
 #include "j1IniReader.h"
 
 j1IniReader::j1IniReader() : tmp(MID_STR)
-{
-}
+{}
 
 // ---------------------------------------------
 void j1IniReader::SetFile(const char* file)
@@ -35,11 +34,13 @@ bool j1IniReader::GetBool(const char* section, const char* key, bool default)
 {
 	GetString(section, key, "false");
 
-	if(tmp.compare_no_case("true")) {
+	if(tmp.compare_no_case("true"))
+	{
 		return true;
 	}
 
-	if(tmp.compare_no_case("false")) {
+	if(tmp.compare_no_case("false"))
+	{
 		return false;
 	}
 

@@ -13,8 +13,7 @@ j1Audio::j1Audio() : j1Module()
 
 // Destructor
 j1Audio::~j1Audio()
-{
-}
+{}
 
 // Called before render is available
 bool j1Audio::Awake()
@@ -23,9 +22,9 @@ bool j1Audio::Awake()
 	bool ret = true;
 	SDL_Init(0);
 
-	if( SDL_InitSubSystem( SDL_INIT_AUDIO ) < 0 )
+	if(SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
 	{
-		LOG( "SDL_INIT_AUDIO could not initialize! SDL_Error: %s\n", SDL_GetError() );
+		LOG("SDL_INIT_AUDIO could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 
@@ -33,16 +32,16 @@ bool j1Audio::Awake()
 	int flags = MIX_INIT_OGG;
 	int init = Mix_Init(flags);
 
-	if( (init & flags) != flags)
+	if((init & flags) != flags)
 	{
 		LOG("Could not initialize Mixer lib. Mix_Init: %s", Mix_GetError());
 		ret = false;
 	}
 
 	//Initialize SDL_mixer
-	if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 	{
-		LOG( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+		LOG("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 		ret = false;
 	}
 
@@ -54,7 +53,8 @@ bool j1Audio::CleanUp()
 {
 	LOG("Freeing sound FX, closing Mixer and Audio subsystem");
 
-	if(music!= NULL) {
+	if(music != NULL)
+	{
 		Mix_FreeMusic(music);
 	}
 
@@ -79,10 +79,12 @@ bool j1Audio::PlayMusic(const char* path, float fade_time)
 
 	if(music != NULL)
 	{
-		if(fade_time > 0.0f) {
+		if(fade_time > 0.0f)
+		{
 			Mix_FadeOutMusic(fade_time * 1000.0f);
 		}
-		else {
+		else
+		{
 			Mix_HaltMusic();
 		}
 
@@ -147,7 +149,7 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 
 	if(id > 0 && id <= fx.count())
 	{
-		Mix_PlayChannel(-1, fx[id-1], repeat);
+		Mix_PlayChannel(-1, fx[id - 1], repeat);
 	}
 
 	return ret;

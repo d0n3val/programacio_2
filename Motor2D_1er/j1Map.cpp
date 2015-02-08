@@ -18,8 +18,7 @@ j1Map::j1Map() : j1Module()
 
 // Destructor
 j1Map::~j1Map()
-{
-}
+{}
 
 // Called before render is available
 bool j1Map::Awake()
@@ -60,7 +59,7 @@ bool j1Map::Update(float dt)
 	p2List_item<MapLayer*>* item;
 	item = data.layers.start;
 
-	while( item != NULL )
+	while(item != NULL)
 	{
 		MapLayer* layer = item->data;
 		int tile_half_width = data.tile_width / 2;
@@ -70,9 +69,10 @@ bool j1Map::Update(float dt)
 		{
 			for(int x = 0; x < data.width; ++x)
 			{
-				int tile_id = layer->Get(x,y);
+				int tile_id = layer->Get(x, y);
 
-				if(tile_id < data.tileset.firstgid) {
+				if(tile_id < data.tileset.firstgid)
+				{
 					continue;
 				}
 
@@ -123,7 +123,7 @@ bool j1Map::CleanUp()
 	p2List_item<MapLayer*>* item;
 	item = data.layers.start;
 
-	while( item != NULL )
+	while(item != NULL)
 	{
 		RELEASE(item->data);
 		item = item->next;
@@ -147,27 +147,33 @@ bool j1Map::Load(p2String path)
 		ret = false;
 	}
 
-	if(ret == true) {
+	if(ret == true)
+	{
 		ret = LoadMap();
 	}
 
-	if(ret == true) {
+	if(ret == true)
+	{
 		ret = LoadTileset();
 	}
 
-	if(ret == true) {
+	if(ret == true)
+	{
 		ret = LoadTilesetDetails();
 	}
 
-	if(ret == true) {
+	if(ret == true)
+	{
 		ret = LoadTilesetImage();
 	}
 
-	if(ret == true) {
+	if(ret == true)
+	{
 		ret = LoadTilesetTerrains();
 	}
 
-	if(ret == true) {
+	if(ret == true)
+	{
 		ret = LoadTilesetTileTypes();
 	}
 
@@ -214,37 +220,46 @@ bool j1Map::LoadMap()
 		data.tile_height = map.attribute("tileheight").as_int();
 		p2String bg_color(map.attribute("backgroundcolor").as_string());
 
+		data.background_color.r = 0;
+		data.background_color.g = 0;
+		data.background_color.b = 0;
+		data.background_color.a = 0;
+
 		if(bg_color.length() > 0)
 		{
 			p2String red, green, blue;
 			bg_color.sub_string(1, 2, red);
 			bg_color.sub_string(3, 4, green);
 			bg_color.sub_string(5, 6, blue);
-			sscanf_s(red, "%x", &data.background_color.r);
-			sscanf_s(green, "%x", &data.background_color.g);
-			sscanf_s(blue, "%x", &data.background_color.b);
-			data.background_color.a = 0;
-		}
-		else
-		{
-			data.background_color.r = 0;
-			data.background_color.g = 0;
-			data.background_color.b = 0;
-			data.background_color.a = 0;
+
+			int v = 0;
+
+			sscanf_s(red, "%x", &v);
+			if(v >= 0 && v <= 255) data.background_color.r = v;
+
+			sscanf_s(green, "%x", &v);
+			if(v >= 0 && v <= 255) data.background_color.g = v;
+
+			sscanf_s(blue, "%x", &v);
+			if(v >= 0 && v <= 255) data.background_color.b = v;
 		}
 
 		p2String orientation(map.attribute("orientation").as_string());
 
-		if(orientation == "orthogonal") {
+		if(orientation == "orthogonal")
+		{
 			data.type = MAPTYPE_ORTHOGONAL;
 		}
-		else if(orientation == "isometric") {
+		else if(orientation == "isometric")
+		{
 			data.type = MAPTYPE_ISOMETRIC;
 		}
-		else if(orientation == "staggered") {
+		else if(orientation == "staggered")
+		{
 			data.type = MAPTYPE_STAGGERED;
 		}
-		else {
+		else
+		{
 			data.type = MAPTYPE_UNKNOWN;
 		}
 	}
@@ -278,7 +293,8 @@ bool j1Map::LoadTileset()
 
 			tileset_node = tileset_file.child("tileset");
 		}
-		else {
+		else
+		{
 			tileset_node = map_file.child("map").child("tileset");
 		}
 
@@ -330,17 +346,19 @@ bool j1Map::LoadTilesetImage()
 	else
 	{
 		data.tileset.texture = App->tex->Load(PATH(folder, image.attribute("source").as_string()));
-		int w,h;
+		int w, h;
 		SDL_QueryTexture(data.tileset.texture, NULL, NULL, &w, &h);
 		data.tileset.tex_width = image.attribute("width").as_int();
 
-		if(data.tileset.tex_width <= 0) {
+		if(data.tileset.tex_width <= 0)
+		{
 			data.tileset.tex_width = w;
 		}
 
 		data.tileset.tex_height = image.attribute("height").as_int();
 
-		if(data.tileset.tex_height <= 0) {
+		if(data.tileset.tex_height <= 0)
+		{
 			data.tileset.tex_height = h;
 		}
 
@@ -391,30 +409,30 @@ bool j1Map::LoadTilesetTileTypes()
 		tile_type.id = tile.attribute("id").as_int();
 		char types[MID_STR];
 		strncpy_s(types, tile.attribute("terrain").as_string(), MID_STR);
-		char* tmp;
+		char* tmp = NULL;
 		char* item;
-		item = strtok_s (types, ",", &tmp);
+		item = strtok_s(types, ",", &tmp);
 		int i = 0;
 
-		while (item != NULL)
+		while(item != NULL)
 		{
 			switch(i)
 			{
 				case 0:
-					tile_type.top_left = &data.tileset.terrain_types[atoi(item)];
-					break;
+				tile_type.top_left = &data.tileset.terrain_types[atoi(item)];
+				break;
 
 				case 1:
-					tile_type.top_right = &data.tileset.terrain_types[atoi(item)];
-					break;
+				tile_type.top_right = &data.tileset.terrain_types[atoi(item)];
+				break;
 
 				case 2:
-					tile_type.bottom_left = &data.tileset.terrain_types[atoi(item)];
-					break;
+				tile_type.bottom_left = &data.tileset.terrain_types[atoi(item)];
+				break;
 
 				case 3:
-					tile_type.bottom_right = &data.tileset.terrain_types[atoi(item)];
-					break;
+				tile_type.bottom_right = &data.tileset.terrain_types[atoi(item)];
+				break;
 			}
 
 			item = strtok_s(NULL, ",", &tmp);
@@ -424,11 +442,11 @@ bool j1Map::LoadTilesetTileTypes()
 		data.tileset.tile_types.add(tile_type);
 		/*
 		LOG("tile id %d on terrains: %s %s %s %s",
-			tile_type.id,
-			tile_type.top_left->name,
-			tile_type.top_right->name,
-			tile_type.bottom_left->name,
-			tile_type.bottom_right->name);*/
+		tile_type.id,
+		tile_type.top_left->name,
+		tile_type.top_right->name,
+		tile_type.bottom_left->name,
+		tile_type.bottom_right->name);*/
 	}
 
 	return ret;
@@ -455,15 +473,15 @@ bool j1Map::LoadLayer(pugi::xml_node node)
 		// decode base 64 then unzip ...
 		unsigned long buffer_len = 1 + strlen(layer_data.text().as_string());
 		char* buffer = new char[buffer_len];
-		strncpy_s(buffer,buffer_len, layer_data.text().as_string(), buffer_len);
+		strncpy_s(buffer, buffer_len, layer_data.text().as_string(), buffer_len);
 		trim_inplace(buffer, "\n\r ");
 		char* decoded;
 		unsigned int decoded_len;
-		decoded = b64_decode( buffer, &decoded_len );
+		decoded = b64_decode(buffer, &decoded_len);
 		RELEASE_ARRAY(buffer);
 		buffer_len = decoded_len * 10;
 		buffer = new char[buffer_len];
-		int result = uncompress((Bytef*) buffer, &buffer_len, (Bytef*)decoded, decoded_len);
+		int result = uncompress((Bytef*)buffer, &buffer_len, (Bytef*)decoded, decoded_len);
 		free(decoded);
 
 		if(result != Z_OK)

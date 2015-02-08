@@ -55,13 +55,16 @@ struct MapLayer
 	int height;
 	unsigned __int32* data;
 
-	MapLayer() : data(NULL)	{}
-	~MapLayer() {
+	MapLayer() : data(NULL)
+	{}
+	~MapLayer()
+	{
 		RELEASE(data);
 	}
 
-	inline unsigned __int32 Get(int x, int y) {
-		return data[(y*width)+x];
+	inline unsigned __int32 Get(int x, int y)
+	{
+		return data[(y*width) + x];
 	}
 };
 

@@ -5968,6 +5968,7 @@ namespace pugi
 
 		// allocate new root
 		_root = new (reinterpret_cast<char*>(page) + sizeof(impl::xml_memory_page)) impl::xml_document_struct(page);
+#pragma warning(suppress: 6011)
 		_root->prev_sibling_c = _root;
 
 		// setup sentinel page

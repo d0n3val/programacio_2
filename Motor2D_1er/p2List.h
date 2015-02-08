@@ -21,8 +21,7 @@ struct p2List_item
 	}
 
 	~p2List_item()
-	{
-	}
+	{}
 };
 
 /**
@@ -74,7 +73,7 @@ public:
 	unsigned int add(const tdata& item)
 	{
 		p2List_item<tdata>*   p_data_item;
-		p_data_item = new p2List_item < tdata > (item);
+		p_data_item = new p2List_item < tdata >(item);
 
 		if(start == NULL)
 		{
@@ -95,7 +94,8 @@ public:
 	*/
 	bool del(p2List_item<tdata>* item)
 	{
-		if(item == NULL) {
+		if(item == NULL)
+		{
 			return (false);
 		}
 
@@ -171,6 +171,8 @@ public:
 			++pos;
 			p_item = p_item->next;
 		}
+
+		ASSERT(p_item);
 
 		return(p_item->data);
 	}
