@@ -3,8 +3,11 @@
 
 #define __P2ASSERT_H__
 
+#include "../Motor2D_1er/p2SString.h"
 #include "../Motor2D_1er/p2List.h"
 #include "../Motor2D_1er/p2Tree.h"
+#include "../Motor2D_1er/p2Vector2.h"
+#include "../Motor2D_1er/p2Point.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -26,7 +29,159 @@ namespace UnitTest1
 	TEST_CLASS(UnitTest1)
 	{
 	public:
-		
+
+		// SWAP ----------------------------------------------
+		TEST_METHOD(swap_int)
+		{
+			int a = 5;
+			int b = 8;
+			SWAP(a, b);
+			Assert::AreEqual(a, 8);
+			Assert::AreEqual(b, 5);
+		}
+
+		TEST_METHOD(swap_SString)
+		{
+			p2SString a("hola");
+			p2SString b("mundo");
+			SWAP(a, b);
+			Assert::IsTrue(a == "mundo");
+			Assert::IsTrue(b == "hola");
+		}
+
+		TEST_METHOD(swap_p2Vector2)
+		{
+			p2Vector2 a;
+			p2Vector2 b;
+			a.x = a.y = 1.0f;
+			b = a;
+			b.x = b.y = 2.0f;
+			SWAP(a, b);
+			Assert::IsTrue(a.x == 2.0f);
+			Assert::IsTrue(b.x == 1.0f);
+		}
+
+		TEST_METHOD(Point2D_int)
+		{
+			p2Point<int> a;
+			p2Point<int> b;
+
+			a.x = a.y = 5;
+			b = a;
+
+			Assert::AreEqual(b.x, 5);
+			Assert::AreEqual(b.y, 5);
+		}
+
+		TEST_METHOD(Point2D_double)
+		{
+			p2Point<double> a;
+			p2Point<double> b;
+
+			a.x = a.y = 3.1415;
+			b = a;
+			
+			Assert::AreEqual(b.x, 3.1415);
+			Assert::AreEqual(b.y, 3.1415);
+
+			p2Point<p2SString> juas;
+			juas.x = "hola";
+			juas.y = "mundo";
+			juas.DistanceTo(juas);
+		}
+
+		// p2SString -----------------------------------------
+		TEST_METHOD(SString_empty_ctor)
+		{
+			p2SString s;
+			Assert::AreEqual((int) s.Length(), 0);
+		}
+		TEST_METHOD(SString_char_ctor)
+		{
+			p2SString s("Hola mundo");
+			Assert::AreEqual((int)s.Length(), 10);
+		}
+		TEST_METHOD(SString_format_ctor)
+		{
+			p2SString s("%s %s %d", "hola", "mundo", 12);
+			Assert::AreEqual((int)s.Length(), 13);
+		}
+		TEST_METHOD(SString_copy_ctor)
+		{
+			p2SString s("%s %s %d", "hola", "mundo", 12);
+			p2SString s2(s);
+			Assert::AreEqual((int)s2.Length(), 13);
+		}
+		TEST_METHOD(SString_op_equal)
+		{
+			p2SString s1("Hola mundo");
+			p2SString s2("Hola mundo");
+			Assert::IsTrue(s1 == s2);
+		}
+		TEST_METHOD(SString_op_notequal)
+		{
+			p2SString s1("Hola mundo 1");
+			p2SString s2("Hola mundo 2");
+			Assert::IsTrue(s1 != s2);
+		}
+		TEST_METHOD(SString_op_equal_cstr)
+		{
+			p2SString s1("Hola mundo");
+			Assert::IsTrue(s1 == "Hola mundo");
+		}
+		TEST_METHOD(SString_op_notequal_cstr)
+		{
+			p2SString s1("Hola mundo 1");
+			Assert::IsTrue(s1 != "test");
+		}
+		TEST_METHOD(SString_op_assign)
+		{
+			p2SString s1("Hola mundo");
+			p2SString s2;
+			s2 = s1;
+			Assert::IsTrue(s2 == "Hola mundo");
+		}
+		TEST_METHOD(SString_op_assign_cstr)
+		{
+			p2SString s1("Hola mundo");
+			s1 = "this is a test";
+			Assert::IsTrue(s1 == "this is a test");
+		}
+		TEST_METHOD(SString_op_concat)
+		{
+			p2SString s1("Hola mundo");
+			p2SString s2("this is a test");
+			s1 += s2;
+			Assert::IsTrue(s1 == "Hola mundothis is a test");
+		}
+		TEST_METHOD(SString_op_concat_cstr)
+		{
+			p2SString s1("Hola mundo");
+			s1 += "this is a test";
+			Assert::IsTrue(s1 == "Hola mundothis is a test");
+		}
+		TEST_METHOD(SString_length)
+		{
+			p2SString s1("Hola mundo");
+			Assert::AreEqual((int)s1.Length(), 10);
+		}
+		TEST_METHOD(SString_capacity)
+		{
+			p2SString s1("Hola mundo");
+			Assert::AreEqual((int)s1.GetCapacity(), 11);
+		}
+		TEST_METHOD(SString_getstr)
+		{
+			p2SString s1("Hola mundo");
+			Assert::AreEqual((int)strcmp("Hola mundo", s1.GetString()), 0);
+		}
+		TEST_METHOD(SString_clear)
+		{
+			p2SString s1("Hola mundo");
+			s1.Clear();
+			Assert::AreEqual((int)s1.Length(), 0);
+		}
+
 		// p2List --------------------------------------------
 		TEST_METHOD(ListAdd)
 		{

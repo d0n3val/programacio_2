@@ -7,15 +7,11 @@
 
 #include "p2Defs.h"
 
-union p2Vector2
+class p2Vector2
 {
-	// Data
-	struct
-	{
-		float x, y;
-	};
+public: 
 
-	float p[2];
+	float x, y;
 
 	// Creators
 	p2Vector2& create(float x, float y);
@@ -25,14 +21,8 @@ union p2Vector2
 	p2Vector2 operator -(const p2Vector2& v) const;
 	p2Vector2 operator +(const p2Vector2& v) const;
 
-	p2Vector2 operator -=(const p2Vector2& v);
-	p2Vector2 operator +=(const p2Vector2& v);
-
-	p2Vector2 operator /(float f) const;
-	p2Vector2 operator *(float f) const;
-
-	p2Vector2 operator /=(float f);
-	p2Vector2 operator *=(float f);
+	const p2Vector2& operator -=(const p2Vector2& v);
+	const p2Vector2& operator +=(const p2Vector2& v);
 
 	// Compare
 	bool operator ==(const p2Vector2& v) const;

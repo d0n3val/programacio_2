@@ -129,6 +129,12 @@
     <ClInclude Include="p2Tree.h">
       <Filter>Programacio 2 ===========</Filter>
     </ClInclude>
+    <ClInclude Include="p2SString.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Point.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Docs\SDL2\APIByCategory.html">

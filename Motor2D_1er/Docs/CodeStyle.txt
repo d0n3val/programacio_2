@@ -1,3 +1,56 @@
+
+Clase cadena:
+- Mai surt de rang
+- Constructors:
+
+	char* cadena;
+	int tamany;
+
+	String()
+	{
+		tamany = 1;
+		cadena = new char[tamany];
+		cadena[0] = '\0';
+	}
+
+	String(const char* c)
+	{
+		tamany = strlen(c) + 1;
+		cadena = new char[tamany];
+		strcpy_s(cadena, tamany, c);
+	
+	}
+
+	String(const char* format, ...)
+
+	String(const String&);
+
+	~String()
+	{
+		delete[] cadena;
+	}
+
+	int len() const
+	{
+		return strlen(cadena);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 CodeStyle doc for J1 Engine and P2 utilities
 
 Variable names: 

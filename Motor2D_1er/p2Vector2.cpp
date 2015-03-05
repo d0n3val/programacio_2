@@ -43,7 +43,7 @@ p2Vector2 p2Vector2::operator +(const p2Vector2 &v) const
 	return(r);
 }
 
-p2Vector2 p2Vector2::operator -=(const p2Vector2 &v)
+const p2Vector2& p2Vector2::operator -=(const p2Vector2 &v)
 {
 	x -= v.x;
 	y -= v.y;
@@ -51,57 +51,10 @@ p2Vector2 p2Vector2::operator -=(const p2Vector2 &v)
 	return(*this);
 }
 
-p2Vector2 p2Vector2::operator +=(const p2Vector2 &v)
+const p2Vector2& p2Vector2::operator +=(const p2Vector2 &v)
 {
 	x += v.x;
 	y += v.y;
-
-	return(*this);
-}
-
-p2Vector2 p2Vector2::operator *(float f) const
-{
-	p2Vector2 r;
-
-	r.x = x * f;
-	r.y = y * f;
-
-	return(r);
-}
-
-p2Vector2 p2Vector2::operator /(float f) const
-{
-	p2Vector2 r;
-
-	r.x = x / f;
-	r.y = y / f;
-
-	return(r);
-
-	/*
-	// Optimization ? must test ...
-	float inv = 1.0f / f;
-	p2Vector2 r;
-
-	r.x = x * inv;
-	r.y = y * inv;
-
-	return(r);
-	*/
-}
-
-p2Vector2 p2Vector2::operator /=(float f)
-{
-	x /= f;
-	y /= f;
-
-	return(*this);
-}
-
-p2Vector2 p2Vector2::operator *=(float f)
-{
-	x *= f;
-	y *= f;
 
 	return(*this);
 }

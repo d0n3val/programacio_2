@@ -105,11 +105,13 @@
     <ClInclude Include="j1Map.h" />
     <ClInclude Include="j1Module.h" />
     <ClInclude Include="p2PerfTimer.h" />
+    <ClInclude Include="p2Point.h" />
     <ClInclude Include="p2RefBool.h" />
     <ClInclude Include="j1Render.h" />
     <ClInclude Include="j1Textures.h" />
     <ClInclude Include="j1Timer.h" />
     <ClInclude Include="j1Window.h" />
+    <ClInclude Include="p2SString.h" />
     <ClInclude Include="p2String.h" />
     <ClInclude Include="p2Tree.h" />
     <ClInclude Include="p2Vector2.h" />
