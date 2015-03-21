@@ -8,6 +8,7 @@
 #include "../Motor2D_1er/p2Tree.h"
 #include "../Motor2D_1er/p2Vector2.h"
 #include "../Motor2D_1er/p2Point.h"
+#include "../Motor2D_1er/p2DynArray.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -29,6 +30,124 @@ namespace UnitTest1
 	TEST_CLASS(UnitTest1)
 	{
 	public:
+
+		// DYN ARRAY -----------------------------------------
+		TEST_METHOD(DynArray_ctor)
+		{
+			p2DynArray<int> array;
+			Assert::AreEqual((int)array.GetCapacity(), DYN_ARRAY_BLOCK_SIZE);
+		}
+
+		TEST_METHOD(DynArray_ctor_capacity)
+		{
+			p2DynArray<int> array(33);
+			Assert::AreEqual((int)array.GetCapacity(), 33);
+		}
+
+		TEST_METHOD(DynArray_push_back)
+		{
+			p2DynArray<int> array;
+
+			array.PushBack(1);
+			array.PushBack(2);
+			array.PushBack(3);
+			Assert::AreEqual((int)array.GetCapacity(), DYN_ARRAY_BLOCK_SIZE);
+			Assert::AreEqual((int)array.Count(), 3);
+		}
+
+		TEST_METHOD(DynArray_pop)
+		{
+			p2DynArray<int> array;
+
+			array.PushBack(1);
+			array.PushBack(2);
+			array.PushBack(3);
+
+			int a = array.Pop();
+			int b = array.Pop();
+
+			Assert::AreEqual((int)array.GetCapacity(), DYN_ARRAY_BLOCK_SIZE);
+			Assert::AreEqual((int)array.Count(), 1);
+			Assert::AreEqual(a, 3);
+			Assert::AreEqual(b, 2);
+		}
+
+		TEST_METHOD(DynArray_clear)
+		{
+			p2DynArray<int> array;
+
+			array.PushBack(1);
+			array.PushBack(2);
+			array.PushBack(3);
+			array.Clear();
+
+			Assert::AreEqual((int)array.GetCapacity(), DYN_ARRAY_BLOCK_SIZE);
+			Assert::AreEqual((int)array.Count(), 0);
+		}
+
+
+		TEST_METHOD(DynArray_op)
+		{
+			p2DynArray<int> array;
+
+			array.PushBack(1);
+			array.PushBack(2);
+			array.PushBack(3);
+			
+			Assert::AreEqual(array[0], 1);
+			Assert::AreEqual(array[1], 2);
+			Assert::AreEqual(array[2], 3);
+		}
+
+		TEST_METHOD(DynArray_at)
+		{
+			p2DynArray<int> array;
+
+			array.PushBack(1);
+			array.PushBack(2);
+			array.PushBack(3);
+
+			Assert::AreEqual(*(array.At(0)), 1);
+			Assert::AreEqual(*(array.At(1)), 2);
+			Assert::AreEqual(*(array.At(2)), 3);
+			Assert::IsNull(array.At(3));
+		}
+
+		TEST_METHOD(DynArray_resize)
+		{
+			p2DynArray<int> array;
+
+			for(int i = 0; i < 999; ++i)
+			{
+				array.PushBack(i);
+			}
+
+			Assert::AreEqual(*(array.At(900)), 900);
+			Assert::IsNull(array.At(1000));
+
+			Assert::AreEqual((int)array.GetCapacity(), 1008);
+			Assert::AreEqual((int)array.Count(), 999);
+		}
+
+		TEST_METHOD(insert)
+		{
+			p2DynArray<int> array;
+
+			for(int i = 0; i < DYN_ARRAY_BLOCK_SIZE; ++i)
+			{
+				array.PushBack(i);
+			}
+
+			array.Insert(999, 3);
+			array.Insert(888, 17);
+			array.Insert(777, 50);
+
+			Assert::IsFalse(array.Insert(777, 50));
+			Assert::AreEqual((int)array.GetCapacity(), DYN_ARRAY_BLOCK_SIZE*2);
+			Assert::AreEqual((int)array.Count(), 18);
+			Assert::AreEqual((int)array[3], 999);
+			Assert::AreEqual((int)array[17], 888);
+		}
 
 		// SWAP ----------------------------------------------
 		TEST_METHOD(swap_int)
@@ -84,10 +203,12 @@ namespace UnitTest1
 			Assert::AreEqual(b.x, 3.1415);
 			Assert::AreEqual(b.y, 3.1415);
 
+			/*
 			p2Point<p2SString> juas;
 			juas.x = "hola";
 			juas.y = "mundo";
 			juas.DistanceTo(juas);
+			*/
 		}
 
 		// p2SString -----------------------------------------

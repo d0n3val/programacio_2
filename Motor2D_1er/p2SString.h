@@ -116,6 +116,10 @@ public:
 
 	const p2SString& operator= (const char* string)
 	{
+		p2SString t(string);
+		(*this) = t;
+		return *this;
+
 		if(string != NULL)
 		{
 			if(strlen(string) + 1 > size)
@@ -138,38 +142,37 @@ public:
 	
 	const p2SString& operator+= (const p2SString& string)
 	{
-		static char tmp[TMP_STRING_SIZE];
-		strcpy_s(tmp, TMP_STRING_SIZE, str);
-		strcat_s(tmp, TMP_STRING_SIZE - strlen(str), string.str);
+		unsigned int need_size = string.Length() + Length() + 1;
 
-		if(strlen(tmp) + 1 > size)
+		if(need_size > size)
 		{
-			delete[] str;
-			Alloc(strlen(tmp)+1);
+			char* tmp = str;
+			Alloc(need_size);
+			strcpy_s(str, size, tmp);
+			delete[] tmp;
 		}
-		else
-			Clear();
 
-		strcpy_s(str, size, tmp);
+		strcat_s(str, size, string.str);
 
 		return(*this);
 	}
 
 	const p2SString& operator+= (const char* string)
 	{
-		static char tmp[TMP_STRING_SIZE];
-		strcpy_s(tmp, TMP_STRING_SIZE, str);
-		strcat_s(tmp, TMP_STRING_SIZE - strlen(str), string);
-
-		if(strlen(tmp) + 1 > size)
+		if(string != NULL)
 		{
-			delete[] str;
-			Alloc(strlen(tmp) + 1);
-		}
-		else
-			Clear();
+			unsigned int need_size = strlen(string) + Length() + 1;
 
-		strcpy_s(str, size, tmp);
+			if(need_size > size)
+			{
+				char* tmp = str;
+				Alloc(need_size);
+				strcpy_s(str, size, tmp);
+				delete[] tmp;
+			}
+
+			strcat_s(str, size, string);
+		}
 
 		return(*this);
 	}
