@@ -61,12 +61,14 @@ public:
 		data[num_elements++] = element;
 	}
 
-	VALUE Pop()
+	bool Pop(VALUE& result)
 	{
 		if(num_elements > 0)
 		{
-			return data[--num_elements];
+			result = data[--num_elements];
+			return true;
 		}
+		return false;
 	}
 
 	void Clear()
