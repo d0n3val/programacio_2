@@ -6,6 +6,7 @@
 #define __P2TREE_H__
 
 #include "p2List.h"
+#include "p2Stack.h"
 
 // Tree node -------------------------------------------------------
 template<class tdata>
@@ -54,6 +55,40 @@ public:
 		}
 
 		return ret;
+	}
+
+	void PreOrderRecursive(p2List<p2TreeNode<tdata>*>* list)
+	{
+		list->add(this);
+
+		p2List_item<p2TreeNode*>* item = childs.start;
+
+		for(; item != NULL; item = item->next)
+			item->data->PreOrderRecursive(list);
+	}
+
+	void InOrderRecursive(p2List<p2TreeNode<tdata>*>* list)
+	{
+		p2List_item<p2TreeNode*>* item = childs.start;
+		unsigned int mid = childs.count() / 2;
+
+		for(unsigned int i = 0; i < mid; ++i, item = item->next)
+			item->data->InOrderRecursive(list);
+
+		list->add(this);
+		
+		for(; item != NULL; item = item->next)
+			item->data->InOrderRecursive(list);
+	}
+
+	void PostOrderRecursive(p2List<p2TreeNode<tdata>*>* list)
+	{
+		p2List_item<p2TreeNode*>* item = childs.start;
+
+		for(; item != NULL; item = item->next)
+			item->data->PostOrderRecursive(list);
+
+		list->add(this);
 	}
 
 	p2TreeNode<tdata>* FindRecursive(const tdata& node)
@@ -118,6 +153,80 @@ public:
 	// Destructor
 	virtual ~p2Tree()
 	{}
+
+	void PreOrderRecursive(p2List<p2TreeNode<tdata>*>* list)
+	{
+		trunk.PreOrderRecursive(list);
+	}
+
+	void PostOrderRecursive(p2List<p2TreeNode<tdata>*>* list)
+	{
+		trunk.PostOrderRecursive(list);
+	}
+
+	void InOrderRecursive(p2List<p2TreeNode<tdata>*>* list)
+	{
+		trunk.InOrderRecursive(list);
+	}
+
+	void PreOrderIterative(p2List<p2TreeNode<tdata>*>* list)
+	{
+		p2Stack<p2TreeNode<tdata>*> stack;
+		p2TreeNode<tdata>* node = &trunk;
+
+		while(node != NULL || stack.Pop(node))
+		{
+			list->add(node);
+
+			p2List_item<p2TreeNode<tdata>*>* item = node->childs.end;
+			for(; item != node->childs.start; item = item->prev)
+				stack.Push(item->data);
+
+			node = (item != NULL) ? item->data : NULL;
+		}
+	}
+
+	void PostOrderIterative(p2List<p2TreeNode<tdata>*>* list)
+	{
+		p2Stack<p2TreeNode<tdata>*> stack;
+		p2TreeNode<tdata>* node = &trunk;
+
+		while(node != NULL || stack.Pop(node))
+		{
+			p2List_item<p2TreeNode<tdata>*>* item = node->childs.end;
+
+			if(item != NULL && list->find(item->data) == -1)
+			{
+				stack.Push(node);
+				for(; item != node->childs.start; item = item->prev)
+					stack.Push(item->data);
+
+				node = item->data;
+			}
+			else
+			{
+				list->add(node);
+				node = NULL;
+			}
+		}
+	}
+
+	void InOrderIterative(p2List<p2TreeNode<tdata>*>* list)
+	{
+		p2Stack<p2TreeNode<tdata>*> stack;
+		p2TreeNode<tdata>* node = &trunk;
+
+		while(node != NULL || stack.Pop(node))
+		{
+			list->add(node);
+
+			p2List_item<p2TreeNode<tdata>*>* item = node->childs.end;
+			for(; item != node->childs.start; item = item->prev)
+				stack.Push(item->data);
+
+			node = (item != NULL) ? item->data : NULL;
+		}
+	}
 
 	void Add(const tdata& data, const tdata& parent)
 	{
