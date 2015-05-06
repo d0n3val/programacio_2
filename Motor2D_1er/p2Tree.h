@@ -213,19 +213,7 @@ public:
 
 	void InOrderIterative(p2List<p2TreeNode<tdata>*>* list)
 	{
-		p2Stack<p2TreeNode<tdata>*> stack;
-		p2TreeNode<tdata>* node = &trunk;
 
-		while(node != NULL || stack.Pop(node))
-		{
-			list->add(node);
-
-			p2List_item<p2TreeNode<tdata>*>* item = node->childs.end;
-			for(; item != node->childs.start; item = item->prev)
-				stack.Push(item->data);
-
-			node = (item != NULL) ? item->data : NULL;
-		}
 	}
 
 	void Add(const tdata& data, const tdata& parent)

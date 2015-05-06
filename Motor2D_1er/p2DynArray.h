@@ -132,6 +132,53 @@ public:
 		return num_elements;
 	}
 
+	// Sort
+	int BubbleSort()
+	{
+		int ret = 0;
+		bool swapped = true;
+
+		while(swapped)
+		{
+			swapped = false;
+			for(unsigned int i = 0; i < num_elements - 2; ++i)
+			{
+				++ret;
+				if(data[i] > data[i + 1])
+				{
+					SWAP(data[i], data[i + 1]);
+					swapped = true;
+				}
+			}
+		}
+
+		return ret;
+	}
+
+
+	int BubbleSortOptimized()
+	{
+		int ret = 0;
+		unsigned int count;
+		unsigned int last = num_elements - 2;
+
+		while(last > 0)
+		{
+			count = last;
+			last = 0;
+			for(unsigned int i = 0; i < count; ++i)
+			{
+				++ret;
+				if(data[i] > data[i + 1])
+				{
+					SWAP(data[i], data[i + 1]);
+					last = i;
+				}
+			}
+		}
+		return ret;
+	}
+
 private:
 
 	// Private Utils

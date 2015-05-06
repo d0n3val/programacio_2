@@ -194,6 +194,45 @@ namespace UnitTest1
 			Assert::AreEqual((int)array[17], 888);
 		}
 
+		TEST_METHOD(DynArray_BubbleSort)
+		{
+			p2DynArray<int> array;
+
+			array.PushBack(5);
+			array.PushBack(4);
+			array.PushBack(1);
+			array.PushBack(2);
+			array.PushBack(8);
+
+			array.BubbleSort();
+
+			Assert::AreEqual((int)array[0], 1);
+			Assert::AreEqual((int)array[1], 2);
+			Assert::AreEqual((int)array[2], 4);
+			Assert::AreEqual((int)array[3], 5);
+			Assert::AreEqual((int)array[4], 8);
+		}
+
+		TEST_METHOD(DynArray_BubbleSortOpt)
+		{
+			p2DynArray<int> array;
+
+			array.PushBack(5);
+			array.PushBack(4);
+			array.PushBack(1);
+			array.PushBack(2);
+			array.PushBack(8);
+
+			int n = array.BubbleSortOptimized();
+
+			Assert::AreEqual((int)n, 6);
+			Assert::AreEqual((int)array[0], 1);
+			Assert::AreEqual((int)array[1], 2);
+			Assert::AreEqual((int)array[2], 4);
+			Assert::AreEqual((int)array[3], 5);
+			Assert::AreEqual((int)array[4], 8);
+		}
+
 		// SWAP ----------------------------------------------
 		TEST_METHOD(swap_int)
 		{
