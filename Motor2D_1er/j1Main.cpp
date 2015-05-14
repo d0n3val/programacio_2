@@ -5,6 +5,7 @@
 #include "p2PerfTimer.h"
 #include "j1App.h"
 #include "p2SString.h"
+#include "p2DynArray.h"
 
 #include "SDL/include/SDL.h"
 #pragma comment( lib, "SDL/libx86/SDL2.lib" )

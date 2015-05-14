@@ -46,6 +46,23 @@ public:
 	unsigned int  count_char(char ch);
 	int           get_token(const char* separator, unsigned int num_token, p2String& buffer) const;
 
+	void trim2()
+	{
+		// cut right --
+		char* end = string + size;
+		while(*--end == ' ') 
+			*end = 0;
+
+		// cut left --
+		char* start = string;
+		while(*++start == ' ');
+
+		size = strlen(start);
+
+		for(int i = 0; i < size + 1; ++i)
+			string[i] = start[i];
+	}
+
 	/*$1- Fast util ----------------------------------------------------------*/
 	inline int is_empty() const
 	{

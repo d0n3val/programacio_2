@@ -179,6 +179,33 @@ public:
 		return ret;
 	}
 
+
+	int CombSort()
+	{
+		int ret = 0;
+		bool swapped = true;
+		int gap = num_elements - 1;
+		float shrink = 1.3f;
+
+		while(swapped || gap > 1)
+		{
+			gap = MAX(1, gap / shrink);
+
+			swapped = false;
+			for(unsigned int i = 0; i + gap < num_elements - 1; ++i)
+			{
+				++ret;
+				if(data[i] > data[i + gap])
+				{
+					SWAP(data[i], data[i + gap]);
+					swapped = true;
+				}
+			}
+		}
+
+		return ret;
+	}
+
 private:
 
 	// Private Utils
