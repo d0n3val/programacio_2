@@ -50,8 +50,7 @@ public:
 	{
 		// cut right --
 		char* end = string + size;
-		while(*--end == ' ') 
-			*end = 0;
+		while(*--end == ' ') *end = '\0';
 
 		// cut left --
 		char* start = string;
@@ -59,9 +58,11 @@ public:
 
 		size = strlen(start);
 
-		for(int i = 0; i < size + 1; ++i)
+		for(uint i = 0; i < size + 1; ++i)
 			string[i] = start[i];
 	}
+
+	
 
 	/*$1- Fast util ----------------------------------------------------------*/
 	inline int is_empty() const

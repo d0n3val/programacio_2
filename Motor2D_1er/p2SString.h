@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include <assert.h>
+#include "p2Defs.h"
 
 #define TMP_STRING_SIZE	4096
 
@@ -196,6 +198,88 @@ public:
 	unsigned int GetCapacity() const
 	{
 		return size;
+	}
+
+	void Trim()
+	{
+		// cut right --
+		char* end = str + size;
+		while(*--end == ' ') *end = '\0';
+
+		// cut left --
+		char* start = str;
+		while(*++start == ' ');
+
+		uint s = strlen(start);
+
+		for(uint i = 0; i < s + 1; ++i)
+			str[i] = start[i];
+	}
+
+	uint Substitute(const char* src, const char *dst)
+	{
+		assert(src);
+		assert(dst);
+
+		uint instances = Find(src);
+
+		if(instances > 0)
+		{
+			uint src_len = strlen(src);
+			uint dst_len = strlen(dst);
+			uint diff = dst_len - src_len;
+			uint needed_size = 1 + strlen(str) + (diff * instances);
+
+			if(size < needed_size)
+			{
+				char* tmp = str;
+				Alloc(needed_size);
+				strcpy_s(str, size, tmp);
+				delete tmp;
+			}
+
+			for(uint i = 0; i < size - src_len; ++i)
+			{
+				if(strncmp(src, &str[i], src_len) == 0)
+				{
+					// make room
+					for(uint j = strlen(str) + diff; j > i + diff; --j)
+					{
+						str[j] = str[j - diff];
+					}
+
+					// copy
+					for(uint j = 0; j < dst_len; ++j)
+					{
+						str[i++] = dst[j];
+					}
+				}
+			}
+			
+		}
+
+		return instances;
+	}
+
+	uint Find(const char* string) const
+	{
+		uint ret = 0;
+		
+		if(string != NULL)
+		{
+			uint len = strlen(string);
+
+			for(uint i = 0; i < size - len; ++i)
+			{
+				if(strncmp(string, &str[i], len) == 0)
+				{
+					i += len;
+					++ret;
+				}
+			}
+		}
+
+		return ret;
 	}
 
 private:

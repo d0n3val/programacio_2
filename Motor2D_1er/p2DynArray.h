@@ -206,6 +206,15 @@ public:
 		return ret;
 	}
 
+	void Flip()
+	{
+		VALUE* start = &data[0];
+		VALUE* end = &data[num_elements-1];
+
+		while(start < end)
+			SWAP(*start++, *end--);
+	}
+
 private:
 
 	// Private Utils

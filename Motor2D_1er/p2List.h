@@ -178,6 +178,59 @@ public:
 	}
 
 	/**
+	* read / write operator access directly to a position in the list
+	*/
+	const tdata& operator  [](const unsigned int index) const
+	{
+		long                  pos;
+		p2List_item<tdata>*   p_item;
+		pos = 0;
+		p_item = start;
+
+		while(p_item != NULL)
+		{
+			if(pos == index)
+			{
+				break;
+			}
+
+			++pos;
+			p_item = p_item->next;
+		}
+
+		ASSERT(p_item);
+
+		return(p_item->data);
+	}
+
+	// Sort
+	int BubbleSort()
+	{
+		int ret = 0;
+		bool swapped = true;
+
+		while(swapped)
+		{
+			swapped = false;
+			p2List_item<tdata>* tmp = start;
+
+			while(tmp != NULL && tmp->next != NULL)
+			{
+				++ret;
+				if(tmp->data > tmp->next->data)
+				{
+					SWAP(tmp->data, tmp->next->data);
+					swapped = true;
+				}
+
+				tmp = tmp->next;
+			}
+		}
+
+		return ret;
+	}
+
+	/**
 	* returns the first apperance of data as index (-1 if not found)
 	*/
 	int find(const tdata& data)

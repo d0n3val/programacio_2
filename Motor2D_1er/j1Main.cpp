@@ -22,9 +22,43 @@ enum MainState
 	EXIT
 };
 
+int fibonnacci(uint pos)
+{
+	int n = 1;
+	int prev = 0;
+
+	for(uint i = 0; i < pos; ++i)
+	{
+		n += prev;
+		prev = n - prev;
+	}
+
+	return n;
+}
+
+int fibonnacci_ofuscated(uint pos)
+{
+	uint n = 1;
+	for(uint i = 0, p = i; i < pos; ++i, n += p, p = n - p);
+	return n;
+}
+
+int fibonnacci_recursive(uint pos)
+{
+	if(pos == 0 || pos == 1)
+		return 1;
+	else
+		return fibonnacci_recursive(pos - 1) + fibonnacci_recursive(pos - 2);
+}
+
+
 int main(int argc, char* args[])
 {
 	LOG("J1 engine starting ...");
+
+	int a = fibonnacci(10);
+	int b = fibonnacci_ofuscated(10);
+	int c = fibonnacci_recursive(10);
 
 	MainState state = CREATE;
 	int result = EXIT_FAILURE;
