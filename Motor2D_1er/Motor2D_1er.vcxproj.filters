@@ -150,6 +150,12 @@
     <ClInclude Include="p2Circle.h">
       <Filter>Programacio 2 ===========</Filter>
     </ClInclude>
+    <ClInclude Include="p2Stack2.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Qeue2.h">
+      <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Docs\SDL2\APIByCategory.html">

@@ -62,7 +62,7 @@ public:
 	/**
 	* Get Size
 	*/
-	unsigned int count()
+	unsigned int count() const
 	{
 		return size;
 	}
@@ -178,7 +178,7 @@ public:
 	}
 
 	/**
-	* read / write operator access directly to a position in the list
+	* const read operator access directly to a position in the list
 	*/
 	const tdata& operator  [](const unsigned int index) const
 	{
@@ -201,6 +201,44 @@ public:
 		ASSERT(p_item);
 
 		return(p_item->data);
+	}
+
+	/**
+	* const access to a node in a position in the list
+	*/
+	const p2List_item<tdata>* At(unsigned int index) const
+	{
+		long                  pos = 0;
+		p2List_item<tdata>*   p_item = start;
+
+		while(p_item != NULL)
+		{
+			if(pos++ == index)
+				break;
+
+			p_item = p_item->next;
+		}
+
+		return p_item;
+	}
+
+	/**
+	* access to a node in a position in the list
+	*/
+	p2List_item<tdata>* At(unsigned int index)
+	{
+		long                  pos = 0;
+		p2List_item<tdata>*   p_item = start;
+
+		while(p_item != NULL)
+		{
+			if(pos++ == index)
+				break;
+
+			p_item = p_item->next;
+		}
+
+		return p_item;
 	}
 
 	// Sort

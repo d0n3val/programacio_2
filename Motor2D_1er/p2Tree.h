@@ -213,7 +213,49 @@ public:
 
 	void InOrderIterative(p2List<p2TreeNode<tdata>*>* list)
 	{
+		p2Stack<p2TreeNode<tdata>*> stack;
+		p2TreeNode<tdata>* node = NULL;
+		p2DynArray<p2TreeNode<tdata>*> childs;
 
+		childs.PushBack(&trunk);
+
+		while(childs.Count() > 0 || stack.Pop(node))
+		{
+			if(childs.Count() > 0)
+			{
+				for(int i = childs.Count() - 1; i >= 0; --i)
+					stack.Push(childs[i]);
+				
+				node = childs[0];
+				childs.Clear();
+
+				// Add all the childs on the right
+				if(node != NULL)
+				{
+					p2List_item<p2TreeNode<tdata>*>* item = node->childs.start;
+					p2List_item<p2TreeNode<tdata>*>* end = node->childs.At(node->childs.count() / 2);
+
+					while(item != end)
+					{
+						childs.PushBack(item->data);
+						item = item->next;
+					}
+				}
+			}
+			else
+			{
+				list->add(node);
+
+				// Add all childs on the right
+				p2List_item<p2TreeNode<tdata>*>* item = node->childs.At(node->childs.count() / 2);
+
+				while(item != NULL)
+				{
+					childs.PushBack(item->data);
+					item = item->next;
+				}
+			}
+		}
 	}
 
 	void Add(const tdata& data, const tdata& parent)
