@@ -271,6 +271,36 @@ namespace UnitTest1
 			Assert::AreEqual((int)array[4], 8);
 		}
 
+		TEST_METHOD(DynArray_InsertArray)
+		{
+			p2DynArray<int> array(5);
+
+			array.PushBack(1);
+			array.PushBack(2);
+			array.PushBack(4);
+			array.PushBack(5);
+			array.PushBack(8);
+
+			p2DynArray<int> array2;
+
+			array2.PushBack(999);
+			array2.PushBack(999);
+			array2.PushBack(999);
+
+			bool b = array.Insert(array2, 2);
+
+			Assert::IsTrue(b);
+			Assert::AreEqual((int)array.Count(), 8);
+			Assert::AreEqual((int)array[0], 1);
+			Assert::AreEqual((int)array[1], 2);
+			Assert::AreEqual((int)array[2], 999);
+			Assert::AreEqual((int)array[3], 999);
+			Assert::AreEqual((int)array[4], 999);
+			Assert::AreEqual((int)array[5], 4);
+			Assert::AreEqual((int)array[6], 5);
+			Assert::AreEqual((int)array[7], 8);
+		}
+
 		// SWAP ----------------------------------------------
 		TEST_METHOD(swap_int)
 		{
@@ -453,6 +483,28 @@ namespace UnitTest1
 			p2List<int> mylist;
 			mylist.add(5);
 			Assert::AreEqual(mylist[0], 5);
+		}
+
+		TEST_METHOD(ListConcat)
+		{
+			p2List<int> mylist;
+			mylist.add(5);
+			mylist.add(5);
+			mylist.add(5);
+
+			p2List<int> mylist2;
+			mylist2.add(6);
+			mylist2.add(6);
+			mylist2.add(6);
+
+			mylist += mylist2;
+			
+			Assert::AreEqual(mylist[0], 5);
+			Assert::AreEqual(mylist[1], 5);
+			Assert::AreEqual(mylist[2], 5);
+			Assert::AreEqual(mylist[3], 6);
+			Assert::AreEqual(mylist[4], 6);
+			Assert::AreEqual(mylist[5], 6);
 		}
 
 		// p2Tree --------------------------------------------

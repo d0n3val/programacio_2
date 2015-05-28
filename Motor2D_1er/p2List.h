@@ -204,6 +204,22 @@ public:
 	}
 
 	/**
+	* const read operator access directly to a position in the list
+	*/
+	const p2List<tdata>& operator +=(const p2List<tdata>& other_list)
+	{
+		p2List_item<tdata>*   p_item = other_list.start;
+
+		while(p_item != NULL)
+		{
+			add(p_item->data);
+			p_item = p_item->next;
+		}
+
+		return(*this);
+	}
+
+	/**
 	* const access to a node in a position in the list
 	*/
 	const p2List_item<tdata>* At(unsigned int index) const

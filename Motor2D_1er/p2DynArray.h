@@ -101,6 +101,24 @@ public:
 		return true;
 	}
 
+	bool Insert(const p2DynArray<VALUE>& array, unsigned int position)
+	{
+		if(position > num_elements)
+			return false;
+
+		if(num_elements + array.num_elements > mem_capacity)
+			Alloc(num_elements + array.num_elements + 1);
+
+		for(unsigned int i = position; i < position + array.num_elements; ++i)
+		{
+			data[i + array.num_elements] = data[i];
+			data[i] = array[i - position];
+			++num_elements;
+		}
+
+		return true;
+	}
+
 	VALUE* At(unsigned int index)
 	{
 		VALUE* result = NULL;
