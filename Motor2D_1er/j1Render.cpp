@@ -65,14 +65,14 @@ bool j1Render::PreUpdate()
 
 bool j1Render::Update(float dt)
 {
-	int speed = 67;
+	float speed = 67.0f;
 
 	if(App->input->GetMouseButtonRepeat(SDL_BUTTON_LEFT) == true)
 	{
 		int x, y;
 		App->input->GetMouseMotion(x, y);
-		camera.x -= speed * x * dt;
-		camera.y -= speed * y * dt;
+		camera.x -= (int) (speed * float(x) * dt);
+		camera.y -= (int) (speed * float(y) * dt);
 	}
 
 	return true;

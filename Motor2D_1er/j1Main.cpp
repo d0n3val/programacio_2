@@ -43,7 +43,7 @@ int main(int argc, char* args[])
 			case CREATE:
 			LOG("CREATION PHASE ===============================");
 
-			j1 = new j1App((argc > 1) ? args[1] : "");
+			j1 = new j1App(argc, args);
 
 			if(j1 != NULL)
 				state = AWAKE;

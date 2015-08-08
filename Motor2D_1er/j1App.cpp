@@ -3,7 +3,7 @@
 #include "j1App.h"
 
 // Constructor
-j1App::j1App(const char* config_file)
+j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
 	quitting = false;
 	frames = 0;
@@ -11,7 +11,8 @@ j1App::j1App(const char* config_file)
 	last_fps = -1;
 	capped_ms = -1;
 	fps_counter = 0;
-	config.SetFile(config_file);
+	config.SetFile(args[1]);
+	fs = new j1FileSystem();
 	input = new j1Input();
 	win = new j1Window();
 	render = new j1Render();
@@ -20,7 +21,6 @@ j1App::j1App(const char* config_file)
 	audio = new j1Audio();
 	map = new j1Map();
 	entities = new j1EntityManager();
-	fs = new j1FileSystem();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -67,6 +67,9 @@ bool j1App::Awake()
 	{
 		capped_ms = 1000 / cap;
 	}
+
+	organization = config.GetString("App", "organization", "MyOrganization");
+	app_name = config.GetString("App", "app_name", "MyAppName");
 
 	p2List_item<j1Module*>* item;
 	item = modules.start;
@@ -243,3 +246,29 @@ bool j1App::CleanUp()
 	return ret;
 }
 
+// ---------------------------------------
+const char* j1App::GetOrganizationName() const
+{
+	return organization;
+}
+
+// ---------------------------------------
+const char* j1App::GetAppName() const
+{
+	return app_name;
+}
+
+// ---------------------------------------
+int j1App::GetArgc() const
+{
+	return argc;
+}
+
+// ---------------------------------------
+const char* j1App::GetArgv(int index) const
+{
+	if(index < argc)
+		return args[index];
+	else
+		return NULL;
+}

@@ -4,6 +4,7 @@
 #include "p2List.h"
 #include "p2RefBool.h"
 #include "j1Timer.h"
+#include "p2String.h"
 #include "j1IniReader.h"
 #include "j1Module.h"
 
@@ -23,7 +24,7 @@ class j1App
 public:
 
 	// Constructor
-	j1App(const char*);
+	j1App(int argc, char* args[]);
 
 	// Destructor
 	virtual ~j1App();
@@ -42,6 +43,11 @@ public:
 
 	// Add a new module to handle
 	void AddModule(j1Module* module);
+
+	const char* GetOrganizationName() const;
+	const char* GetAppName() const;
+	int GetArgc() const;
+	const char* GetArgv(int index) const;
 
 private:
 
@@ -88,6 +94,10 @@ private:
 	j1Timer				ms_timer;
 	j1Timer				fps_timer;
 	p2List<j1Module*>	modules;
+	p2String			organization;
+	p2String			app_name;
+	int					argc;
+	char**				args;
 };
 
 #endif
