@@ -16,6 +16,7 @@
 #include "j1Audio.h"
 #include "j1Map.h"
 #include "j1EntityManager.h"
+#include "j1FileSystem.h"
 
 class j1App
 {
@@ -79,6 +80,7 @@ public:
 	j1Audio*			audio;
 	j1Map*				map;
 	j1EntityManager*	entities;
+	j1FileSystem*		fs;
 
 private:
 

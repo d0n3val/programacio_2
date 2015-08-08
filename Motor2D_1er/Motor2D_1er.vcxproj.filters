@@ -49,6 +49,9 @@
     <ClCompile Include="j1EntityManager.cpp">
       <Filter>Projecte 1 ==============\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="j1FileSystem.cpp">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -155,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="p2Qeue2.h">
       <Filter>Programacio 2 ===========</Filter>
+    </ClInclude>
+    <ClInclude Include="j1FileSystem.h">
+      <Filter>Projecte 1 ==============\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

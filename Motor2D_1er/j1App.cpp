@@ -11,9 +11,7 @@ j1App::j1App(const char* config_file)
 	last_fps = -1;
 	capped_ms = -1;
 	fps_counter = 0;
-
 	config.SetFile(config_file);
-
 	input = new j1Input();
 	win = new j1Window();
 	render = new j1Render();
@@ -22,10 +20,11 @@ j1App::j1App(const char* config_file)
 	audio = new j1Audio();
 	map = new j1Map();
 	entities = new j1EntityManager();
+	fs = new j1FileSystem();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
-
+	AddModule(fs);
 	AddModule(input);
 	AddModule(win);
 	AddModule(render);
@@ -38,12 +37,22 @@ j1App::j1App(const char* config_file)
 
 // Destructor
 j1App::~j1App()
-{}
+{
+	// release modules
+	p2List_item<j1Module*>* item = modules.end;
+
+	while(item != NULL)
+	{
+		RELEASE(item->data);
+		item = item->prev;
+	}
+
+	modules.clear();
+}
 
 void j1App::AddModule(j1Module* module)
 {
 	ASSERT(module);
-
 	module->Init(this);
 	modules.add(module);
 }
@@ -52,16 +61,16 @@ void j1App::AddModule(j1Module* module)
 bool j1App::Awake()
 {
 	bool ret = true;
-
 	int cap = config.GetInt("App", "framerate_cap", -1);
+
 	if(cap > 0)
 	{
 		capped_ms = 1000 / cap;
 	}
 
 	p2List_item<j1Module*>* item;
-
 	item = modules.start;
+
 	while(item != NULL && ret == true)
 	{
 		ret = item->data->Awake();
@@ -75,10 +84,9 @@ bool j1App::Awake()
 bool j1App::Start()
 {
 	bool ret = true;
-
 	p2List_item<j1Module*>* item;
-
 	item = modules.start;
+
 	while(item != NULL && ret == true)
 	{
 		ret = item->data->Start();
@@ -92,19 +100,18 @@ bool j1App::Start()
 bool j1App::Update()
 {
 	bool ret = true;
-
 	PrepareUpdate();
-
 	ret = PreUpdate();
 
-	if(ret == true)
+	if(ret == true) {
 		ret = DoUpdate();
+	}
 
-	if(ret == true)
+	if(ret == true) {
 		ret = PostUpdate();
+	}
 
 	FinishUpdate();
-
 	return ret;
 }
 
@@ -119,8 +126,9 @@ void j1App::PrepareUpdate()
 void j1App::FinishUpdate()
 {
 	// In background mode leave some time for OS to do stuff
-	if(pause.Get() == true)
+	if(pause.Get() == true) {
 		SDL_Delay(33);
+	}
 
 	// Recap on framecount and fps
 	++frames;
@@ -136,17 +144,16 @@ void j1App::FinishUpdate()
 	last_frame_ms = ms_timer.Read();
 
 	// cap fps
-	if(last_frame_ms < capped_ms)
+	if(last_frame_ms < capped_ms) {
 		SDL_Delay(capped_ms - last_frame_ms);
+	}
 }
 
 // Call modules before each loop iteration
 bool j1App::PreUpdate()
 {
 	bool ret = true;
-
 	p2List_item<j1Module*>* item;
-
 	item = modules.start;
 	j1Module* pModule = NULL;
 
@@ -154,11 +161,13 @@ bool j1App::PreUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->active == false)
+		if(pModule->active == false) {
 			continue;
+		}
 
-		if(pause.Get() == true && pModule->update_on_pause == false)
+		if(pause.Get() == true && pModule->update_on_pause == false) {
 			continue;
+		}
 
 		ret = item->data->PreUpdate();
 	}
@@ -170,9 +179,7 @@ bool j1App::PreUpdate()
 bool j1App::DoUpdate()
 {
 	bool ret = true;
-
 	p2List_item<j1Module*>* item;
-
 	item = modules.start;
 	j1Module* pModule = NULL;
 
@@ -180,11 +187,13 @@ bool j1App::DoUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->active == false)
+		if(pModule->active == false) {
 			continue;
+		}
 
-		if(pause.Get() == true && pModule->update_on_pause == false)
+		if(pause.Get() == true && pModule->update_on_pause == false) {
 			continue;
+		}
 
 		ret = item->data->Update(dt);
 	}
@@ -196,9 +205,7 @@ bool j1App::DoUpdate()
 bool j1App::PostUpdate()
 {
 	bool ret = true;
-
 	p2List_item<j1Module*>* item;
-
 	item = modules.start;
 	j1Module* pModule = NULL;
 
@@ -206,11 +213,13 @@ bool j1App::PostUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->active == false)
+		if(pModule->active == false) {
 			continue;
+		}
 
-		if(pause.Get() == true && pModule->update_on_pause == false)
+		if(pause.Get() == true && pModule->update_on_pause == false) {
 			continue;
+		}
 
 		ret = item->data->PostUpdate();
 	}
@@ -222,24 +231,14 @@ bool j1App::PostUpdate()
 bool j1App::CleanUp()
 {
 	bool ret = true;
-
 	p2List_item<j1Module*>* item;
-
 	item = modules.end;
+
 	while(item != NULL && ret == true)
 	{
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}
-
-	// release modules
-	item = modules.end;
-	while(item != NULL)
-	{
-		RELEASE(item->data);
-		item = item->prev;
-	}
-	modules.clear();
 
 	return ret;
 }

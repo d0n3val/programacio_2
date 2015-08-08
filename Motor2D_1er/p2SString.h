@@ -200,6 +200,24 @@ public:
 		return size;
 	}
 
+	bool Cut(unsigned int begin, unsigned int end = 0)
+	{
+		uint len = Length();
+
+		if(end >= len || end == 0)
+			end = len - 1;
+
+		if(begin > len || end <= begin)
+			return false;
+
+		char* p1 = str + begin;
+		char* p2 = str + end + 1;
+
+		while(*p1++ = *p2++);
+
+		return true;
+	}
+
 	void Trim()
 	{
 		// cut right --

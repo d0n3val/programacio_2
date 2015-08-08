@@ -138,6 +138,21 @@ public:
 		}
 	}
 
+	tdata CalcAddition()
+	{
+		p2List_item<p2TreeNode*>* item = childs.start;
+		tdata result = data;
+
+		for(; item != NULL; item = item->next)
+		{
+			p2TreeNode* child = item->data;
+			
+			result += child->CalcAddition();
+		}
+
+		return result;
+	}
+
 };
 
 // Tree class -------------------------------------------------------
@@ -327,6 +342,31 @@ public:
 			if(child->parent)
 				child->parent->RemoveChild(child);
 		}
+	}
+
+	tdata CalcAdditionRecursive()
+	{
+		return trunk.CalcAddition();
+	}
+
+	tdata CalcAdditionIterative()
+	{
+		tdata result = 0;
+		p2Stack<p2TreeNode<tdata>*> stack;
+		p2TreeNode<tdata>* node = &trunk;
+
+		while(node != NULL || stack.Pop(node))
+		{
+			result += node->data;
+
+			p2List_item<p2TreeNode<tdata>*>* item = node->childs.end;
+			for(; item != node->childs.start; item = item->prev)
+				stack.Push(item->data);
+
+			node = (item != NULL) ? item->data : NULL;
+		}
+
+		return result;
 	}
 
 public:
