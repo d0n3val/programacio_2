@@ -21,7 +21,7 @@ j1Window::~j1Window()
 }
 
 // Called before render is available
-bool j1Window::Awake()
+bool j1Window::Awake(j1IniReader* conf)
 {
 	LOG("Init SDL window & surface");
 	bool ret = true;
@@ -34,27 +34,27 @@ bool j1Window::Awake()
 	else
 	{
 		//Create window
-		int width = App->config.GetInt("window", "width", SCREEN_WIDTH);
-		int height = App->config.GetInt("window", "height", SCREEN_HEIGHT);
-		title = App->config.GetString("window", "title", "No title");
+		int width = conf->GetInt("width", SCREEN_WIDTH);
+		int height = conf->GetInt("height", SCREEN_HEIGHT);
+		title = conf->GetString("title", "No title");
 		Uint32 flags = SDL_WINDOW_SHOWN;
 
-		if(App->config.GetBool("window", "fullscreen", false) == true)
+		if(conf->GetBool("fullscreen", false) == true)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN;
 		}
 
-		if(App->config.GetBool("window", "borderless", false) == true)
+		if(conf->GetBool("borderless", false) == true)
 		{
 			flags |= SDL_WINDOW_BORDERLESS;
 		}
 
-		if(App->config.GetBool("window", "resizable", false) == true)
+		if(conf->GetBool("resizable", false) == true)
 		{
 			flags |= SDL_WINDOW_RESIZABLE;
 		}
 
-		if(App->config.GetBool("window", "fullscreen_windowed", false) == true)
+		if(conf->GetBool("fullscreen_windowed", false) == true)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 		}

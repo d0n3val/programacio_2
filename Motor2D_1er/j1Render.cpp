@@ -5,7 +5,7 @@
 
 j1Render::j1Render() : j1Module()
 {
-	name.create("render");
+	name.create("renderer");
 	background.r = 0;
 	background.g = 0;
 	background.b = 0;
@@ -17,14 +17,14 @@ j1Render::~j1Render()
 {}
 
 // Called before render is available
-bool j1Render::Awake()
+bool j1Render::Awake(j1IniReader* conf)
 {
 	LOG("Create SDL rendering context");
 	bool ret = true;
 	// load flags
 	Uint32 flags = SDL_RENDERER_ACCELERATED;
 
-	if(App->config.GetBool("window", "vsync", false) == true)
+	if(conf->GetBool("vsync", false) == true)
 	{
 		flags |= SDL_RENDERER_PRESENTVSYNC;
 	}

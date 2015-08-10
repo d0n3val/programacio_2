@@ -22,7 +22,7 @@ public:
 	virtual ~j1EntityManager();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(j1IniReader* conf);
 
 	// Called before the first frame
 	bool Start();

@@ -15,7 +15,7 @@ j1Fonts::~j1Fonts()
 {}
 
 // Called before render is available
-bool j1Fonts::Awake()
+bool j1Fonts::Awake(j1IniReader* conf)
 {
 	LOG("Init True Type Font library");
 	bool ret = true;
@@ -27,8 +27,8 @@ bool j1Fonts::Awake()
 	}
 	else
 	{
-		const char* path = App->config.GetString("fonts", "default_font", DEFAULT_FONT);
-		int size = App->config.GetInt("fonts", "default_size", DEFAULT_FONT_SIZE);
+		const char* path = conf->GetString("default_font", DEFAULT_FONT);
+		int size = conf->GetInt("default_size", DEFAULT_FONT_SIZE);
 		default = Load(path, size);
 	}
 

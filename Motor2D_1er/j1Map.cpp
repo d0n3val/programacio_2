@@ -21,13 +21,13 @@ j1Map::~j1Map()
 {}
 
 // Called before render is available
-bool j1Map::Awake()
+bool j1Map::Awake(j1IniReader* conf)
 {
 	LOG("Loading Map");
 	bool ret = true;
-	folder.create(App->config.GetString("maps", "folder", "maps/"));
+	folder.create(conf->GetString("folder", "maps/"));
 
-	if(Load(App->config.GetString("maps", "map", "")) == true)
+	if(Load(conf->GetString("map", "")) == true)
 	{
 		map_loaded = true;
 		App->render->SetBackgroundColor(data.background_color);

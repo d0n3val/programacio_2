@@ -10,7 +10,7 @@
 
 j1EntityManager::j1EntityManager() : j1Module(), logic_updates_per_second(DEFAULT_LOGIC_PER_SECOND), accumulated_time(0.0f), entities(dummy)
 {
-	name.create("Entity Manager");
+	name.create("entities");
 	dummy = new j1Entity();
 	entities.trunk = dummy;
 }
@@ -20,11 +20,11 @@ j1EntityManager::~j1EntityManager()
 {}
 
 // Called before render is available
-bool j1EntityManager::Awake()
+bool j1EntityManager::Awake(j1IniReader* conf)
 {
 	LOG("Setting up Entity manager");
 	bool ret = true;
-	logic_updates_per_second = App->config.GetInt("entities", "updates_per_second ", DEFAULT_LOGIC_PER_SECOND);
+	logic_updates_per_second = conf->GetInt("updates_per_second ", DEFAULT_LOGIC_PER_SECOND);
 	update_ms_cycle = 1.0f / (float)logic_updates_per_second;
 	return ret;
 }

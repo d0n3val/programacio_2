@@ -24,7 +24,7 @@ public:
 	virtual ~j1FileSystem();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(j1IniReader* conf);
 
 	// Called before quitting
 	bool CleanUp();
@@ -32,6 +32,8 @@ public:
 	// Utility functions
 	bool AddPath(const char* path_or_zip);
 	bool Exists(const char* file) const;
+	bool IsDirectory(const char* file) const;
+	unsigned int Read(const char* file, char** buffer) const;
 
 private:
 

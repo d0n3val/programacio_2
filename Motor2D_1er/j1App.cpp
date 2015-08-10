@@ -11,7 +11,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	last_fps = -1;
 	capped_ms = -1;
 	fps_counter = 0;
-	config.SetFile(args[1]);
+
 	fs = new j1FileSystem();
 	input = new j1Input();
 	win = new j1Window();
@@ -61,22 +61,35 @@ void j1App::AddModule(j1Module* module)
 bool j1App::Awake()
 {
 	bool ret = true;
-	int cap = config.GetInt("App", "framerate_cap", -1);
+
+	char* buffer = NULL;
+	fs->AddPath("sf2/");
+	unsigned int s = fs->Read("config.ini", &buffer);
+	config.SetBuffer(buffer, s);
+	RELEASE(buffer);
+
+	config.SetSection("App");
+
+	int cap = config.GetInt("framerate_cap", -1);
 
 	if(cap > 0)
 	{
 		capped_ms = 1000 / cap;
 	}
 
-	organization = config.GetString("App", "organization", "MyOrganization");
-	app_name = config.GetString("App", "app_name", "MyAppName");
+	organization = config.GetString("organization", "MyOrganization");
+	app_name = config.GetString("app_name", "MyAppName");
 
 	p2List_item<j1Module*>* item;
 	item = modules.start;
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Awake();
+		if(config.SetSection(item->data->name.c_str()) == true)
+			ret = item->data->Awake(&config);
+		else
+			ret = item->data->Awake(NULL);
+
 		item = item->next;
 	}
 

@@ -18,7 +18,7 @@ j1Input::~j1Input()
 {}
 
 // Called before render is available
-bool j1Input::Awake()
+bool j1Input::Awake(j1IniReader* conf)
 {
 	LOG("Init SDL event system");
 	bool ret = true;

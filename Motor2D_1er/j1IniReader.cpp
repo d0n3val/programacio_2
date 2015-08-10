@@ -1,49 +1,63 @@
-#include <Windows.h>
-#include <string.h>
 #include "p2Assert.h"
 #include "j1IniReader.h"
+#include "IniParser\iniparser.h"
 
 // ---------------------------------------------
-j1IniReader::j1IniReader() : tmp(MID_STR)
-{}
+j1IniReader::j1IniReader() : dict(NULL)
+{
+	section[0] = '\0';
+}
+
+j1IniReader::~j1IniReader()
+{
+	if(dict != NULL)
+		iniparser_freedict(dict);
+}
 
 // ---------------------------------------------
-void j1IniReader::SetFile(const char* file)
+void j1IniReader::SetBuffer(const char* buffer, unsigned int lenght)
 {
 	ASSERT(file);
 
-	file_name = file;
+	if(dict != NULL)
+		iniparser_freedict(dict);
+
+	dict = iniparser_load_buffer(buffer, lenght);
 }
 
 // ---------------------------------------------
-const p2String& j1IniReader::GetString(const char* section, const char* key, const char* default)
+bool j1IniReader::SetSection(const char* section)
 {
-	GetPrivateProfileString(section, key, default, tmp.c_str(), MID_STR, file_name);
-	tmp.update();
+	ASSERT(section);
+	
+	sprintf_s(tmp, 80, "%s", section);
 
-	return tmp;
-}
-
-// ---------------------------------------------
-int j1IniReader::GetInt(const char* section, const char* key, int default)
-{
-	return GetPrivateProfileInt(section, key, default, file_name);
-}
-
-// ---------------------------------------------
-bool j1IniReader::GetBool(const char* section, const char* key, bool default)
-{
-	GetString(section, key, "false");
-
-	if(tmp.compare_no_case("true"))
+	if(iniparser_find_entry(dict, tmp) == 1)
 	{
+		strcpy_s(this->section, 80, section);
 		return true;
 	}
 
-	if(tmp.compare_no_case("false"))
-	{
-		return false;
-	}
+	return false;
+}
 
-	return default;
+// ---------------------------------------------
+const char* j1IniReader::GetString(const char* key, char* default)
+{
+	sprintf_s(tmp, 80, "%s:%s", section, key);
+	return iniparser_getstring(dict, tmp, default);
+}
+
+// ---------------------------------------------
+int j1IniReader::GetInt(const char* key, int default)
+{
+	sprintf_s(tmp, 80, "%s:%s", section, key);
+	return iniparser_getint(dict, tmp, default);
+}
+
+// ---------------------------------------------
+bool j1IniReader::GetBool(const char* key, bool default)
+{
+	sprintf_s(tmp, 80, "%s:%s", section, key);
+	return iniparser_getboolean(dict, tmp, default) != 0;
 }

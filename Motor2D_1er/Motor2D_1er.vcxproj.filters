@@ -52,6 +52,12 @@
     <ClCompile Include="j1FileSystem.cpp">
       <Filter>Projecte 1 ==============\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="IniParser\dictionary.cpp">
+      <Filter>Projecte 1 ==============\Tools\External\IniParser</Filter>
+    </ClCompile>
+    <ClCompile Include="IniParser\iniparser.cpp">
+      <Filter>Projecte 1 ==============\Tools\External\IniParser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -162,6 +168,12 @@
     <ClInclude Include="j1FileSystem.h">
       <Filter>Projecte 1 ==============\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="IniParser\dictionary.h">
+      <Filter>Projecte 1 ==============\Tools\External\IniParser</Filter>
+    </ClInclude>
+    <ClInclude Include="IniParser\iniparser.h">
+      <Filter>Projecte 1 ==============\Tools\External\IniParser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Docs\SDL2\APIByCategory.html">
@@ -213,6 +225,9 @@
     </Filter>
     <Filter Include="Docs\snippets">
       <UniqueIdentifier>{5e946775-4d35-4606-8865-9e2558771876}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projecte 1 ==============\Tools\External\IniParser">
+      <UniqueIdentifier>{d41cf0c2-c28f-4e50-9f81-e4e9db378e86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

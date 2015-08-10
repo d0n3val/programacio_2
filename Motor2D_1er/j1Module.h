@@ -9,6 +9,7 @@
 #include "p2String.h"
 
 class j1App;
+class j1IniReader;
 
 class j1Module
 {
@@ -24,7 +25,7 @@ public:
 	}
 
 	// Called before render is available
-	virtual bool Awake()
+	virtual bool Awake(j1IniReader* conf)
 	{
 		return true;
 	}

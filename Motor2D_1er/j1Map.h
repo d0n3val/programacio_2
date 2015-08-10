@@ -92,7 +92,7 @@ public:
 	virtual ~j1Map();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(j1IniReader* conf);
 
 	// Called each loop iteration
 	bool PreUpdate();

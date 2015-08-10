@@ -14,7 +14,7 @@ public:
 	virtual ~j1Render();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(j1IniReader* conf);
 
 	// Called before the first frame
 	bool Start();

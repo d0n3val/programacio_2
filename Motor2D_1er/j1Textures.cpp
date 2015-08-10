@@ -16,7 +16,7 @@ j1Textures::~j1Textures()
 {}
 
 // Called before render is available
-bool j1Textures::Awake()
+bool j1Textures::Awake(j1IniReader* conf)
 {
 	LOG("Init Image library");
 	bool ret = true;

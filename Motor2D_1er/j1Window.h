@@ -14,7 +14,7 @@ public:
 	virtual ~j1Window();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(j1IniReader* conf);
 
 	// Called each loop iteration
 	bool Update(float dt);

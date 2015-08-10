@@ -16,7 +16,7 @@ public:
 	virtual ~j1Audio();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(j1IniReader* conf);
 
 	// Called before quitting
 	bool CleanUp();
