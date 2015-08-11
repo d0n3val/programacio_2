@@ -130,20 +130,28 @@ bool j1Map::CleanUp()
 	}
 
 	data.layers.clear();
+	map_file.reset();
+
 	return true;
 }
 
 // Load new map
-bool j1Map::Load(p2String path)
+bool j1Map::Load(const char* file_name)
 {
 	bool ret = true;
-	p2String tmp("%s%s", folder.c_str(), path.c_str());
+	p2String tmp("%s%s", folder.c_str(), file_name);
 
-	pugi::xml_parse_result result = map_file.load_file(tmp);
+	//pugi::xml_parse_result result = map_file.load_file(tmp);
+
+	char* buf;
+	int size = App->fs->Load(tmp, &buf);
+	pugi::xml_parse_result result = map_file.load_buffer(buf, size);
+
+	RELEASE(buf);
 
 	if(result == NULL)
 	{
-		LOG("Could not load map xml file %s. pugi error: %s", tmp.c_str(), result.description());
+		LOG("Could not load map xml file %s. pugi error: %s", file_name, result.description());
 		ret = false;
 	}
 
@@ -189,7 +197,7 @@ bool j1Map::Load(p2String path)
 
 	if(ret == true)
 	{
-		LOG("Successfully parsed map XML file: %s", path);
+		LOG("Successfully parsed map XML file: %s", file_name);
 		LOG("width: %d height: %d", data.width, data.height);
 		LOG("tile_width: %d tile_height: %d", data.tile_width, data.tile_height);
 		LOG("Tileset ----");

@@ -103,7 +103,7 @@ public:
 	bool CleanUp();
 
 	// Load new map
-	bool Load(p2String path);
+	bool Load(const char* path);
 
 	SDL_Rect GetTileRect(int id);
 

@@ -3,22 +3,15 @@
 
 #include "j1Module.h"
 
-struct PHYSFS_file;
+struct SDL_RWops;
 
-class file
-{
-	char name[256];
-	unsigned long GetSize() const;
-
-private:
-	PHYSFS_file* f;
-};
+int close_sdl_rwops(SDL_RWops *rw);
 
 class j1FileSystem : public j1Module
 {
 public:
 
-	j1FileSystem();
+	j1FileSystem(const char* game_path);
 
 	// Destructor
 	virtual ~j1FileSystem();
@@ -33,7 +26,8 @@ public:
 	bool AddPath(const char* path_or_zip);
 	bool Exists(const char* file) const;
 	bool IsDirectory(const char* file) const;
-	unsigned int Read(const char* file, char** buffer) const;
+	unsigned int Load(const char* file, char** buffer) const;
+	SDL_RWops* Load(const char* file) const;
 
 private:
 

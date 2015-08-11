@@ -12,7 +12,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	capped_ms = -1;
 	fps_counter = 0;
 
-	fs = new j1FileSystem();
+	fs = new j1FileSystem(argc > 0 ? args[1] : "./");
 	input = new j1Input();
 	win = new j1Window();
 	render = new j1Render();
@@ -62,23 +62,10 @@ bool j1App::Awake()
 {
 	bool ret = true;
 
-	char* buffer = NULL;
-	fs->AddPath("sf2/");
-	unsigned int s = fs->Read("config.ini", &buffer);
+	char* buffer;
+	unsigned int s = fs->Load("config.ini", &buffer);
 	config.SetBuffer(buffer, s);
 	RELEASE(buffer);
-
-	config.SetSection("App");
-
-	int cap = config.GetInt("framerate_cap", -1);
-
-	if(cap > 0)
-	{
-		capped_ms = 1000 / cap;
-	}
-
-	organization = config.GetString("organization", "MyOrganization");
-	app_name = config.GetString("app_name", "MyAppName");
 
 	p2List_item<j1Module*>* item;
 	item = modules.start;
@@ -92,6 +79,19 @@ bool j1App::Awake()
 
 		item = item->next;
 	}
+
+	// We configure APp the last to allow fs to self.configure
+	config.SetSection("App");
+
+	int cap = config.GetInt("framerate_cap", -1);
+
+	if(cap > 0)
+	{
+		capped_ms = 1000 / cap;
+	}
+
+	organization = config.GetString("organization", "MyOrganization");
+	app_name = config.GetString("app_name", "MyAppName");
 
 	return ret;
 }

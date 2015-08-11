@@ -6,7 +6,7 @@
 
 #pragma comment( lib, "PhysFS/libx86/physfs.lib" )
 
-j1FileSystem::j1FileSystem() : j1Module()
+j1FileSystem::j1FileSystem(const char* game_path) : j1Module()
 {
 	name.create("file_system");
 
@@ -14,6 +14,8 @@ j1FileSystem::j1FileSystem() : j1Module()
 	char* base_path = SDL_GetBasePath();
 	PHYSFS_init(base_path);
 	SDL_free(base_path);
+
+	AddPath(game_path);
 }
 
 // Destructor
@@ -52,7 +54,7 @@ bool j1FileSystem::AddPath(const char* path_or_zip)
 {
 	bool ret = false;
 
-	if(PHYSFS_mount(path_or_zip, NULL, 0) == 0)
+	if(PHYSFS_mount(path_or_zip, NULL, 1) == 0)
 		LOG("File System error while adding a path or zip: %s\n", PHYSFS_getLastError());
 	else
 		ret = true;
@@ -73,7 +75,7 @@ bool j1FileSystem::IsDirectory(const char* file) const
 }
 
 // Read a whole file and put it in a new buffer
-unsigned int j1FileSystem::Read(const char* file, char** buffer) const
+unsigned int j1FileSystem::Load(const char* file, char** buffer) const
 {
 	unsigned int ret = 0;
 
@@ -103,4 +105,29 @@ unsigned int j1FileSystem::Read(const char* file, char** buffer) const
 		LOG("File System error while opening file %s: %s\n", file, PHYSFS_getLastError());
 
 	return ret;
+}
+
+// Read a whole file and put it in a new buffer
+SDL_RWops* j1FileSystem::Load(const char* file) const
+{
+	char* buffer;
+	int size = Load(file, &buffer);
+
+	if(size > 0)
+	{
+		SDL_RWops* r = SDL_RWFromConstMem(buffer, size);
+		if(r != NULL)
+			r->close = close_sdl_rwops;
+
+		return r;
+	}
+	else
+		return NULL;
+}
+
+int close_sdl_rwops(SDL_RWops *rw)
+{
+	RELEASE(rw->hidden.mem.base);
+	SDL_FreeRW(rw);
+	return 0;
 }

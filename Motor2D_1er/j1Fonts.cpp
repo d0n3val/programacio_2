@@ -54,7 +54,9 @@ bool j1Fonts::CleanUp()
 // Load new texture from file path
 TTF_Font* const j1Fonts::Load(const char* path, int size)
 {
-	TTF_Font* font = TTF_OpenFont(path, size);
+	//TTF_Font* font = TTF_OpenFont(path, size);
+
+	TTF_Font* font = TTF_OpenFontRW(App->fs->Load(path), 1, size);
 
 	if(font == NULL)
 	{
