@@ -16,6 +16,24 @@ j1Render::j1Render() : j1Module()
 j1Render::~j1Render()
 {}
 
+// Load Game State
+bool j1Render::LoadGameState(j1Serialization* serial)
+{
+	camera.x = serial->LoadInt("cam_x");
+	camera.y = serial->LoadInt("cam_y");
+
+	return true;
+}
+
+// Save Game State
+bool j1Render::SaveGameState(j1Serialization* serial)
+{
+	serial->SaveInt("cam_x", camera.x);
+	serial->SaveInt("cam_y", camera.y);
+
+	return true;
+}
+
 // Called before render is available
 bool j1Render::Awake(j1IniReader* conf)
 {
@@ -65,6 +83,16 @@ bool j1Render::PreUpdate()
 
 bool j1Render::Update(float dt)
 {
+	if(App->input->GetKeyDown(SDLK_s))
+	{
+		App->serial->SaveGameState("savegame.xml");
+	}
+
+	if(App->input->GetKeyDown(SDLK_l))
+	{
+		App->serial->LoadGameState("savegame.xml");
+	}
+
 	float speed = 67.0f;
 
 	if(App->input->GetMouseButtonRepeat(SDL_BUTTON_LEFT) == true)

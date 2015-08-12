@@ -27,6 +27,10 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// Game State
+	bool LoadGameState(j1Serialization* serial);
+	bool SaveGameState(j1Serialization* serial);
+
 	// Blit
 	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section = NULL);
 

@@ -131,3 +131,27 @@ int close_sdl_rwops(SDL_RWops *rw)
 	SDL_FreeRW(rw);
 	return 0;
 }
+
+// Save a whole buffer to disk
+unsigned int j1FileSystem::Save(const char* file, const char* buffer, unsigned int size) const
+{
+	unsigned int ret = 0;
+
+	PHYSFS_file* fs_file = PHYSFS_openWrite(file);
+
+	if(fs_file != NULL)
+	{
+		unsigned int written = PHYSFS_write(fs_file, (const void*)buffer, 1, size);
+		if(written != size)
+			LOG("File System error while writing to file %s: %s\n", file, PHYSFS_getLastError());
+		else
+			ret = written;
+
+		if(PHYSFS_close(fs_file) == 0)
+			LOG("File System error while closing file %s: %s\n", file, PHYSFS_getLastError());
+	}
+	else
+		LOG("File System error while opening file %s: %s\n", file, PHYSFS_getLastError());
+
+	return ret;
+}

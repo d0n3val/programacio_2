@@ -10,6 +10,7 @@
 
 class j1App;
 class j1IniReader;
+class j1Serialization;
 
 class j1Module
 {
@@ -56,6 +57,18 @@ public:
 
 	// Called before quitting
 	virtual bool CleanUp()
+	{
+		return true;
+	}
+
+	// Called to load a game state
+	virtual bool LoadGameState(j1Serialization* serial)
+	{
+		return true;
+	}
+
+	// Called to save a game state
+	virtual bool SaveGameState(j1Serialization* serial)
 	{
 		return true;
 	}

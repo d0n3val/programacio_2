@@ -42,6 +42,12 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// Load Game State
+	bool LoadGameState();
+
+	// Save Game State
+	bool SaveGameState();
+
 	// Add a new module to handle
 	void AddModule(j1Module* module);
 
@@ -88,7 +94,7 @@ public:
 	j1Map*				map;
 	j1EntityManager*	entities;
 	j1FileSystem*		fs;
-	j1Serialization*	save;
+	j1Serialization*	serial;
 
 private:
 

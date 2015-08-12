@@ -141,8 +141,6 @@ bool j1Map::Load(const char* file_name)
 	bool ret = true;
 	p2String tmp("%s%s", folder.c_str(), file_name);
 
-	//pugi::xml_parse_result result = map_file.load_file(tmp);
-
 	char* buf;
 	int size = App->fs->Load(tmp, &buf);
 	pugi::xml_parse_result result = map_file.load_buffer(buf, size);
@@ -384,7 +382,7 @@ bool j1Map::LoadTilesetTerrains()
 
 	if(terrains == NULL)
 	{
-		LOG("Map does not contain terrin type definitions");
+		LOG("Map does not contain terrain type definitions");
 		//LOG("Error parsing tileset xml file: Cannot find 'terraintypes' tag.");
 		//ret = false;
 	}

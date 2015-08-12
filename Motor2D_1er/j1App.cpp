@@ -21,12 +21,12 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new j1Audio();
 	map = new j1Map();
 	entities = new j1EntityManager();
-	save = new j1Serialization();
+	serial = new j1Serialization();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(fs);
-	AddModule(save);
+	AddModule(serial);
 	AddModule(input);
 	AddModule(win);
 	AddModule(render);
@@ -224,7 +224,6 @@ bool j1App::PostUpdate()
 {
 	bool ret = true;
 	p2List_item<j1Module*>* item;
-	item = modules.start;
 	j1Module* pModule = NULL;
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
@@ -244,6 +243,37 @@ bool j1App::PostUpdate()
 
 	return ret;
 }
+
+// Call all modules to load a game state
+bool j1App::LoadGameState()
+{
+	bool ret = true;
+	p2List_item<j1Module*>* item = modules.start;
+
+	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	{
+		if(serial->SetLoadSection(item->data->name))
+			ret = item->data->LoadGameState(serial);
+	}
+
+	return ret;
+}
+
+// Call all modules to save their game state
+bool j1App::SaveGameState()
+{
+	bool ret = true;
+	p2List_item<j1Module*>* item = modules.start;
+
+	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	{
+		serial->SetWriteSection(item->data->name);
+		ret = item->data->SaveGameState(serial);
+	}
+
+	return ret;
+}
+
 
 // Called before quitting
 bool j1App::CleanUp()
