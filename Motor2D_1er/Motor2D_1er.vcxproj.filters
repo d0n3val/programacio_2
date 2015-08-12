@@ -58,6 +58,9 @@
     <ClCompile Include="IniParser\iniparser.cpp">
       <Filter>Projecte 1 ==============\Tools\External\IniParser</Filter>
     </ClCompile>
+    <ClCompile Include="j1Serialization.cpp">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="IniParser\iniparser.h">
       <Filter>Projecte 1 ==============\Tools\External\IniParser</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Serialization.h">
+      <Filter>Projecte 1 ==============\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

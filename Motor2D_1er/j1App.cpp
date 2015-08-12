@@ -21,10 +21,12 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new j1Audio();
 	map = new j1Map();
 	entities = new j1EntityManager();
+	save = new j1Serialization();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(fs);
+	AddModule(save);
 	AddModule(input);
 	AddModule(win);
 	AddModule(render);
@@ -80,7 +82,7 @@ bool j1App::Awake()
 		item = item->next;
 	}
 
-	// We configure APp the last to allow fs to self.configure
+	// We configure App the last to allow fs to self.configure
 	config.SetSection("App");
 
 	int cap = config.GetInt("framerate_cap", -1);

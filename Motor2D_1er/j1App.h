@@ -18,6 +18,7 @@
 #include "j1Map.h"
 #include "j1EntityManager.h"
 #include "j1FileSystem.h"
+#include "j1Serialization.h"
 
 class j1App
 {
@@ -87,6 +88,7 @@ public:
 	j1Map*				map;
 	j1EntityManager*	entities;
 	j1FileSystem*		fs;
+	j1Serialization*	save;
 
 private:
 
