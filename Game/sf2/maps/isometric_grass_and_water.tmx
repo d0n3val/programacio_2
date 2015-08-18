@@ -9,7 +9,11 @@
    <terrain name="Water" tile="22"/>
   </terraintypes>
   <tile id="0" terrain="0,0,0,0"/>
-  <tile id="1" terrain="0,0,0,0"/>
+  <tile id="1" terrain="0,0,0,0">
+   <properties>
+    <property name="test" value="89"/>
+   </properties>
+  </tile>
   <tile id="2" terrain="0,0,0,0"/>
   <tile id="3" terrain="0,0,0,0"/>
   <tile id="4" terrain="0,0,0,1"/>

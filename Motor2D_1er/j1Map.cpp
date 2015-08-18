@@ -78,7 +78,7 @@ int Properties::Get(const char* value, int default_value) const
 
 	while(item)
 	{
-		if(item->data->name.compare_no_case(value))
+		if(item->data->name == value)
 			return item->data->value;
 		item = item->next;
 	}
@@ -467,8 +467,8 @@ bool j1Map::LoadTilesetTileTypes(pugi::xml_node& tileset_node, TileSet* set)
 
 	for(tile = tileset_node.child("tile"); tile; tile = tile.next_sibling("tile"))
 	{
-		TileType tile_type;
-		tile_type.id = tile.attribute("id").as_int();
+		TileType* tile_type = new TileType();
+		tile_type->id = tile.attribute("id").as_int();
 		char types[MID_STR];
 		strncpy_s(types, tile.attribute("terrain").as_string(), MID_STR);
 		char* tmp = NULL;
@@ -481,19 +481,19 @@ bool j1Map::LoadTilesetTileTypes(pugi::xml_node& tileset_node, TileSet* set)
 			switch(i)
 			{
 				case 0:
-				tile_type.top_left = &set->terrain_types[atoi(item)];
+				tile_type->top_left = &set->terrain_types[atoi(item)];
 				break;
 
 				case 1:
-				tile_type.top_right = &set->terrain_types[atoi(item)];
+				tile_type->top_right = &set->terrain_types[atoi(item)];
 				break;
 
 				case 2:
-				tile_type.bottom_left = &set->terrain_types[atoi(item)];
+				tile_type->bottom_left = &set->terrain_types[atoi(item)];
 				break;
 
 				case 3:
-				tile_type.bottom_right = &set->terrain_types[atoi(item)];
+				tile_type->bottom_right = &set->terrain_types[atoi(item)];
 				break;
 			}
 
@@ -501,14 +501,29 @@ bool j1Map::LoadTilesetTileTypes(pugi::xml_node& tileset_node, TileSet* set)
 			++i;
 		}
 
+		LoadProperties(tile, tile_type->properties);
+
+		//Load any properties found
+
+
 		set->tile_types.add(tile_type);
+		
 		/*
 		LOG("tile id %d on terrains: %s %s %s %s",
-		tile_type.id,
-		tile_type.top_left->name,
-		tile_type.top_right->name,
-		tile_type.bottom_left->name,
-		tile_type.bottom_right->name);*/
+		tile_type->id,
+		tile_type->top_left->name,
+		tile_type->top_right->name,
+		tile_type->bottom_left->name,
+		tile_type->bottom_right->name);
+
+		p2List_item<Property*>* it = tile_type->properties.list.start;
+
+		while(it)
+		{
+			LOG("--> %i: %s", it->data->value, it->data->name);
+			it = it->next;
+		}
+		*/
 	}
 
 	return ret;
@@ -579,7 +594,7 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 		{
 			Property* p = new Property();
 
-			p->name = prop.attribute("name").as_string();
+			//p->name = prop.attribute("name").as_string();
 			p->value = prop.attribute("value").as_int();
 
 			properties.list.add(p);

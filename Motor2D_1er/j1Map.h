@@ -4,6 +4,7 @@
 #include "PugiXml/src/pugixml.hpp"
 #include "j1Textures.h"
 #include "p2List.h"
+#include "p2SString.h"
 #include "j1Module.h"
 
 enum MapTypes
@@ -20,6 +21,33 @@ struct TerrainType
 	int	tile;
 };
 
+struct Property
+{
+	p2SString name;
+	int value;
+};
+
+struct Properties
+{
+	~Properties()
+	{
+		p2List_item<Property*>* item;
+		item = list.start;
+
+		while(item != NULL)
+		{
+			RELEASE(item->data);
+			item = item->next;
+		}
+
+		list.clear();
+	}
+
+	int Get(const char* name, int default_value = 0) const;
+
+	p2List<Property*>	list;
+};
+
 struct TileType
 {
 	int id;
@@ -27,19 +55,7 @@ struct TileType
 	TerrainType* top_right;
 	TerrainType* bottom_left;
 	TerrainType* bottom_right;
-};
-
-struct Property
-{
-	p2String name;
-	int value;
-};
-
-struct Properties
-{
-	int Get(const char* name, int default_value = 0) const;
-
-	p2List<Property*>	list;
+	Properties properties;
 };
 
 struct TileSet
@@ -47,6 +63,16 @@ struct TileSet
 	~TileSet()
 	{
 		terrain_types.clear();
+
+		p2List_item<TileType*>* item;
+		item = tile_types.start;
+
+		while(item != NULL)
+		{
+			RELEASE(item->data);
+			item = item->next;
+		}
+
 		tile_types.clear();
 	}
 
@@ -66,7 +92,7 @@ struct TileSet
 	int					offset_x;
 	int					offset_y;
 	p2List<TerrainType>	terrain_types;
-	p2List<TileType>	tile_types;
+	p2List<TileType*>	tile_types;
 };
 
 struct MapLayer
