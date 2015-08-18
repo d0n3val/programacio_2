@@ -39,6 +39,11 @@
  </tileset>
  <tileset firstgid="25" name="meta" tilewidth="64" tileheight="64">
   <image source="meta.png" width="128" height="64"/>
+  <tile id="0">
+   <properties>
+    <property name="walkable" value="255"/>
+   </properties>
+  </tile>
   <tile id="1">
    <properties>
     <property name="walkable" value="0"/>
@@ -48,6 +53,7 @@
  <layer name="Tile Layer 1" width="25" height="25">
   <properties>
    <property name="Draw" value="1"/>
+   <property name="Walkability" value="0"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJx1lttywjAMROVgyqVtAoFC/v9L68xoh5PFPGhIYktrrVYyS0QszZ7Nvpvd0n7y24L1Q7MhrTSreN/le821HZ7lv9qYa6sdE0cYs/kX7PXYwtfaevYp7WDrd+SnHByjYr/npP1zZ4/elcuM71rjeckdc5KNHX75fMwc9s2uzb6AsYstJzwrv5/Tz89SLIZy8v203llV8xl7yMU+462/v81OqA114/UhrzUxRqwprnh6ZGzp2PNQfPqRu/X9hnMV8F/xLg1L42erDf2oaa2RI2qPtbgbhmw2H69nMUxx/gVccXdC3AW/o/HV60vW59Lhu8arDxmfGIPFUV1qbLVQEIs4PlOeHQxqVjmzr5mLYsmf+5Qj5yM1r3Ne4p1D5VcMh3qWZibLx2fYkBhPYOv81I9wbrGd45zFU7zrndpwDjkHXXfej9zHc3EG+D3AWcCZMJif7hTnVxr6i9edtoBDz8N7kxqbY6sN9gJnsnqIOqCme7Un76579sIV8dccHvHqZefH76BP9wjzkVapM2rL+5/8cR6QS9eh8p2AT12y5oO9+7yh5hzLZypnHX29/pzB9PE7bOg8Mza5KvGu4R7mp/89zqvr7x+TnxEn
@@ -56,6 +62,7 @@
  <layer name="Meta" width="25" height="25">
   <properties>
    <property name="Draw" value="1"/>
+   <property name="Walkability" value="1"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJzllMENwDAIA5kj+w/aBSCcMWoftZRHlMABsXIi4sA1VZXnDUZ3pjJIDY4ow+mHxjmcW8yWxyo/qQxSa7fvONv+dmd2m8Mmg85q+i4qp8rxFSPLRWtQGNHcUWZBpdSk+o3edzytMLIYooyhenLyr1CvOYwbN+t3i/E3PWKwFdc=

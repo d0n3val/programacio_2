@@ -119,6 +119,8 @@ bool j1Input::PreUpdate()
 			case SDL_MOUSEMOTION:
 			mouse_motion_x = event.motion.xrel;
 			mouse_motion_y = event.motion.yrel;
+			mouse_x = event.motion.x;
+			mouse_y = event.motion.y;
 			//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
 			break;
 		}
@@ -189,6 +191,12 @@ bool j1Input::GetMouseButtonRepeat(int code)
 bool j1Input::GetMouseButtonUp(int code)
 {
 	return mouse_buttons[code - 1] == KS_UP;
+}
+
+void j1Input::GetMousePosition(int& x, int& y)
+{
+	x = mouse_x;
+	y = mouse_y;
 }
 
 void j1Input::GetMouseMotion(int& x, int& y)

@@ -81,7 +81,22 @@ bool j1Window::PreUpdate()
 {
 	if(App->last_fps >= 0)
 	{
-		final_title.create("%s - %d fps (%d/%d ms)", title.c_str(), App->last_fps, App->last_frame_ms, App->capped_ms);
+		int x, y;
+		App->input->GetMousePosition(x, y);
+
+		p2Point<int> rel = App->render->ScreenToWorld(x, y);
+		p2Point<int> p = App->map->WorldToMap(rel.x, rel.y);
+		
+		final_title.create("%s - %d fps (%d/%d ms) mouse:%d,%d cam:%d,%d rel:%d,%d cell:%d,%d", 
+			title.c_str(), 
+			App->last_fps, 
+			App->last_frame_ms, 
+			App->capped_ms, 
+			x, y,
+			App->render->camera.x, App->render->camera.y,
+			rel.x, rel.y,
+			p.x, p.y
+			);
 		SDL_SetWindowTitle(window, final_title.c_str());
 	}
 	else

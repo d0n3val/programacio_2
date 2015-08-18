@@ -19,6 +19,7 @@
 #include "j1EntityManager.h"
 #include "j1FileSystem.h"
 #include "j1Serialization.h"
+#include "j1PathFinding.h"
 
 class j1App
 {
@@ -95,6 +96,7 @@ public:
 	j1EntityManager*	entities;
 	j1FileSystem*		fs;
 	j1Serialization*	serial;
+	j1PathFinding*		pathfinding;
 
 private:
 

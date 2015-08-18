@@ -57,7 +57,7 @@ public:
 	bool GetWindowEvent(int code);
 
 	// Get mouse / axis position
-	//bool GetMousePosition(int &x, int &y);
+	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
 
 	bool GetMouseButtonDown(int code);
@@ -73,6 +73,8 @@ private:
 	j1KeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
 	int			mouse_motion_x;
 	int			mouse_motion_y;
+	int			mouse_x;
+	int			mouse_y;
 };
 
 #endif // __j1INPUT_H__

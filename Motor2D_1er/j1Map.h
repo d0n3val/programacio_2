@@ -4,7 +4,8 @@
 #include "PugiXml/src/pugixml.hpp"
 #include "j1Textures.h"
 #include "p2List.h"
-#include "p2SString.h"
+#include "p2String.h"
+#include "p2Point.h"
 #include "j1Module.h"
 
 enum MapTypes
@@ -23,7 +24,7 @@ struct TerrainType
 
 struct Property
 {
-	p2SString name;
+	p2String name;
 	int value;
 };
 
@@ -76,6 +77,7 @@ struct TileSet
 		tile_types.clear();
 	}
 
+	TileType* GetTileType(int id) const;
 	SDL_Rect GetTileRect(int id) const;
 
 	p2String			name;
@@ -155,6 +157,9 @@ public:
 	bool Load(const char* path);
 
 	TileSet* GetTilesetFromTileId(int id) const;
+
+	p2Point<int> MapToWorld(int x, int y) const;
+	p2Point<int> WorldToMap(int x, int y) const;
 
 private:
 

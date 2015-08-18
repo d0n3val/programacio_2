@@ -151,3 +151,14 @@ void j1Render::SetBackgroundColor(SDL_Color color)
 {
 	background = color;
 }
+
+
+p2Point<int> j1Render::ScreenToWorld(int x, int y) const
+{
+	p2Point<int> ret;
+
+	ret.x = x + camera.x;
+	ret.y = y + camera.y;
+
+	return ret;
+}

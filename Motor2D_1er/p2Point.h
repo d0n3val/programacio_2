@@ -6,6 +6,7 @@
 #define __P2POINT_H__
 
 #include "p2Defs.h"
+#include "p2Vector2.h"
 
 template<class TYPE>
 class p2Point

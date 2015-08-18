@@ -61,6 +61,21 @@ TileSet* j1Map::GetTilesetFromTileId(int id) const
 	return set;
 }
 
+TileType* TileSet::GetTileType(int id) const
+{
+	p2List_item<TileType*>* item = tile_types.start;
+	int relative_id = id - firstgid;
+
+	while(item)
+	{
+		if(item->data->id == relative_id)
+			return item->data;
+		item = item->next;
+	}
+
+	return NULL;
+}
+
 SDL_Rect TileSet::GetTileRect(int id) const
 {
 	int relative_id = id - firstgid;
@@ -88,7 +103,7 @@ int Properties::Get(const char* value, int default_value) const
 
 bool j1Map::Update(float dt)
 {
-	// Render all layers
+	// Render all layers with draw > 0
 	p2List_item<MapLayer*>* item;
 	item = data.layers.start;
 
@@ -98,9 +113,6 @@ bool j1Map::Update(float dt)
 
 		if(layer->properties.Get("Draw", 1) == 0)
 			continue;
-
-		int tile_half_width = data.tile_width / 2;
-		int tile_half_height = data.tile_height / 2;
 
 		for(int y = 0; y < data.height; ++y)
 		{
@@ -113,26 +125,9 @@ bool j1Map::Update(float dt)
 					continue;
 
 				SDL_Rect r = tileset->GetTileRect(tile_id);
-				int pos_x;
-				int pos_y;
+				p2Point<int> pos = MapToWorld(x, y);
 
-				if(data.type == MAPTYPE_ORTHOGONAL)
-				{
-					pos_x = (x * data.tile_width);
-					pos_y = (y * data.tile_height);
-				}
-				else if(data.type == MAPTYPE_ISOMETRIC)
-				{
-					pos_x = (x * tile_half_width) - (y * tile_half_width);
-					pos_y = (y * tile_half_height) + (x * tile_half_height);
-				}
-				else
-				{
-					LOG("Unknown map type");
-					continue;
-				}
-
-				App->render->Blit(tileset->texture, pos_x + tileset->offset_x, pos_y + tileset->offset_y, &r);
+				App->render->Blit(tileset->texture, pos.x + tileset->offset_x, pos.y + tileset->offset_y, &r);
 				//LOG("Rendering tile id %d at %d,%d rect x%d,y%d,w%d,h%d", tile_id, pos_x, pos_y, r.x, r.y, r.w, r.h);
 			}
 		}
@@ -141,6 +136,51 @@ bool j1Map::Update(float dt)
 	return true;
 }
 
+p2Point<int> j1Map::MapToWorld(int x, int y) const
+{
+	p2Point<int> ret;
+
+	if(data.type == MAPTYPE_ORTHOGONAL)
+	{
+		ret.x = x * data.tile_width;
+		ret.y = y * data.tile_height;
+	}
+	else if(data.type == MAPTYPE_ISOMETRIC)
+	{
+		ret.x = (x-y) * (data.tile_width / 2);
+		ret.y = (x+y) * (data.tile_height / 2);
+	}
+	else
+	{
+		LOG("Unknown map type");
+		ret.x = x; ret.y = y;
+	}
+
+	return ret;
+}
+
+p2Point<int> j1Map::WorldToMap(int x, int y) const
+{
+	p2Point<int> ret;
+
+	if(data.type == MAPTYPE_ORTHOGONAL)
+	{
+		ret.x = x / data.tile_width;
+		ret.y = y / data.tile_height;
+	}
+	else if(data.type == MAPTYPE_ISOMETRIC)
+	{
+		ret.x = (x / (data.tile_width / 2) + (y / (data.tile_height / 2))) / 2;
+		ret.y = (y / (data.tile_height / 2) - (x / (data.tile_width / 2))) / 2;
+	}
+	else
+	{
+		LOG("Unknown map type");
+		ret.x = x; ret.y = y;
+	}
+
+	return ret;
+}
 
 bool j1Map::PostUpdate()
 {
@@ -269,6 +309,47 @@ bool j1Map::Load(const char* file_name)
 			LOG("name: %s", l->name);
 			LOG("width: %d height: %d", l->width, l->height);
 			item2 = item2->next;
+		}
+	}
+
+	// create walkability map
+	{
+		p2List_item<MapLayer*>* item;
+		item = data.layers.start;
+
+		for(item = data.layers.start; item != NULL; item = item->next)
+		{
+			MapLayer* layer = item->data;
+
+			if(layer->properties.Get("Walkability", 1) == 0)
+				continue;
+
+			uchar* map = new uchar[layer->width*layer->height];
+
+			for(int y = 0; y < data.height; ++y)
+			{
+				for(int x = 0; x < data.width; ++x)
+				{
+					int i = (y*layer->width) + x;
+					map[i] = 255;
+
+					int tile_id = layer->Get(x, y);
+					TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
+					if(tileset != NULL)
+					{
+						TileType* ts = tileset->GetTileType(tile_id);
+						if(ts != NULL)
+						{
+							map[i] = ts->properties.Get("walkable", 255);
+						}
+					}
+				}
+			}
+
+			App->pathfinding->SetMap(layer->width, layer->height, map);
+			RELEASE_ARRAY(map);
+
+			break;
 		}
 	}
 
@@ -594,7 +675,7 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 		{
 			Property* p = new Property();
 
-			//p->name = prop.attribute("name").as_string();
+			p->name = prop.attribute("name").as_string();
 			p->value = prop.attribute("value").as_int();
 
 			properties.list.add(p);

@@ -37,6 +37,7 @@
 #define TO_BOOL( a )  ( (a != 0) ? true : false )
 
 typedef unsigned int uint;
+typedef unsigned char uchar;
 
 template <class VALUE_TYPE> void SWAP(VALUE_TYPE& a, VALUE_TYPE& b)
 {
