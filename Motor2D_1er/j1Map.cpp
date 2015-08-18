@@ -42,15 +42,48 @@ bool j1Map::PreUpdate()
 	return true;
 }
 
-SDL_Rect j1Map::GetTileRect(int id)
+TileSet* j1Map::GetTilesetFromTileId(int id) const
 {
-	int relative_id = id - data.tileset.firstgid;
+	p2List_item<TileSet*>* item = data.tilesets.start;
+	TileSet* set = NULL;
+
+	while(item)
+	{
+		if(id < item->data->firstgid)
+		{
+			set = item->prev->data;
+			break;
+		}
+		set = item->data;
+		item = item->next;
+	}
+
+	return set;
+}
+
+SDL_Rect TileSet::GetTileRect(int id) const
+{
+	int relative_id = id - firstgid;
 	SDL_Rect rect;
-	rect.w = data.tileset.tile_width;
-	rect.h = data.tileset.tile_height;
-	rect.x = data.tileset.margin + ((rect.w + data.tileset.spacing) * (relative_id % data.tileset.num_tiles_width));
-	rect.y = data.tileset.margin + ((rect.h + data.tileset.spacing) * (relative_id / data.tileset.num_tiles_width));
+	rect.w = tile_width;
+	rect.h = tile_height;
+	rect.x = margin + ((rect.w + spacing) * (relative_id % num_tiles_width));
+	rect.y = margin + ((rect.h + spacing) * (relative_id / num_tiles_width));
 	return rect;
+}
+
+int Properties::Get(const char* value, int default_value) const
+{
+	p2List_item<Property*>* item = list.start;
+
+	while(item)
+	{
+		if(item->data->name.compare_no_case(value))
+			return item->data->value;
+		item = item->next;
+	}
+
+	return default_value;
 }
 
 bool j1Map::Update(float dt)
@@ -59,9 +92,13 @@ bool j1Map::Update(float dt)
 	p2List_item<MapLayer*>* item;
 	item = data.layers.start;
 
-	while(item != NULL)
+	for(item = data.layers.start; item != NULL; item = item->next)
 	{
 		MapLayer* layer = item->data;
+
+		if(layer->properties.Get("Draw", 1) == 0)
+			continue;
+
 		int tile_half_width = data.tile_width / 2;
 		int tile_half_height = data.tile_height / 2;
 
@@ -70,13 +107,12 @@ bool j1Map::Update(float dt)
 			for(int x = 0; x < data.width; ++x)
 			{
 				int tile_id = layer->Get(x, y);
+				TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
 
-				if(tile_id < data.tileset.firstgid)
-				{
+				if(tileset == NULL)
 					continue;
-				}
 
-				SDL_Rect r = GetTileRect(tile_id);
+				SDL_Rect r = tileset->GetTileRect(tile_id);
 				int pos_x;
 				int pos_y;
 
@@ -96,12 +132,10 @@ bool j1Map::Update(float dt)
 					continue;
 				}
 
-				App->render->Blit(data.tileset.texture, pos_x + data.tileset.offset_x, pos_y + data.tileset.offset_y, &r);
+				App->render->Blit(tileset->texture, pos_x + tileset->offset_x, pos_y + tileset->offset_y, &r);
 				//LOG("Rendering tile id %d at %d,%d rect x%d,y%d,w%d,h%d", tile_id, pos_x, pos_y, r.x, r.y, r.w, r.h);
 			}
 		}
-
-		item = item->next;
 	}
 
 	return true;
@@ -117,16 +151,27 @@ bool j1Map::PostUpdate()
 bool j1Map::CleanUp()
 {
 	LOG("Unloading map");
-	data.tileset.terrain_types.clear();
-	data.tileset.tile_types.clear();
-	// Render all layers
-	p2List_item<MapLayer*>* item;
-	item = data.layers.start;
+
+	// Remove all tilesets
+	p2List_item<TileSet*>* item;
+	item = data.tilesets.start;
 
 	while(item != NULL)
 	{
 		RELEASE(item->data);
 		item = item->next;
+	}
+
+	data.tilesets.clear();
+
+	// Remove all layers
+	p2List_item<MapLayer*>* item2;
+	item2 = data.layers.start;
+
+	while(item2 != NULL)
+	{
+		RELEASE(item2->data);
+		item2 = item2->next;
 	}
 
 	data.layers.clear();
@@ -158,29 +203,35 @@ bool j1Map::Load(const char* file_name)
 		ret = LoadMap();
 	}
 
-	if(ret == true)
+	pugi::xml_node tileset;
+	for(tileset = map_file.child("map").child("tileset"); tileset; tileset = tileset.next_sibling("tileset"))
 	{
-		ret = LoadTileset();
-	}
+		TileSet* set = new TileSet();
+		if(ret == true)
+		{
+			ret = LoadTileset(tileset, set);
+		}
 
-	if(ret == true)
-	{
-		ret = LoadTilesetDetails();
-	}
+		if(ret == true)
+		{
+			ret = LoadTilesetDetails(tileset, set);
+		}
 
-	if(ret == true)
-	{
-		ret = LoadTilesetImage();
-	}
+		if(ret == true)
+		{
+			ret = LoadTilesetImage(tileset, set);
+		}
 
-	if(ret == true)
-	{
-		ret = LoadTilesetTerrains();
-	}
+		if(ret == true)
+		{
+			ret = LoadTilesetTerrains(tileset, set);
+		}
 
-	if(ret == true)
-	{
-		ret = LoadTilesetTileTypes();
+		if(ret == true)
+		{
+			ret = LoadTilesetTileTypes(tileset, set);
+		}
+		data.tilesets.add(set);
 	}
 
 	if(ret == true)
@@ -198,10 +249,27 @@ bool j1Map::Load(const char* file_name)
 		LOG("Successfully parsed map XML file: %s", file_name);
 		LOG("width: %d height: %d", data.width, data.height);
 		LOG("tile_width: %d tile_height: %d", data.tile_width, data.tile_height);
-		LOG("Tileset ----");
-		LOG("name: %s firstgid: %d", data.tileset.name, data.tileset.firstgid);
-		LOG("tile width: %d tile height: %d", data.tileset.tile_width, data.tileset.tile_height);
-		LOG("spacing: %d margin: %d", data.tileset.spacing, data.tileset.margin);
+
+		p2List_item<TileSet*>* item = data.tilesets.start;
+		while(item != NULL)
+		{
+			TileSet* s = item->data;
+			LOG("Tileset ----");
+			LOG("name: %s firstgid: %d", s->name, s->firstgid);
+			LOG("tile width: %d tile height: %d", s->tile_width, s->tile_height);
+			LOG("spacing: %d margin: %d", s->spacing, s->margin);
+			item = item->next;
+		}
+
+		p2List_item<MapLayer*>* item2 = data.layers.start;
+		while(item2 != NULL)
+		{
+			MapLayer* l = item2->data;
+			LOG("Layer ----");
+			LOG("name: %s", l->name);
+			LOG("width: %d height: %d", l->width, l->height);
+			item2 = item2->next;
+		}
 	}
 
 	return ret;
@@ -273,10 +341,10 @@ bool j1Map::LoadMap()
 	return ret;
 }
 
-bool j1Map::LoadTileset()
+bool j1Map::LoadTileset(pugi::xml_node& map, TileSet* set)
 {
 	bool ret = true;
-	pugi::xml_node map = map_file.child("map").child("tileset");
+	//pugi::xml_node map = map_file.child("map").child("tileset");
 
 	if(map == NULL)
 	{
@@ -285,7 +353,7 @@ bool j1Map::LoadTileset()
 	}
 	else
 	{
-		data.tileset.firstgid = map.attribute("firstgid").as_int();
+		set->firstgid = map.attribute("firstgid").as_int();
 
 		if(map.attribute("source").empty() == false)
 		{
@@ -296,18 +364,6 @@ bool j1Map::LoadTileset()
 				LOG("Could not load tileset xml file. pugi error: %s", result.description());
 				ret = false;
 			}
-
-			tileset_node = tileset_file.child("tileset");
-		}
-		else
-		{
-			tileset_node = map_file.child("map").child("tileset");
-		}
-
-		if(tileset_node == NULL)
-		{
-			LOG("Error parsing tileset xml file: Cannot find 'tileset' tag.");
-			ret = false;
 		}
 	}
 
@@ -315,31 +371,31 @@ bool j1Map::LoadTileset()
 }
 
 
-bool j1Map::LoadTilesetDetails()
+bool j1Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 {
 	bool ret = true;
-	data.tileset.name = tileset_node.attribute("name").as_string();
-	data.tileset.tile_width = tileset_node.attribute("tilewidth").as_int();
-	data.tileset.tile_height = tileset_node.attribute("tileheight").as_int();
-	data.tileset.margin = tileset_node.attribute("margin").as_int();
-	data.tileset.spacing = tileset_node.attribute("spacing").as_int();
+	set->name = tileset_node.attribute("name").as_string();
+	set->tile_width = tileset_node.attribute("tilewidth").as_int();
+	set->tile_height = tileset_node.attribute("tileheight").as_int();
+	set->margin = tileset_node.attribute("margin").as_int();
+	set->spacing = tileset_node.attribute("spacing").as_int();
 	pugi::xml_node offset = tileset_node.child("tileoffset");
 
 	if(offset != NULL)
 	{
-		data.tileset.offset_x = offset.attribute("x").as_int();
-		data.tileset.offset_y = offset.attribute("y").as_int();
+		set->offset_x = offset.attribute("x").as_int();
+		set->offset_y = offset.attribute("y").as_int();
 	}
 	else
 	{
-		data.tileset.offset_x = 0;
-		data.tileset.offset_y = 0;
+		set->offset_x = 0;
+		set->offset_y = 0;
 	}
 
 	return ret;
 }
 
-bool j1Map::LoadTilesetImage()
+bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 {
 	bool ret = true;
 	pugi::xml_node image = tileset_node.child("image");
@@ -351,31 +407,31 @@ bool j1Map::LoadTilesetImage()
 	}
 	else
 	{
-		data.tileset.texture = App->tex->Load(PATH(folder, image.attribute("source").as_string()));
+		set->texture = App->tex->Load(PATH(folder, image.attribute("source").as_string()));
 		int w, h;
-		SDL_QueryTexture(data.tileset.texture, NULL, NULL, &w, &h);
-		data.tileset.tex_width = image.attribute("width").as_int();
+		SDL_QueryTexture(set->texture, NULL, NULL, &w, &h);
+		set->tex_width = image.attribute("width").as_int();
 
-		if(data.tileset.tex_width <= 0)
+		if(set->tex_width <= 0)
 		{
-			data.tileset.tex_width = w;
+			set->tex_width = w;
 		}
 
-		data.tileset.tex_height = image.attribute("height").as_int();
+		set->tex_height = image.attribute("height").as_int();
 
-		if(data.tileset.tex_height <= 0)
+		if(set->tex_height <= 0)
 		{
-			data.tileset.tex_height = h;
+			set->tex_height = h;
 		}
 
-		data.tileset.num_tiles_width = data.tileset.tex_width / data.tileset.tile_width;
-		data.tileset.num_tiles_height = data.tileset.tex_height / data.tileset.tile_height;
+		set->num_tiles_width = set->tex_width / set->tile_width;
+		set->num_tiles_height = set->tex_height / set->tile_height;
 	}
 
 	return ret;
 }
 
-bool j1Map::LoadTilesetTerrains()
+bool j1Map::LoadTilesetTerrains(pugi::xml_node& tileset_node, TileSet* set)
 {
 	bool ret = true;
 	pugi::xml_node terrains = tileset_node.child("terraintypes");
@@ -395,7 +451,7 @@ bool j1Map::LoadTilesetTerrains()
 			TerrainType terrain_type;
 			terrain_type.name = terrain.attribute("name").as_string();
 			terrain_type.tile = terrain.attribute("tile").as_int();
-			data.tileset.terrain_types.add(terrain_type);
+			set->terrain_types.add(terrain_type);
 			//LOG("terrain %s on tile %d", terrain_type.name, terrain_type.tile);
 		}
 	}
@@ -404,7 +460,7 @@ bool j1Map::LoadTilesetTerrains()
 }
 
 
-bool j1Map::LoadTilesetTileTypes()
+bool j1Map::LoadTilesetTileTypes(pugi::xml_node& tileset_node, TileSet* set)
 {
 	bool ret = true;
 	pugi::xml_node tile;
@@ -425,19 +481,19 @@ bool j1Map::LoadTilesetTileTypes()
 			switch(i)
 			{
 				case 0:
-				tile_type.top_left = &data.tileset.terrain_types[atoi(item)];
+				tile_type.top_left = &set->terrain_types[atoi(item)];
 				break;
 
 				case 1:
-				tile_type.top_right = &data.tileset.terrain_types[atoi(item)];
+				tile_type.top_right = &set->terrain_types[atoi(item)];
 				break;
 
 				case 2:
-				tile_type.bottom_left = &data.tileset.terrain_types[atoi(item)];
+				tile_type.bottom_left = &set->terrain_types[atoi(item)];
 				break;
 
 				case 3:
-				tile_type.bottom_right = &data.tileset.terrain_types[atoi(item)];
+				tile_type.bottom_right = &set->terrain_types[atoi(item)];
 				break;
 			}
 
@@ -445,7 +501,7 @@ bool j1Map::LoadTilesetTileTypes()
 			++i;
 		}
 
-		data.tileset.tile_types.add(tile_type);
+		set->tile_types.add(tile_type);
 		/*
 		LOG("tile id %d on terrains: %s %s %s %s",
 		tile_type.id,
@@ -465,6 +521,7 @@ bool j1Map::LoadLayer(pugi::xml_node node)
 	layer->name = node.attribute("name").as_string();
 	layer->width = node.attribute("width").as_int();
 	layer->height = node.attribute("height").as_int();
+	LoadProperties(node, layer->properties);
 	LOG("layer %s width %d height %d", layer->name, layer->width, layer->height);
 	pugi::xml_node layer_data = node.child("data");
 
@@ -485,7 +542,7 @@ bool j1Map::LoadLayer(pugi::xml_node node)
 		unsigned int decoded_len;
 		decoded = b64_decode(buffer, &decoded_len);
 		RELEASE_ARRAY(buffer);
-		buffer_len = decoded_len * 10;
+		buffer_len = decoded_len * 20;
 		buffer = new char[buffer_len];
 		int result = uncompress((Bytef*)buffer, &buffer_len, (Bytef*)decoded, decoded_len);
 		free(decoded);
@@ -505,5 +562,29 @@ bool j1Map::LoadLayer(pugi::xml_node node)
 	}
 
 	data.layers.add(layer);
+	return ret;
+}
+
+// Load a group of properties from a node and fill a list with it
+bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
+{
+	bool ret = false;
+	pugi::xml_node data = node.child("properties");
+
+	if(data != NULL)
+	{
+		pugi::xml_node prop;
+
+		for(prop = data.child("property"); prop; prop = prop.next_sibling("property"))
+		{
+			Property* p = new Property();
+
+			p->name = prop.attribute("name").as_string();
+			p->value = prop.attribute("value").as_int();
+
+			properties.list.add(p);
+		}
+	}
+
 	return ret;
 }

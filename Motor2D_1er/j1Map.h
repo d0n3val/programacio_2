@@ -29,8 +29,29 @@ struct TileType
 	TerrainType* bottom_right;
 };
 
+struct Property
+{
+	p2String name;
+	int value;
+};
+
+struct Properties
+{
+	int Get(const char* name, int default_value = 0) const;
+
+	p2List<Property*>	list;
+};
+
 struct TileSet
 {
+	~TileSet()
+	{
+		terrain_types.clear();
+		tile_types.clear();
+	}
+
+	SDL_Rect GetTileRect(int id) const;
+
 	p2String			name;
 	int					firstgid;
 	int					margin;
@@ -50,13 +71,15 @@ struct TileSet
 
 struct MapLayer
 {
-	p2String name;
-	int width;
-	int height;
-	unsigned __int32* data;
+	p2String			name;
+	Properties			properties;
+	int					width;
+	int					height;
+	unsigned __int32*	data;
 
 	MapLayer() : data(NULL)
 	{}
+
 	~MapLayer()
 	{
 		RELEASE(data);
@@ -77,7 +100,7 @@ struct MapData
 	SDL_Color			background_color;
 	MapTypes			type;
 	p2List<TileSet*>	tilesets;
-	TileSet				tileset;
+	//TileSet				tileset;
 	p2List<MapLayer*>	layers;
 };
 
@@ -105,17 +128,18 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
-	SDL_Rect GetTileRect(int id);
+	TileSet* GetTilesetFromTileId(int id) const;
 
 private:
 
 	bool LoadMap();
-	bool LoadTileset();
-	bool LoadTilesetDetails();
-	bool LoadTilesetImage();
-	bool LoadTilesetTerrains();
-	bool LoadTilesetTileTypes();
+	bool LoadTileset(pugi::xml_node& tileset_node, TileSet* set);
+	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
+	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
+	bool LoadTilesetTerrains(pugi::xml_node& tileset_node, TileSet* set);
+	bool LoadTilesetTileTypes(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node node);
+	bool LoadProperties(pugi::xml_node& node, Properties& list);
 
 public:
 
@@ -125,7 +149,6 @@ private:
 
 	pugi::xml_document	map_file;
 	pugi::xml_document	tileset_file;
-	pugi::xml_node		tileset_node;
 
 	p2String			folder;
 	bool				map_loaded;
