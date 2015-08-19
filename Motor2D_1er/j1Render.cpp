@@ -104,7 +104,7 @@ bool j1Render::CleanUp()
 }
 
 // Blit to screen
-bool j1Render::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section) const
+bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section) const
 {
 	bool ret = true;
 	SDL_Rect rect;

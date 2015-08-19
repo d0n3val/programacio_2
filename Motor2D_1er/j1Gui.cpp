@@ -2,6 +2,7 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Render.h"
+#include "j1Textures.h"
 #include "j1Gui.h"
 
 j1Gui::j1Gui() : j1Module()
@@ -19,7 +20,22 @@ bool j1Gui::Awake(j1IniReader* conf)
 	LOG("Loading GUI");
 	bool ret = true;
 
+	atlas = App->tex->Load(conf->GetString("atlas"));
+
 	return ret;
+}
+
+// Called after all Updates
+bool j1Gui::PostUpdate()
+{
+	p2List_item<Gui*>* item;
+
+	for(item = elements.start; item; item = item->next)
+	{
+		item->data->Draw();
+	}
+
+	return true;
 }
 
 // Called before quitting
@@ -27,6 +43,12 @@ bool j1Gui::CleanUp()
 {
 	LOG("Freeing GUI");
 
+	p2List_item<Gui*>* item;
+
+	for(item = elements.start; item; item = item->next)
+		RELEASE(item->data);
+
+	elements.clear();
 
 	return true;
 }
@@ -34,13 +56,13 @@ bool j1Gui::CleanUp()
 // class Gui ---------------------------------------------------
 void Gui::Draw() const
 {
-	App->render->SetViewPort(rect);
+	App->render->SetViewPort(mask);
 	InnerDraw();
 	App->render->ResetViewPort();
 }
 
 // class GuiImage ---------------------------------------------------
-GuiImage::GuiImage(SDL_Texture* texture) : Gui(), texture(texture)
+GuiImage::GuiImage(SDL_Texture* texture, SDL_Rect section) : Gui(), texture(texture), section(section)
 {}
 
 GuiImage::~GuiImage()
@@ -48,5 +70,5 @@ GuiImage::~GuiImage()
 
 void GuiImage::InnerDraw() const
 {
-	App->render->Blit(texture, rect.x, rect.y);
+	App->render->Blit(texture, pos.x, pos.y, &section);
 }

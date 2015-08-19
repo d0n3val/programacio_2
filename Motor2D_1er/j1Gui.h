@@ -18,13 +18,13 @@ protected:
 	{}
 
 public:
-	SDL_Rect rect;
+	SDL_Rect mask;
 };
 
 // ---------------------------------------------------
 class GuiImage : public Gui
 {
-	GuiImage(SDL_Texture* texture);
+	GuiImage(SDL_Texture* texture, SDL_Rect section);
 	virtual ~GuiImage();
 
 protected:
@@ -33,6 +33,8 @@ protected:
 
 private:
 
+	iPoint pos;
+	SDL_Rect section;
 	SDL_Texture* texture;
 };
 
@@ -49,12 +51,16 @@ public:
 	// Called before render is available
 	bool Awake(j1IniReader* conf);
 
+	// Called after all Updates
+	bool PostUpdate();
+
 	// Called before quitting
 	bool CleanUp();
 
 private:
 
 	p2List<Gui*> elements;
+	SDL_Texture* atlas;
 };
 
 #endif // __j1GUI_H__

@@ -35,7 +35,7 @@ public:
 	// Blit
 	void SetViewPort(const SDL_Rect& rect);
 	void ResetViewPort();
-	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section = NULL) const;
+	bool Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL) const;
 
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);

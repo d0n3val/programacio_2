@@ -47,7 +47,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(serial);
 	AddModule(input);
 	AddModule(win);
-	AddModule(render);
 	AddModule(tex);
 	AddModule(fonts);
 	AddModule(audio);
@@ -56,6 +55,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	AddModule(gui);
 	AddModule(scene);
+
+	// render last to swap buffer
+	AddModule(render);
 }
 
 // Destructor
