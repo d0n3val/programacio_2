@@ -365,8 +365,8 @@ namespace UnitTest1
 
 		TEST_METHOD(Point2D_int)
 		{
-			p2Point<int> a;
-			p2Point<int> b;
+			iPoint a;
+			iPoint b;
 
 			a.x = a.y = 5;
 			b = a;

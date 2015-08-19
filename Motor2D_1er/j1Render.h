@@ -33,18 +33,21 @@ public:
 	bool SaveGameState(j1Serialization* serial);
 
 	// Blit
-	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section = NULL);
+	void SetViewPort(const SDL_Rect& rect);
+	void ResetViewPort();
+	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section = NULL) const;
 
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
 
 	// Transform screen to World coordinates
-	p2Point<int> ScreenToWorld(int x, int y) const;
+	iPoint ScreenToWorld(int x, int y) const;
 
 public:
 
 	SDL_Renderer*	renderer;
 	SDL_Rect		camera;
+	SDL_Rect		viewport;
 	SDL_Color		background;
 };
 

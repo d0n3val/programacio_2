@@ -1,23 +1,22 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+#include "j1Render.h"
+#include "j1FileSystem.h"
+#include "j1Textures.h"
 #include "j1Map.h"
+
 #include "base64/base64.h"
 #include "zlib/include/zlib.h"
 #include "trim.h"
 #include "SDL/include/SDL.h"
-#include "j1Render.h"
-#include "j1Pathfinding.h"
-#include "j1FileSystem.h"
-#include "j1Textures.h"
-#include "math.h"
+#include <math.h>
 
 #pragma comment( lib, "zlib/libx86/zdll.lib" )
 
-j1Map::j1Map() : j1Module()
+j1Map::j1Map() : j1Module(), map_loaded(false)
 {
 	name.create("map");
-	map_loaded = false;
 }
 
 // Destructor
@@ -27,30 +26,12 @@ j1Map::~j1Map()
 // Called before render is available
 bool j1Map::Awake(j1IniReader* conf)
 {
-	LOG("Loading Map");
+	LOG("Loading Map Loader");
 	bool ret = true;
-	folder.create(conf->GetString("folder", "maps/"));
 
-	if(Load(conf->GetString("map", "")) == true)
-	{
-		map_loaded = true;
-		App->render->SetBackgroundColor(data.background_color);
-
-		int w, h;
-		uchar* data;
-		if(CreateWalkabilityMap(w, h, &data))
-			App->pathfinding->SetMap(w, h, data);
-
-		RELEASE_ARRAY(data);
-	}
+	folder.create(conf->GetString("folder", ""));
 
 	return ret;
-}
-
-// Called each loop iteration
-bool j1Map::PreUpdate()
-{
-	return true;
 }
 
 TileSet* j1Map::GetTilesetFromTileId(int id) const
@@ -112,11 +93,16 @@ int Properties::Get(const char* value, int default_value) const
 	return default_value;
 }
 
-bool j1Map::Update(float dt)
+void j1Map::Draw()
 {
+	if(map_loaded == false)
+		return;
+
 	// Render all layers with draw > 0
 	p2List_item<MapLayer*>* item;
 	item = data.layers.start;
+	
+	App->render->SetBackgroundColor(data.background_color);
 
 	for(item = data.layers.start; item != NULL; item = item->next)
 	{
@@ -136,20 +122,18 @@ bool j1Map::Update(float dt)
 					continue;
 
 				SDL_Rect r = tileset->GetTileRect(tile_id);
-				p2Point<int> pos = MapToWorld(x, y);
+				iPoint pos = MapToWorld(x, y);
 
 				App->render->Blit(tileset->texture, pos.x + tileset->offset_x, pos.y + tileset->offset_y, &r);
 				//LOG("Rendering tile id %d at %d,%d rect x%d,y%d,w%d,h%d", tile_id, pos_x, pos_y, r.x, r.y, r.w, r.h);
 			}
 		}
 	}
-
-	return true;
 }
 
-p2Point<int> j1Map::MapToWorld(int x, int y) const
+iPoint j1Map::MapToWorld(int x, int y) const
 {
-	p2Point<int> ret;
+	iPoint ret;
 
 	if(data.type == MAPTYPE_ORTHOGONAL)
 	{
@@ -170,9 +154,9 @@ p2Point<int> j1Map::MapToWorld(int x, int y) const
 	return ret;
 }
 
-p2Point<int> j1Map::WorldToMap(int x, int y) const
+iPoint j1Map::WorldToMap(int x, int y) const
 {
-	p2Point<int> ret;
+	iPoint ret;
 
 	if(data.type == MAPTYPE_ORTHOGONAL)
 	{
@@ -193,11 +177,6 @@ p2Point<int> j1Map::WorldToMap(int x, int y) const
 	}
 
 	return ret;
-}
-
-bool j1Map::PostUpdate()
-{
-	return true;
 }
 
 // Called before quitting
@@ -325,6 +304,7 @@ bool j1Map::Load(const char* file_name)
 		}
 	}
 
+	map_loaded = ret;
 
 	return ret;
 }

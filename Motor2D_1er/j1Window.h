@@ -3,8 +3,8 @@
 
 #include "j1Module.h"
 
-class SDL_Window;
-class SDL_Surface;
+struct SDL_Window;
+struct SDL_Surface;
 
 class j1Window : public j1Module
 {
@@ -17,15 +17,6 @@ public:
 
 	// Called before render is available
 	bool Awake(j1IniReader* conf);
-
-	// Called each loop iteration
-	bool Update(float dt);
-
-	// Called before all Updates
-	bool PreUpdate();
-
-	// Called before all Updates
-	bool PostUpdate();
 
 	// Called before quitting
 	bool CleanUp();
@@ -42,7 +33,6 @@ public:
 
 private:
 	p2String	title;
-	p2String	final_title;
 };
 
 #endif // __j1WINDOW_H__

@@ -13,6 +13,7 @@
 #include "j1Serialization.h"
 #include "j1PathFinding.h"
 #include "j1Gui.h"
+#include "j1Scene.h"
 
 #include "j1App.h"
 
@@ -38,6 +39,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	serial = new j1Serialization();
 	pathfinding = new j1PathFinding();
 	gui = new j1Gui();
+	scene = new j1Scene();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -53,6 +55,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entities);
 	AddModule(pathfinding);
 	AddModule(gui);
+	AddModule(scene);
 }
 
 // Destructor
@@ -137,15 +140,34 @@ bool j1App::Update()
 {
 	bool ret = true;
 	PrepareUpdate();
-	ret = PreUpdate();
 
-	if(ret == true) {
+	if(input->GetWindowEvent(WE_QUIT) == true)
+		ret = false;
+
+	if(input->GetWindowEvent(WE_HIDE) == true)
+	{
+		if(pause.Get() == false)
+			LOG("Entering background mode");
+
+		pause.Set();
+	}
+
+	if(input->GetWindowEvent(WE_SHOW) == true)
+	{
+		pause.Unset();
+
+		if(pause.Get() == false)
+			LOG("Leaving background mode");
+	}
+
+	if(ret == true)
+		ret = PreUpdate();
+
+	if(ret == true)
 		ret = DoUpdate();
-	}
 
-	if(ret == true) {
+	if(ret == true)
 		ret = PostUpdate();
-	}
 
 	FinishUpdate();
 	return ret;

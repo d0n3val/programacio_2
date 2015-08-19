@@ -1,10 +1,6 @@
 #include "p2Defs.h"
 #include "p2Log.h"
-#include "j1Input.h"
 #include "j1App.h"
-#include "p2Point.h"
-#include "j1Render.h"
-#include "j1Map.h"
 #include "j1Window.h"
 
 #include "SDL/include/SDL.h"
@@ -12,7 +8,7 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-j1Window::j1Window() : j1Module(), final_title(MID_STR)
+j1Window::j1Window() : j1Module()
 {
 	window = NULL;
 	screen_surface = NULL;
@@ -82,81 +78,6 @@ bool j1Window::Awake(j1IniReader* conf)
 	return ret;
 }
 
-// Add last frame fps stadistics in the title
-bool j1Window::PreUpdate()
-{
-	if(App->last_fps >= 0)
-	{
-		int x, y;
-		App->input->GetMousePosition(x, y);
-
-		p2Point<int> rel = App->render->ScreenToWorld(x, y);
-		p2Point<int> p = App->map->WorldToMap(rel.x, rel.y);
-		
-		final_title.create("%s - %d fps (%d/%d ms) mouse:%d,%d cam:%d,%d rel:%d,%d cell:%d,%d", 
-			title.c_str(), 
-			App->last_fps, 
-			App->last_frame_ms, 
-			App->capped_ms, 
-			x, y,
-			App->render->camera.x, App->render->camera.y,
-			rel.x, rel.y,
-			p.x, p.y
-			);
-		SDL_SetWindowTitle(window, final_title.c_str());
-	}
-	else
-	{
-		SDL_SetWindowTitle(window, title);
-	}
-
-	return true;
-}
-
-// Called each loop iteration
-bool j1Window::Update(float dt)
-{
-	bool ret = true;
-
-	if(App->input->GetWindowEvent(WE_QUIT) == true)
-	{
-		ret = false;
-	}
-
-	if(App->input->GetKeyDown(SDLK_ESCAPE) == true)
-	{
-		ret = false;
-	}
-
-	if(App->input->GetWindowEvent(WE_HIDE) == true)
-	{
-		if(App->pause.Get() == false)
-		{
-			LOG("Entering background mode");
-		}
-
-		App->pause.Set();
-	}
-
-	if(App->input->GetWindowEvent(WE_SHOW) == true)
-	{
-		App->pause.Unset();
-
-		if(App->pause.Get() == false)
-		{
-			LOG("Leaving background mode");
-		}
-	}
-
-	return ret;
-}
-
-// Swap buffers
-bool j1Window::PostUpdate()
-{
-	return true;
-}
-
 // Called before quitting
 bool j1Window::CleanUp()
 {
@@ -176,5 +97,6 @@ bool j1Window::CleanUp()
 // Set new window title
 void j1Window::SetTitle(const char* new_title)
 {
-	title.create(new_title);
+	//title.create(new_title);
+	SDL_SetWindowTitle(window, new_title);
 }

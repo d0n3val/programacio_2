@@ -67,6 +67,9 @@
     <ClCompile Include="j1Gui.cpp">
       <Filter>Projecte 1 ==============\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="j1Scene.cpp">
+      <Filter>Projecte 1 ==============\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -192,6 +195,9 @@
     <ClInclude Include="j1Gui.h">
       <Filter>Projecte 1 ==============\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="j1Scene.h">
+      <Filter>Projecte 1 ==============\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Docs\SDL2\APIByCategory.html">
@@ -229,9 +235,6 @@
     <Filter Include="Projecte 1 ==============\Tools">
       <UniqueIdentifier>{42c748be-4a37-49de-970f-5be811d06b38}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Projecte 1 ==============\Modules">
-      <UniqueIdentifier>{244722d1-90ce-423d-8e7a-556211865a32}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Projecte 1 ==============\Tools\External">
       <UniqueIdentifier>{6b41dfa6-e244-4402-b642-0242f3517d09}</UniqueIdentifier>
     </Filter>
@@ -246,6 +249,12 @@
     </Filter>
     <Filter Include="Projecte 1 ==============\Tools\External\IniParser">
       <UniqueIdentifier>{d41cf0c2-c28f-4e50-9f81-e4e9db378e86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projecte 1 ==============\Scenes">
+      <UniqueIdentifier>{e07660eb-d36f-4cc9-af59-324d31c2f2f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projecte 1 ==============\Modules">
+      <UniqueIdentifier>{244722d1-90ce-423d-8e7a-556211865a32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

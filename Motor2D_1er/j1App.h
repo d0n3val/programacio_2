@@ -21,6 +21,7 @@ class j1FileSystem;
 class j1Serialization;
 class j1PathFinding;
 class j1Gui;
+class j1Scene;
 
 class j1App
 {
@@ -99,6 +100,7 @@ public:
 	j1Serialization*	serial;
 	j1PathFinding*		pathfinding;
 	j1Gui*				gui;
+	j1Scene*			scene;
 
 private:
 

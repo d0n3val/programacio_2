@@ -1,10 +1,6 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
-#include "j1Textures.h"
-#include "j1Input.h"
-#include "j1Render.h"
-#include "j1Map.h"
 #include "j1PathFinding.h"
 
 j1PathFinding::j1PathFinding() : 
@@ -12,8 +8,7 @@ j1Module(),
 map(NULL), 
 last_path(DEFAULT_PATH_LENGTH),
 width(0), 
-height(0),
-debug(true)
+height(0)
 {
 	name.create("pathfinding");
 }
@@ -39,68 +34,7 @@ bool j1PathFinding::Start()
 	LOG("Start pathfinding");
 	bool ret = true;
 
-	debug_tex = App->tex->Load("maps/path.png");
-
 	return ret;
-}
-
-// Called each loop iteration
-bool j1PathFinding::PreUpdate()
-{
-	if(debug == true)
-	{
-		static p2Point<int> origin;
-		static bool origin_selected = false;
-
-		int x, y;
-		App->input->GetMousePosition(x, y);
-		p2Point<int> p = App->render->ScreenToWorld(x, y);
-		p = App->map->WorldToMap(p.x, p.y);
-
-		if(App->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
-		{
-			if(origin_selected == true)
-			{		
-				CreatePath(origin, p);
-				origin_selected = false;
-			}
-			else
-			{
-				origin = p;
-				origin_selected = true;
-			}
-		}
-	}
-	
-	return true;
-}
-
-bool j1PathFinding::Update(float dt)
-{
-	if(debug == true)
-	{
-		int x, y;
-		App->input->GetMousePosition(x, y);
-		p2Point<int> p = App->render->ScreenToWorld(x, y);
-		p = App->map->WorldToMap(p.x, p.y);
-		p = App->map->MapToWorld(p.x, p.y);
-
-		App->render->Blit(debug_tex, p.x, p.y);
-
-		for(uint i = 0; i < last_path.Count(); ++i)
-		{
-			p2Point<int> pos = App->map->MapToWorld(last_path[i].x, last_path[i].y);
-			App->render->Blit(debug_tex, pos.x, pos.y);
-		}
-	}
-
-	return true;
-}
-
-
-bool j1PathFinding::PostUpdate()
-{
-	return true;
 }
 
 // Called before quitting
@@ -124,19 +58,19 @@ void j1PathFinding::SetMap(uint width, uint height, uchar* data)
 	memcpy(map, data, width*height);
 }
 
-bool j1PathFinding::CheckBoundaries(const p2Point<int>& pos) const
+bool j1PathFinding::CheckBoundaries(const iPoint& pos) const
 {
 	return (pos.x >= 0 && pos.x <= width &&
 			pos.y >= 0 && pos.y <= height);
 }
 
-bool j1PathFinding::IsWalkable(const p2Point<int>& pos) const
+bool j1PathFinding::IsWalkable(const iPoint& pos) const
 {
 	uchar t = GetTileAt(pos);
 	return t != INVALID_WALK_CODE && t > 0;
 }
 
-uchar j1PathFinding::GetTileAt(const p2Point<int>& pos) const
+uchar j1PathFinding::GetTileAt(const iPoint& pos) const
 {
 	if(CheckBoundaries(pos))
 		return map[(pos.y*width) + pos.x];
@@ -144,16 +78,13 @@ uchar j1PathFinding::GetTileAt(const p2Point<int>& pos) const
 	return INVALID_WALK_CODE;
 }
 
-const p2DynArray<p2Point<int>> j1PathFinding::GetLastPath() const
+const p2DynArray<iPoint>* j1PathFinding::GetLastPath() const
 {
-	return last_path;
+	return &last_path;
 }
 
-// ---------------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------------
-
-// PathList ---------------------------------------------------
-p2List_item<PathNode>* PathList::Find(const p2Point<int>& point) const
+// PathList ------------------------------------------------------------------------
+p2List_item<PathNode>* PathList::Find(const iPoint& point) const
 {
 	p2List_item<PathNode>* item = list.start;
 	while(item)
@@ -183,11 +114,11 @@ p2List_item<PathNode>* PathList::GetNodeLowestScore() const
 	return ret;
 }
 
-// PathNode ---------------------------------------------------
+// PathNode -------------------------------------------------------------------------
 PathNode::PathNode() : g(-1), h(-1), pos(-1, -1), parent(NULL)
 {}
 
-PathNode::PathNode(int g, int h, const p2Point<int>& pos, const PathNode* parent) : g(g), h(h), pos(pos), parent(parent)
+PathNode::PathNode(int g, int h, const iPoint& pos, const PathNode* parent) : g(g), h(h), pos(pos), parent(parent)
 {}
 
 PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), parent(node.parent)
@@ -195,7 +126,7 @@ PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), 
 
 uint PathNode::FindWalkableAdjacents(PathList& list_to_fill, j1PathFinding* path_finder) const
 {
-	p2Point<int> cell;
+	iPoint cell;
 	uint before = list_to_fill.list.count();
 
 	// north
@@ -226,7 +157,7 @@ int PathNode::Score() const
 	return g + h;
 }
 
-int PathNode::CalculateF(const p2Point<int>& destination)
+int PathNode::CalculateF(const iPoint& destination)
 {
 	g = parent->g + 1;
 	//h = pos.DistanceManhattan(destination);
@@ -236,7 +167,7 @@ int PathNode::CalculateF(const p2Point<int>& destination)
 }
 
 // Actual A* algorithm -----------------------------------------------
-int j1PathFinding::CreatePath(const p2Point<int>& origin, const p2Point<int>& destination)
+int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
 	int ret = -1;
 	int iterations = 0;

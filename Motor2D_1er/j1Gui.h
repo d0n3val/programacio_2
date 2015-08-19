@@ -10,7 +10,11 @@ public:
 	virtual ~Gui()
 	{}
 
-	virtual void Draw() const
+	void Draw() const;
+
+protected:
+
+	virtual void InnerDraw() const
 	{}
 
 public:
@@ -23,7 +27,9 @@ class GuiImage : public Gui
 	GuiImage(SDL_Texture* texture);
 	virtual ~GuiImage();
 
-	void Draw() const;
+protected:
+
+	void InnerDraw() const;
 
 private:
 

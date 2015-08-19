@@ -24,35 +24,26 @@ public:
 	// Called before the first frame
 	bool Start();
 
-	// Called each loop iteration
-	bool PreUpdate();
-	bool Update(float dt);
-	bool PostUpdate();
-
 	// Called before quitting
 	bool CleanUp();
 
 	// Set Map
 	void SetMap(uint width, uint height, uchar* data);
 
-	int CreatePath(const p2Point<int>& origin, const p2Point<int>& destination);
+	int CreatePath(const iPoint& origin, const iPoint& destination);
 
-	const p2DynArray<p2Point<int>> GetLastPath() const;
+	const p2DynArray<iPoint>* GetLastPath() const;
 
-	bool CheckBoundaries(const p2Point<int>& pos) const;
-	bool IsWalkable(const p2Point<int>& pos) const;
-	uchar GetTileAt(const p2Point<int>& pos) const;
-
-public:
-	bool debug;
+	bool CheckBoundaries(const iPoint& pos) const;
+	bool IsWalkable(const iPoint& pos) const;
+	uchar GetTileAt(const iPoint& pos) const;
 
 private:
 
 	uint width;
 	uint height;
 	uchar* map;
-	SDL_Texture* debug_tex;
-	p2DynArray<p2Point<int>> last_path;
+	p2DynArray<iPoint> last_path;
 };
 
 struct PathList;
@@ -61,24 +52,24 @@ struct PathList;
 struct PathNode
 {
 	PathNode();
-	PathNode(int g, int h, const p2Point<int>& pos, const PathNode* parent);
+	PathNode(int g, int h, const iPoint& pos, const PathNode* parent);
 	PathNode(const PathNode& node);
 
 	uint FindWalkableAdjacents(PathList& list_to_fill, j1PathFinding* path_finder) const;
 	int Score() const;
-	int CalculateF(const p2Point<int>& destination);
+	int CalculateF(const iPoint& destination);
 
 	int g;
 	int h;
-	p2Point<int> pos;
+	iPoint pos;
 	const PathNode* parent;
 };
 
 // Helper struct to include a list of path nodes
 struct PathList
 {
-	bool Contains(const p2Point<int>& point) const;
-	p2List_item<PathNode>* Find(const p2Point<int>& point) const;
+	bool Contains(const iPoint& point) const;
+	p2List_item<PathNode>* Find(const iPoint& point) const;
 	p2List_item<PathNode>* GetNodeLowestScore() const;
 
 	p2List<PathNode> list;

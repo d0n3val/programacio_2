@@ -3,7 +3,6 @@
 #include "j1App.h"
 #include "j1Serialization.h"
 #include "j1Window.h"
-#include "j1Input.h"
 #include "j1Render.h"
 
 j1Render::j1Render() : j1Module()
@@ -73,6 +72,7 @@ bool j1Render::Start()
 {
 	LOG("render start");
 	// back background
+	SDL_RenderGetViewport(renderer, &viewport);
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.g, background.a);
 	return true;
 }
@@ -86,26 +86,6 @@ bool j1Render::PreUpdate()
 
 bool j1Render::Update(float dt)
 {
-	if(App->input->GetKeyDown(SDLK_s))
-	{
-		App->serial->SaveGameState("savegame.xml");
-	}
-
-	if(App->input->GetKeyDown(SDLK_l))
-	{
-		App->serial->LoadGameState("savegame.xml");
-	}
-
-	float speed = 67.0f;
-
-	if(App->input->GetMouseButtonRepeat(SDL_BUTTON_LEFT) == true)
-	{
-		int x, y;
-		App->input->GetMouseMotion(x, y);
-		camera.x -= (int) (speed * float(x) * dt);
-		camera.y -= (int) (speed * float(y) * dt);
-	}
-
 	return true;
 }
 
@@ -124,7 +104,7 @@ bool j1Render::CleanUp()
 }
 
 // Blit to screen
-bool j1Render::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section)
+bool j1Render::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section) const
 {
 	bool ret = true;
 	SDL_Rect rect;
@@ -155,13 +135,22 @@ void j1Render::SetBackgroundColor(SDL_Color color)
 	background = color;
 }
 
-
-p2Point<int> j1Render::ScreenToWorld(int x, int y) const
+iPoint j1Render::ScreenToWorld(int x, int y) const
 {
-	p2Point<int> ret;
+	iPoint ret;
 
 	ret.x = x + camera.x;
 	ret.y = y + camera.y;
 
 	return ret;
+}
+
+void j1Render::SetViewPort(const SDL_Rect& rect)
+{
+	SDL_RenderSetViewport(renderer, &rect);
+}
+
+void j1Render::ResetViewPort()
+{
+	SDL_RenderSetViewport(renderer, &viewport);
 }

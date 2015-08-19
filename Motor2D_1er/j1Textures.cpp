@@ -43,23 +43,6 @@ bool j1Textures::Start()
 	return ret;
 }
 
-// Called each loop iteration
-bool j1Textures::PreUpdate()
-{
-	return true;
-}
-
-bool j1Textures::Update(float dt)
-{
-	return true;
-}
-
-
-bool j1Textures::PostUpdate()
-{
-	return true;
-}
-
 // Called before quitting
 bool j1Textures::CleanUp()
 {

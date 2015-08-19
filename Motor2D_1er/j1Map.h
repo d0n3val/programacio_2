@@ -14,18 +14,21 @@ enum MapTypes
 	MAPTYPE_STAGGERED
 };
 
+// ----------------------------------------------------
 struct TerrainType
 {
 	p2String name;
 	int	tile;
 };
 
+// ----------------------------------------------------
 struct Property
 {
 	p2String name;
 	int value;
 };
 
+// ----------------------------------------------------
 struct Properties
 {
 	~Properties()
@@ -47,6 +50,7 @@ struct Properties
 	p2List<Property*>	list;
 };
 
+// ----------------------------------------------------
 struct TileType
 {
 	int id;
@@ -57,6 +61,7 @@ struct TileType
 	Properties properties;
 };
 
+// ----------------------------------------------------
 struct TileSet
 {
 	~TileSet()
@@ -95,6 +100,7 @@ struct TileSet
 	p2List<TileType*>	tile_types;
 };
 
+// ----------------------------------------------------
 struct MapLayer
 {
 	p2String			name;
@@ -117,6 +123,7 @@ struct MapLayer
 	}
 };
 
+// ----------------------------------------------------
 struct MapData
 {
 	int					width;
@@ -130,7 +137,7 @@ struct MapData
 	p2List<MapLayer*>	layers;
 };
 
-
+// ----------------------------------------------------
 class j1Map : public j1Module
 {
 public:
@@ -144,9 +151,7 @@ public:
 	bool Awake(j1IniReader* conf);
 
 	// Called each loop iteration
-	bool PreUpdate();
-	bool Update(float dt);
-	bool PostUpdate();
+	void Draw();
 
 	// Called before quitting
 	bool CleanUp();
@@ -156,8 +161,8 @@ public:
 
 	TileSet* GetTilesetFromTileId(int id) const;
 
-	p2Point<int> MapToWorld(int x, int y) const;
-	p2Point<int> WorldToMap(int x, int y) const;
+	iPoint MapToWorld(int x, int y) const;
+	iPoint WorldToMap(int x, int y) const;
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
 private:
