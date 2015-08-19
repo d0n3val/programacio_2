@@ -31,6 +31,13 @@ bool j1Map::Awake(j1IniReader* conf)
 	{
 		map_loaded = true;
 		App->render->SetBackgroundColor(data.background_color);
+
+		int w, h;
+		uchar* data;
+		if(CreateWalkabilityMap(w, h, &data))
+			App->pathfinding->SetMap(w, h, data);
+
+		RELEASE_ARRAY(data);
 	}
 
 	return ret;
@@ -170,6 +177,8 @@ p2Point<int> j1Map::WorldToMap(int x, int y) const
 	}
 	else if(data.type == MAPTYPE_ISOMETRIC)
 	{
+		x -= 8; // Tileset margins
+		y -= 16;
 		ret.x = (x / (data.tile_width / 2) + (y / (data.tile_height / 2))) / 2;
 		ret.y = (y / (data.tile_height / 2) - (x / (data.tile_width / 2))) / 2;
 	}
@@ -312,45 +321,52 @@ bool j1Map::Load(const char* file_name)
 		}
 	}
 
-	// create walkability map
+
+	return ret;
+}
+
+// create walkability map
+bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
+{
+	bool ret = false;
+	p2List_item<MapLayer*>* item;
+	item = data.layers.start;
+
+	for(item = data.layers.start; item != NULL; item = item->next)
 	{
-		p2List_item<MapLayer*>* item;
-		item = data.layers.start;
+		MapLayer* layer = item->data;
 
-		for(item = data.layers.start; item != NULL; item = item->next)
+		if(layer->properties.Get("Walkability", 1) == 0)
+			continue;
+
+		uchar* map = new uchar[layer->width*layer->height];
+
+		for(int y = 0; y < data.height; ++y)
 		{
-			MapLayer* layer = item->data;
-
-			if(layer->properties.Get("Walkability", 1) == 0)
-				continue;
-
-			uchar* map = new uchar[layer->width*layer->height];
-
-			for(int y = 0; y < data.height; ++y)
+			for(int x = 0; x < data.width; ++x)
 			{
-				for(int x = 0; x < data.width; ++x)
-				{
-					int i = (y*layer->width) + x;
-					map[i] = 255;
+				int i = (y*layer->width) + x;
+				map[i] = 1;
 
-					int tile_id = layer->Get(x, y);
-					TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
-					if(tileset != NULL)
+				int tile_id = layer->Get(x, y);
+				TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
+				if(tileset != NULL)
+				{
+					TileType* ts = tileset->GetTileType(tile_id);
+					if(ts != NULL)
 					{
-						TileType* ts = tileset->GetTileType(tile_id);
-						if(ts != NULL)
-						{
-							map[i] = ts->properties.Get("walkable", 255);
-						}
+						map[i] = ts->properties.Get("walkable", 1);
 					}
 				}
 			}
-
-			App->pathfinding->SetMap(layer->width, layer->height, map);
-			RELEASE_ARRAY(map);
-
-			break;
 		}
+
+		*buffer = map;
+		width = data.width;
+		height = data.height;
+		ret = true;
+
+		break;
 	}
 
 	return ret;

@@ -6,6 +6,7 @@
 #include "p2DynArray.h"
 
 #define  DEFAULT_PATH_LENGTH 50
+#define INVALID_WALK_CODE 255
 
 class j1PathFinding : public j1Module
 {
@@ -38,6 +39,8 @@ public:
 	const p2DynArray<p2Point<int>> GetLastPath() const;
 
 	bool CheckBoundaries(const p2Point<int>& pos) const;
+	bool IsWalkable(const p2Point<int>& pos) const;
+	uchar GetTileAt(const p2Point<int>& pos) const;
 
 public:
 	bool debug;

@@ -121,13 +121,16 @@ int j1PathFinding::CreatePath(const p2Point<int>& origin, const p2Point<int>& de
 {
 	int ret = -1;
 
-	if(CheckBoundaries(origin) && CheckBoundaries(destination))
+	if(IsWalkable(origin) && IsWalkable(destination))
 	{
 		last_path.Clear();
 
-		last_path.PushBack(origin);
-		last_path.PushBack(destination);
-		ret = 2;
+		{
+			last_path.PushBack(origin);
+			last_path.PushBack(destination);
+		}
+
+		ret = last_path.Count();
 	}
 
 	return ret;
@@ -137,6 +140,20 @@ bool j1PathFinding::CheckBoundaries(const p2Point<int>& pos) const
 {
 	return (pos.x >= 0 && pos.x <= width &&
 			pos.y >= 0 && pos.y <= height);
+}
+
+bool j1PathFinding::IsWalkable(const p2Point<int>& pos) const
+{
+	uchar t = GetTileAt(pos);
+	return t != INVALID_WALK_CODE && t > 0;
+}
+
+uchar j1PathFinding::GetTileAt(const p2Point<int>& pos) const
+{
+	if(CheckBoundaries(pos))
+		return map[(pos.y*width) + pos.x];
+
+	return INVALID_WALK_CODE;
 }
 
 const p2DynArray<p2Point<int>> j1PathFinding::GetLastPath() const

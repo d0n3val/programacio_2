@@ -160,6 +160,7 @@ public:
 
 	p2Point<int> MapToWorld(int x, int y) const;
 	p2Point<int> WorldToMap(int x, int y) const;
+	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
 private:
 

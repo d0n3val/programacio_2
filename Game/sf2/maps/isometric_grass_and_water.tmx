@@ -41,7 +41,7 @@
   <image source="meta.png" width="128" height="64"/>
   <tile id="0">
    <properties>
-    <property name="walkable" value="255"/>
+    <property name="walkable" value="1"/>
    </properties>
   </tile>
   <tile id="1">
