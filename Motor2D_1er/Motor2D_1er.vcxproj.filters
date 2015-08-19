@@ -64,6 +64,9 @@
     <ClCompile Include="j1Pathfinding.cpp">
       <Filter>Projecte 1 ==============\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="j1Gui.cpp">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -184,6 +187,9 @@
       <Filter>Projecte 1 ==============\Modules</Filter>
     </ClInclude>
     <ClInclude Include="j1Pathfinding.h">
+      <Filter>Projecte 1 ==============\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Gui.h">
       <Filter>Projecte 1 ==============\Modules</Filter>
     </ClInclude>
   </ItemGroup>

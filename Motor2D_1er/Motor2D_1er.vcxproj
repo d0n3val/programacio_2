@@ -79,6 +79,7 @@
     <ClCompile Include="IniParser\iniparser.cpp" />
     <ClCompile Include="j1EntityManager.cpp" />
     <ClCompile Include="j1FileSystem.cpp" />
+    <ClCompile Include="j1Gui.cpp" />
     <ClCompile Include="j1Main.cpp" />
     <ClCompile Include="j1App.cpp" />
     <ClCompile Include="j1Audio.cpp" />
@@ -102,6 +103,7 @@
     <ClInclude Include="IniParser\dictionary.h" />
     <ClInclude Include="IniParser\iniparser.h" />
     <ClInclude Include="j1FileSystem.h" />
+    <ClInclude Include="j1Gui.h" />
     <ClInclude Include="j1Pathfinding.h" />
     <ClInclude Include="j1Serialization.h" />
     <ClInclude Include="p2Circle.h" />

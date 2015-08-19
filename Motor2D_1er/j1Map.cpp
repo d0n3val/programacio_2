@@ -6,6 +6,10 @@
 #include "zlib/include/zlib.h"
 #include "trim.h"
 #include "SDL/include/SDL.h"
+#include "j1Render.h"
+#include "j1Pathfinding.h"
+#include "j1FileSystem.h"
+#include "j1Textures.h"
 #include "math.h"
 
 #pragma comment( lib, "zlib/libx86/zdll.lib" )

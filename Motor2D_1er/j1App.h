@@ -9,17 +9,18 @@
 #include "j1Module.h"
 
 // Modules
-#include "j1Window.h"
-#include "j1Input.h"
-#include "j1Render.h"
-#include "j1Textures.h"
-#include "j1Fonts.h"
-#include "j1Audio.h"
-#include "j1Map.h"
-#include "j1EntityManager.h"
-#include "j1FileSystem.h"
-#include "j1Serialization.h"
-#include "j1PathFinding.h"
+class j1Window;
+class j1Input;
+class j1Render;
+class j1Textures;
+class j1Fonts;
+class j1Audio;
+class j1Map;
+class j1EntityManager;
+class j1FileSystem;
+class j1Serialization;
+class j1PathFinding;
+class j1Gui;
 
 class j1App
 {
@@ -97,6 +98,7 @@ public:
 	j1FileSystem*		fs;
 	j1Serialization*	serial;
 	j1PathFinding*		pathfinding;
+	j1Gui*				gui;
 
 private:
 
@@ -109,5 +111,7 @@ private:
 	int					argc;
 	char**				args;
 };
+
+extern j1App* App;
 
 #endif

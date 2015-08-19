@@ -1,8 +1,10 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+#include "j1FileSystem.h"
 #include "j1Audio.h"
 
+#include "SDL_mixer\include\SDL_mixer.h"
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
 j1Audio::j1Audio() : j1Module()

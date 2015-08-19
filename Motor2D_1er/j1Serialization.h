@@ -1,6 +1,7 @@
 #ifndef __j1SERIALIZATION_H__
 #define __j1SERIALIZATION_H__
 
+#include "PugiXml\src\pugixml.hpp"
 #include "j1Module.h"
 
 #define SAVE_BUFFER_SIZE 2048

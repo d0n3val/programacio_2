@@ -1,7 +1,13 @@
 #include "p2Defs.h"
 #include "p2Log.h"
+#include "j1Input.h"
 #include "j1App.h"
+#include "p2Point.h"
+#include "j1Render.h"
+#include "j1Map.h"
 #include "j1Window.h"
+
+#include "SDL/include/SDL.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;

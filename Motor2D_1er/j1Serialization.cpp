@@ -1,6 +1,7 @@
 #include "p2Defs.h"
 #include "j1App.h"
 #include "p2Log.h"
+#include "j1FileSystem.h"
 #include "j1Serialization.h"
 
 j1Serialization::j1Serialization() : j1Module()

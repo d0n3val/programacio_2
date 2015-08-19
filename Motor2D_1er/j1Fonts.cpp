@@ -1,8 +1,12 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+#include "j1Textures.h"
+#include "j1FileSystem.h"
 #include "j1Fonts.h"
 
+#include "SDL\include\SDL.h"
+#include "SDL_TTF\include\SDL_ttf.h"
 #pragma comment( lib, "SDL_ttf/libx86/SDL2_ttf.lib" )
 
 j1Fonts::j1Fonts() : j1Module()

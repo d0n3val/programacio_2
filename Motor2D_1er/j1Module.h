@@ -16,12 +16,11 @@ class j1Module
 {
 public:
 
-	j1Module() : active(false), update_on_pause(false), App(NULL)
+	j1Module() : active(false), update_on_pause(false)
 	{}
 
-	void Init(j1App* App)
+	void Init()
 	{
-		this->App = App;
 		active = true;
 	}
 
@@ -78,7 +77,6 @@ public:
 	p2String	name;
 	bool		active;
 	bool		update_on_pause;
-	j1App*		App;
 
 };
 

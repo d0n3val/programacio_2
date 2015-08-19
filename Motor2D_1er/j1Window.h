@@ -2,7 +2,9 @@
 #define __j1WINDOW_H__
 
 #include "j1Module.h"
-#include "SDL/include/SDL.h"
+
+class SDL_Window;
+class SDL_Surface;
 
 class j1Window : public j1Module
 {

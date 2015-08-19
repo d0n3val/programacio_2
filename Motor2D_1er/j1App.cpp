@@ -1,5 +1,19 @@
 #include "p2Defs.h"
 #include "p2Log.h"
+
+#include "j1Window.h"
+#include "j1Input.h"
+#include "j1Render.h"
+#include "j1Textures.h"
+#include "j1Fonts.h"
+#include "j1Audio.h"
+#include "j1Map.h"
+#include "j1EntityManager.h"
+#include "j1FileSystem.h"
+#include "j1Serialization.h"
+#include "j1PathFinding.h"
+#include "j1Gui.h"
+
 #include "j1App.h"
 
 // Constructor
@@ -23,6 +37,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	entities = new j1EntityManager();
 	serial = new j1Serialization();
 	pathfinding = new j1PathFinding();
+	gui = new j1Gui();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -37,6 +52,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(entities);
 	AddModule(pathfinding);
+	AddModule(gui);
 }
 
 // Destructor
@@ -57,7 +73,7 @@ j1App::~j1App()
 void j1App::AddModule(j1Module* module)
 {
 	ASSERT(module);
-	module->Init(this);
+	module->Init();
 	modules.add(module);
 }
 

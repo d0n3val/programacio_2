@@ -1,6 +1,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1Input.h"
+#include "SDL/include/SDL.h"
 
 j1Input::j1Input() : j1Module()
 {

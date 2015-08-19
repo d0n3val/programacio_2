@@ -1,8 +1,11 @@
 #ifndef __j1TEXTURES_H__
 #define __j1TEXTURES_H__
 
-#include "SDL/include/SDL.h"
 #include "j1Module.h"
+#include "p2List.h"
+
+struct SDL_Texture;
+struct SDL_Surface;
 
 class j1Textures : public j1Module
 {

@@ -22,14 +22,15 @@ enum MainState
 	EXIT
 };
 
+j1App* App = NULL;
 
 int main(int argc, char* args[])
 {
-	LOG("J1 engine starting ...");
+	LOG("App engine starting ...");
 
 	MainState state = CREATE;
 	int result = EXIT_FAILURE;
-	j1App* j1 = NULL;
+	//AppApp* App = NULL;
 	j1PerfTimer ptimer;
 
 	while(state != EXIT)
@@ -43,9 +44,9 @@ int main(int argc, char* args[])
 			case CREATE:
 			LOG("CREATION PHASE ===============================");
 
-			j1 = new j1App(argc, args);
+			App = new j1App(argc, args);
 
-			if(j1 != NULL)
+			if(App != NULL)
 				state = AWAKE;
 			else
 				state = FAIL;
@@ -56,7 +57,7 @@ int main(int argc, char* args[])
 			// Awake all modules -----------------------------------------------
 			case AWAKE:
 			LOG("AWAKE PHASE ===============================");
-			if(j1->Awake() == true)
+			if(App->Awake() == true)
 				state = START;
 			else
 			{
@@ -70,7 +71,7 @@ int main(int argc, char* args[])
 			// Call all modules before first frame  ----------------------------
 			case START:
 			LOG("START PHASE ===============================");
-			if(j1->Start() == true)
+			if(App->Start() == true)
 			{
 				state = LOOP;
 				LOG("PHASE FINISHED: %.2f ms", ptimer.ReadMs());
@@ -85,16 +86,16 @@ int main(int argc, char* args[])
 
 			// Loop all modules until we are asked to leave ---------------------
 			case LOOP:
-			if(j1->Update() == false)
+			if(App->Update() == false)
 				state = CLEAN;
 			break;
 
 			// Cleanup allocated memory -----------------------------------------
 			case CLEAN:
 			LOG("CLEANUP PHASE ===============================");
-			if(j1->CleanUp() == true)
+			if(App->CleanUp() == true)
 			{
-				RELEASE(j1);
+				RELEASE(App);
 				result = EXIT_SUCCESS;
 				state = EXIT;
 			}
