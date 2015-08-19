@@ -70,7 +70,7 @@ public:
 	/**
 	* Add new item
 	*/
-	unsigned int add(const tdata& item)
+	p2List_item<tdata>* add(const tdata& item)
 	{
 		p2List_item<tdata>*   p_data_item;
 		p_data_item = new p2List_item < tdata >(item);
@@ -86,7 +86,8 @@ public:
 			end = p_data_item;
 		}
 
-		return(++size);
+		++size;
+		return(p_data_item);
 	}
 
 	/**

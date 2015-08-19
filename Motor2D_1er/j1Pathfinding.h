@@ -8,6 +8,7 @@
 #define  DEFAULT_PATH_LENGTH 50
 #define INVALID_WALK_CODE 255
 
+// --------------------------------------------------
 class j1PathFinding : public j1Module
 {
 public:
@@ -53,6 +54,36 @@ private:
 	SDL_Texture* debug_tex;
 	p2DynArray<p2Point<int>> last_path;
 };
+
+struct PathList;
+
+// Helper struct to reprsent a node in the path creation
+struct PathNode
+{
+	PathNode();
+	PathNode(int g, int h, const p2Point<int>& pos, const PathNode* parent);
+	PathNode(const PathNode& node);
+
+	uint FindWalkableAdjacents(PathList& list_to_fill, j1PathFinding* path_finder) const;
+	int Score() const;
+	int CalculateF(const p2Point<int>& destination);
+
+	int g;
+	int h;
+	p2Point<int> pos;
+	const PathNode* parent;
+};
+
+// Helper struct to include a list of path nodes
+struct PathList
+{
+	bool Contains(const p2Point<int>& point) const;
+	p2List_item<PathNode>* Find(const p2Point<int>& point) const;
+	p2List_item<PathNode>* GetNodeLowestScore() const;
+
+	p2List<PathNode> list;
+};
+
 
 
 #endif // __j1PATHFINDING_H__

@@ -7,6 +7,7 @@
 
 #include "p2Defs.h"
 #include "p2Vector2.h"
+#include <math.h>
 
 template<class TYPE>
 class p2Point
@@ -14,6 +15,21 @@ class p2Point
 public:
 
 	TYPE x, y;
+
+	p2Point()
+	{}
+
+	p2Point(const p2Point<TYPE>& v)
+	{
+		this->x = v.x;
+		this->y = v.y;
+	}
+
+	p2Point(const TYPE& x, const TYPE& y)
+	{
+		this->x = x;
+		this->y = y;
+	}
 
 	p2Point& create(const TYPE& x, const TYPE& y)
 	{
@@ -104,7 +120,7 @@ public:
 		TYPE fx = x - v.x;
 		TYPE fy = y - v.y;
 
-		return sqrt((fx*fx) + (fy*fy));
+		return sqrtf((fx*fx) + (fy*fy));
 	}
 
 	TYPE DistanceNoSqrt(const p2Point& v) const
@@ -117,7 +133,7 @@ public:
 
 	TYPE DistanceManhattan(const p2Point& v) const
 	{
-		return fabs(v.x - x) + fabs(v.y - y);
+		return abs(v.x - x) + abs(v.y - y);
 	}
 };
 

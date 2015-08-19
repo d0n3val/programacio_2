@@ -57,7 +57,7 @@ bool j1EntityManager::Update(float dt)
 
 	if(do_logic == true)
 	{
-		LOG("Did logic step after %f", accumulated_time);
+		//LOG("Did logic step after %f", accumulated_time);
 		accumulated_time = 0.0f;
 	}
 
