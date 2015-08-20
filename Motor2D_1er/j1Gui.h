@@ -48,8 +48,8 @@ public:
 	// Destructor
 	virtual ~j1Gui();
 
-	// Called before render is available
-	bool Awake(j1IniReader* conf);
+	// Called when before the first frame
+	bool Start(j1IniReader* conf);
 
 	// Called after all Updates
 	bool PostUpdate();

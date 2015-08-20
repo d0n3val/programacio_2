@@ -25,7 +25,7 @@ public:
 	bool Awake(j1IniReader* conf);
 
 	// Called before the first frame
-	bool Start();
+	bool Start(j1IniReader* conf);
 
 	// Called each loop iteration
 	bool PreUpdate();

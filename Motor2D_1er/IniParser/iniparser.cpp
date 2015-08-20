@@ -753,6 +753,9 @@ The returned dictionary must be freed using iniparser_freedict().
 
 char* bgets(char* buf, unsigned int amount, char** data)
 {
+	if(amount <= 0 || strlen(*data) == 0)
+		return NULL;
+
 	const char* end_line = (const char*) memchr(*data, '\n', amount);
 
 	if(end_line != NULL)
@@ -761,7 +764,11 @@ char* bgets(char* buf, unsigned int amount, char** data)
 		*data += end_line + 1 - *data;
 	}
 	else
-		return NULL;
+	{
+		int l = strlen(*data);
+		memcpy(buf, *data, l);
+		*data += l;
+	}
 
 	return buf;
 }
@@ -808,7 +815,6 @@ dictionary * iniparser_load_buffer(const char * buffer, unsigned int length)
 		if(len == 0)
 			continue;
 		/* Safety check against buffer overflows */
-
 		/*
 		if (line[len]!='\n') {
 		fprintf(stderr,

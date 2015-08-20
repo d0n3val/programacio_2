@@ -15,11 +15,12 @@ j1Gui::~j1Gui()
 {}
 
 // Called before render is available
-bool j1Gui::Awake(j1IniReader* conf)
+bool j1Gui::Start(j1IniReader* conf)
 {
 	LOG("Loading GUI");
 	bool ret = true;
 
+	const char* t = conf->GetString("atlas");
 	atlas = App->tex->Load(conf->GetString("atlas"));
 
 	return ret;

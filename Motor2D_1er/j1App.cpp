@@ -130,7 +130,10 @@ bool j1App::Start()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Start();
+		if(config.SetSection(item->data->name.c_str()) == true)
+			ret = item->data->Start(&config);
+		else
+			ret = item->data->Start(NULL);
 		item = item->next;
 	}
 

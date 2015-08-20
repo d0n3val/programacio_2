@@ -32,7 +32,7 @@ bool j1Scene::Awake(j1IniReader* conf)
 }
 
 // Called before the first frame
-bool j1Scene::Start()
+bool j1Scene::Start(j1IniReader* conf)
 {
 	if(App->map->Load(map) == true)
 	{
@@ -45,6 +45,7 @@ bool j1Scene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path.png");
+	test_gui = App->tex->Load("textures/Lenna.png");
 
 	return true;
 }

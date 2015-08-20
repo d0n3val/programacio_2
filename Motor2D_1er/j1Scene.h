@@ -18,7 +18,7 @@ public:
 	bool Awake(j1IniReader* conf);
 
 	// Called before the first frame
-	bool Start();
+	bool Start(j1IniReader* conf);
 
 	// Called before all Updates
 	bool PreUpdate();
@@ -36,6 +36,7 @@ private:
 
 	p2String map;
 	SDL_Texture* debug_tex;
+	SDL_Texture* test_gui;
 };
 
 #endif // __j1SCENE_H__

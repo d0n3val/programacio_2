@@ -29,7 +29,7 @@ bool j1PathFinding::Awake(j1IniReader* conf)
 }
 
 // Called before the first frame
-bool j1PathFinding::Start()
+bool j1PathFinding::Start(j1IniReader* conf)
 {
 	LOG("Start pathfinding");
 	bool ret = true;

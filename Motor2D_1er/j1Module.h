@@ -31,7 +31,7 @@ public:
 	}
 
 	// Called before the first frame
-	virtual bool Start()
+	virtual bool Start(j1IniReader* conf)
 	{
 		return true;
 	}

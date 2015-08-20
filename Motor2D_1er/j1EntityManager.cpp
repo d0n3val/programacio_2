@@ -30,7 +30,7 @@ bool j1EntityManager::Awake(j1IniReader* conf)
 }
 
 // Called before the first frame
-bool j1EntityManager::Start()
+bool j1EntityManager::Start(j1IniReader* conf)
 {
 	LOG("start j1EntityManager");
 	bool ret = true;

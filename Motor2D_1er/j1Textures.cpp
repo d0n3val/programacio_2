@@ -36,7 +36,7 @@ bool j1Textures::Awake(j1IniReader* conf)
 }
 
 // Called before the first frame
-bool j1Textures::Start()
+bool j1Textures::Start(j1IniReader* conf)
 {
 	LOG("start textures");
 	bool ret = true;

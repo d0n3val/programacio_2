@@ -37,7 +37,7 @@ bool j1Input::Awake(j1IniReader* conf)
 }
 
 // Called before the first frame
-bool j1Input::Start()
+bool j1Input::Start(j1IniReader* conf)
 {
 	CleanKeys();
 	return true;

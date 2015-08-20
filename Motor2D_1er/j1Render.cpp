@@ -68,7 +68,7 @@ bool j1Render::Awake(j1IniReader* conf)
 }
 
 // Called before the first frame
-bool j1Render::Start()
+bool j1Render::Start(j1IniReader* conf)
 {
 	LOG("render start");
 	// back background
