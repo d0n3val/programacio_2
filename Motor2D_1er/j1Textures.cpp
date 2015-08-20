@@ -78,6 +78,24 @@ SDL_Texture* const j1Textures::Load(const char* path)
 	return texture;
 }
 
+// Unload texture
+bool j1Textures::UnLoad(SDL_Texture* texture)
+{
+	p2List_item<SDL_Texture*>* item;
+
+	for(item = textures.start; item != NULL; item = item->next)
+	{
+		if(texture == item->data)
+		{
+			SDL_DestroyTexture(item->data);
+			textures.del(item);
+			return true;
+		}
+	}
+
+	return false;
+}
+
 // Translate a surface into a texture
 SDL_Texture* const j1Textures::LoadSurface(SDL_Surface* surface)
 {
@@ -93,4 +111,10 @@ SDL_Texture* const j1Textures::LoadSurface(SDL_Surface* surface)
 	}
 
 	return texture;
+}
+
+// Retrieve size of a texture
+void j1Textures::GetSize(const SDL_Texture* texture, uint& width, uint& height) const
+{
+	SDL_QueryTexture((SDL_Texture*)texture, NULL, NULL, (int*) &width, (int*) &height);
 }

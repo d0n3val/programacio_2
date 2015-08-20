@@ -58,8 +58,6 @@ bool j1Fonts::CleanUp()
 // Load new texture from file path
 TTF_Font* const j1Fonts::Load(const char* path, int size)
 {
-	//TTF_Font* font = TTF_OpenFont(path, size);
-
 	TTF_Font* font = TTF_OpenFontRW(App->fs->Load(path), 1, size);
 
 	if(font == NULL)
@@ -79,7 +77,7 @@ TTF_Font* const j1Fonts::Load(const char* path, int size)
 SDL_Texture* j1Fonts::Print(const char* text, SDL_Color color, TTF_Font* font)
 {
 	SDL_Texture* ret = NULL;
-	SDL_Surface* surface = TTF_RenderText_Solid((font) ? font : default, text, color);
+	SDL_Surface* surface = TTF_RenderText_Blended((font) ? font : default, text, color);
 
 	if(surface == NULL)
 	{
@@ -90,6 +88,19 @@ SDL_Texture* j1Fonts::Print(const char* text, SDL_Color color, TTF_Font* font)
 		ret = App->tex->LoadSurface(surface);
 		SDL_FreeSurface(surface);
 	}
+
+	return ret;
+}
+
+// calculate size of a text
+bool j1Fonts::CalcSize(const char* text, int& width, int& height, _TTF_Font* font) const
+{
+	bool ret = false;
+
+	if(TTF_SizeText((font) ? font : default, text, &width, &height) != 0)
+		LOG("Unable to calc size of text surface! SDL_ttf Error: %s\n", TTF_GetError());
+	else
+		ret = true;
 
 	return ret;
 }

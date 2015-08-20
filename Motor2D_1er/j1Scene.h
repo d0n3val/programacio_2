@@ -32,11 +32,16 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// Listener to Gui events
+	void OnGui(Gui* gui, int type);
+
 private:
 
-	p2String map;
 	SDL_Texture* debug_tex;
 	SDL_Texture* test_gui;
+	GuiText* gtext;
+	GuiInput* ginput;
+	Gui* g;
 };
 
 #endif // __j1SCENE_H__

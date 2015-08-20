@@ -11,6 +11,7 @@
 class j1App;
 class j1IniReader;
 class j1Serialization;
+class Gui;
 
 class j1Module
 {
@@ -58,6 +59,11 @@ public:
 	virtual bool CleanUp()
 	{
 		return true;
+	}
+
+	// Listener to gui events
+	virtual void OnGui(Gui* gui, int type)
+	{
 	}
 
 	// Called to load a game state

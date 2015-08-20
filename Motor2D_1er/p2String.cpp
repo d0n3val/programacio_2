@@ -235,24 +235,17 @@ void p2String::alloc(unsigned int new_size)
 {
 	bool saved_str = false;
 
-	if(string != NULL)
-	{
-		ASSERT_MSG(size < HUGE_STR, "Not enough room for temporal string");
-		memcpy(tmp, string, size + 1);
-		saved_str = true;
-	}
-	else
-		destroy();
+	char* old = string;
 
 	string = new char[new_size];
 	max_size = new_size;
-	clear();
 
-	if(saved_str == true)
-	{
-		memcpy(string, tmp, MIN(new_size - 1, strlen(tmp)));
-	}
+	if(old)
+		strcpy_s(string, max_size, old);
+	else
+		clear();
 
+	RELEASE_ARRAY(old);
 	// realloc ?
 }
 
@@ -307,6 +300,19 @@ void p2String::cut(unsigned int start, unsigned int end)
 	}
 }
 
+
+/**
+* Cuts the string
+*/
+void p2String::cut(unsigned int pos)
+{
+	if(string != NULL && pos < size )
+	{
+		memmove(&string[pos], &string[pos+1], size - pos);
+		update();
+	}
+}
+
 /**
 * Paste a substring into buffer
 */
@@ -348,6 +354,24 @@ unsigned int p2String::sub_string(unsigned int start, unsigned int end, p2String
 	{
 		return(0);
 	}
+}
+
+/**
+* Convert the string to upper case
+*/
+p2String& p2String::insert(unsigned int position, const char* text)
+{
+	if(position <= size && text != NULL)
+	{
+		int len = strlen(text);
+		make_room(len);
+
+		memcpy(&string[position + len], &string[position], (size + 1) - position);
+		memcpy(&string[position], text, len);
+
+		update();
+	}
+	return(*this);
 }
 
 /**

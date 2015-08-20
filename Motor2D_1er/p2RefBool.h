@@ -12,16 +12,19 @@ public:
 	{
 		return value > 0;
 	}
-	inline void Set()
+	inline bool Set()
 	{
 		++value;
+		return value == 1;
 	}
-	inline void Unset()
+	inline bool Unset()
 	{
 		if(value > 0)
 		{
 			--value;
 		}
+
+		return value == 0;
 	}
 
 private:

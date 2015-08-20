@@ -24,6 +24,12 @@ public:
 	// Changae title
 	void SetTitle(const char* new_title);
 
+	// Retrive window size
+	void GetWindowSize(uint& width, uint& height) const;
+
+	// Retrieve window scale
+	uint GetScale() const;
+
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;
@@ -33,6 +39,9 @@ public:
 
 private:
 	p2String	title;
+	uint		width;
+	uint		height;
+	uint		scale;
 };
 
 #endif // __j1WINDOW_H__

@@ -9,6 +9,7 @@
 #include "j1Render.h"
 #include "j1Serialization.h"
 #include "j1Window.h"
+#include "j1Gui.h"
 #include "j1Scene.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -25,8 +26,6 @@ bool j1Scene::Awake(j1IniReader* conf)
 {
 	LOG("Loading Scene");
 	bool ret = true;
-	
-	map.create(conf->GetString("map", ""));
 
 	return ret;
 }
@@ -34,7 +33,7 @@ bool j1Scene::Awake(j1IniReader* conf)
 // Called before the first frame
 bool j1Scene::Start(j1IniReader* conf)
 {
-	if(App->map->Load(map) == true)
+	if(App->map->Load(conf->GetString("map")) == true)
 	{
 		int w, h;
 		uchar* data = NULL;
@@ -45,7 +44,21 @@ bool j1Scene::Start(j1IniReader* conf)
 	}
 
 	debug_tex = App->tex->Load("maps/path.png");
-	test_gui = App->tex->Load("textures/Lenna.png");
+
+	// gui test
+	g = App->gui->CreateImage({408, 166, 231, 70});
+	g->SetPos(500, 500);
+	
+	gtext = App->gui->CreateText("this is a test");
+	gtext->SetPos(60, 18);
+	gtext->SetParent(g);
+
+	Gui* b = App->gui->CreateButton(205, 45, this);
+	b->SetPos(15,10);
+	b->SetParent(g);
+
+	ginput = App->gui->CreateInput("write something here ...", 200, this);
+	ginput->SetPos(100, 100);
 
 	return true;
 }
@@ -97,6 +110,7 @@ bool j1Scene::PreUpdate()
 			origin = p;
 			origin_selected = true;
 		}
+		g->SetPos(x, y);
 	}
 
 	return true;
@@ -137,14 +151,15 @@ bool j1Scene::Update(float dt)
 	}
 
 	// Move camera while dragging mouse
-	float speed = 67.0f;
+	
 
 	if(App->input->GetMouseButtonRepeat(SDL_BUTTON_LEFT) == true)
 	{
+		float speed = 67.0f;
 		int x, y;
 		App->input->GetMouseMotion(x, y);
-		App->render->camera.x -= (int)(speed * float(x) * dt);
-		App->render->camera.y -= (int)(speed * float(y) * dt);
+		App->render->camera.x += (int)(speed * float(x) * dt);
+		App->render->camera.y += (int)(speed * float(y) * dt);
 	}
 
 	return true;
@@ -167,4 +182,32 @@ bool j1Scene::CleanUp()
 	LOG("Freeing scene");
 
 	return true;
+}
+
+// Called before quitting
+void j1Scene::OnGui(Gui* gui, int type)
+{
+	//LOG("received gui event type %d", type);
+	
+	switch(type)
+	{
+		case GuiEvents::mouse_enters:
+		gtext->SetText("Inside!");
+		break;
+		case GuiEvents::mouse_leaves:
+		gtext->SetText("Bye!");
+		break;
+		case GuiEvents::mouse_lclick:
+		gtext->SetText("Left Click!");
+		break;
+		case GuiEvents::mouse_rclick:
+		gtext->SetText("Right Click!");
+		break;
+		case GuiEvents::gain_focus:
+		gtext->SetText("Text gained focus");
+		break;
+		case GuiEvents::lost_focus:
+		gtext->SetText("Text lost focus");
+		break;
+	}
 }

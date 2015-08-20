@@ -34,8 +34,10 @@ public:
 	void          reserve(const unsigned int required_space);
 	unsigned int  get_reserved() const;
 	void          cut(unsigned int start, unsigned int end);
+	void		  cut(unsigned int pos);
 	unsigned int  sub_string(unsigned int start, unsigned int end, char* buffer) const;
 	unsigned int  sub_string(unsigned int start, unsigned int end, p2String& buffer) const;
+	p2String&   insert(unsigned int position, const char* text);
 	p2String&   to_upper_case();
 	p2String&   to_lower_case();
 	p2String&   capitalize();
@@ -118,6 +120,16 @@ public:
 
 	int operator                        !=(const p2String& str) const;
 	int operator                        !=(const char* str) const;
+
+	friend int operator ==(const char* str1, const p2String& str2)
+	{
+		return str2 == str1;
+	}
+
+	friend int operator !=(const char* str1, const p2String& str2)
+	{
+		return str2 != str1;
+	}
 
 	const char operator [](int index) const;
 	char* operator  [](int index);

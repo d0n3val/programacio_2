@@ -1,6 +1,8 @@
 #include "p2Defs.h"
 #include "p2Log.h"
+#include "j1App.h"
 #include "j1Input.h"
+#include "j1Window.h"
 #include "SDL/include/SDL.h"
 
 j1Input::j1Input() : j1Module()
@@ -39,6 +41,7 @@ bool j1Input::Awake(j1IniReader* conf)
 // Called before the first frame
 bool j1Input::Start(j1IniReader* conf)
 {
+	SDL_StopTextInput();
 	CleanKeys();
 	return true;
 }
@@ -103,8 +106,58 @@ bool j1Input::PreUpdate()
 				}
 
 				keyState[code] = state;
+
+				// Special case of micro controlling text input
+				if(text_input.Get() && state != KS_UP)
+				{
+					switch(event.key.keysym.sym)
+					{
+						case SDLK_BACKSPACE:
+							last_text_input.cut(cursor_text_input - 1);
+							if(cursor_text_input > 0)
+								cursor_text_input--;
+						break;
+						case SDLK_DELETE:
+							if(cursor_text_input < last_text_input.length())
+								last_text_input.cut(cursor_text_input);
+						break;
+						case SDLK_KP_ENTER:
+						case SDLK_RETURN2:
+						case SDLK_RETURN:
+							selection_text_input = 1;
+						break;
+						case SDLK_LEFT:
+							if(cursor_text_input > 0)
+								cursor_text_input--;
+						break;
+						case SDLK_RIGHT:
+							if(cursor_text_input < last_text_input.length())
+								cursor_text_input++;
+						break;
+						case SDLK_HOME:
+							cursor_text_input = 0;
+						break;
+						case SDLK_END:
+							cursor_text_input = last_text_input.length();
+						break;
+					}
+				}
+					
 				//LOG("Key %d changes state to %d", code, state);
 			}
+			break;
+
+			case SDL_TEXTINPUT:
+			last_text_input.insert(cursor_text_input, event.text.text);
+			cursor_text_input += strlen(event.text.text);
+			LOG("Input event: %s", event.edit.text);
+			break;
+
+			case SDL_TEXTEDITING:	
+			//last_text_input = event.edit.text;
+			//cursor_text_input = event.edit.start;
+			//selection_text_input = event.edit.length;
+			LOG("Edit event: %s cursor %d selection %d", event.edit.text, event.edit.start, event.edit.length);
 			break;
 
 			case SDL_MOUSEBUTTONDOWN:
@@ -118,10 +171,11 @@ bool j1Input::PreUpdate()
 			break;
 
 			case SDL_MOUSEMOTION:
-			mouse_motion_x = event.motion.xrel;
-			mouse_motion_y = event.motion.yrel;
-			mouse_x = event.motion.x;
-			mouse_y = event.motion.y;
+			int scale = App->win->GetScale();
+			mouse_motion_x = event.motion.xrel / scale;
+			mouse_motion_y = event.motion.yrel / scale;
+			mouse_x = event.motion.x / scale;
+			mouse_y = event.motion.y / scale;
 			//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
 			break;
 		}
@@ -141,6 +195,7 @@ bool j1Input::CleanUp()
 // ---------
 void j1Input::CleanKeys()
 {
+	// memset would be faster!
 	for(int i = 0; i < WE_COUNT; ++i)
 	{
 		windowEvents[i] = false;
@@ -177,6 +232,31 @@ bool j1Input::GetKeyRepeat(int code)
 bool j1Input::GetKeyUp(int code)
 {
 	return keyState[code] == KS_UP;
+}
+
+void j1Input::StartTextInput(SDL_Rect* rect)
+{
+	if(text_input.Set() == true)
+	{
+		SDL_StartTextInput();
+
+		if(rect!=NULL)
+			SDL_SetTextInputRect(rect);
+	}
+}
+
+void j1Input::EndTextInput()
+{
+	if(text_input.Unset() == true)
+		SDL_StopTextInput();
+}
+
+const char* j1Input::GetTextInput(int& cursor, int& selection) const
+{
+	cursor = cursor_text_input;
+	selection = selection_text_input;
+
+	return last_text_input.c_str();
 }
 
 bool j1Input::GetMouseButtonDown(int code)

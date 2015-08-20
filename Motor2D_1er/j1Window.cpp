@@ -36,8 +36,13 @@ bool j1Window::Awake(j1IniReader* conf)
 	else
 	{
 		//Create window
-		int width = conf->GetInt("width", SCREEN_WIDTH);
-		int height = conf->GetInt("height", SCREEN_HEIGHT);
+		width = conf->GetInt("width", SCREEN_WIDTH);
+		height = conf->GetInt("height", SCREEN_HEIGHT);
+		scale = conf->GetInt("scale", 1);
+
+		width *= scale;
+		height *= scale;
+
 		title = conf->GetString("title", "No title");
 		Uint32 flags = SDL_WINDOW_SHOWN;
 
@@ -99,4 +104,15 @@ void j1Window::SetTitle(const char* new_title)
 {
 	//title.create(new_title);
 	SDL_SetWindowTitle(window, new_title);
+}
+
+void j1Window::GetWindowSize(uint& width, uint& height) const
+{
+	width = this->width;
+	height = this->height;
+}
+
+uint j1Window::GetScale() const
+{
+	return scale;
 }
